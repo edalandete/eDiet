@@ -11,7 +11,6 @@ module.exports = () => {
     '/signup',
     passport.authenticate('signup', { session: false }),
     async (req, res) => {
-      debugger;
       res.json({
         message: 'Signup successful',
         user: req.user,
