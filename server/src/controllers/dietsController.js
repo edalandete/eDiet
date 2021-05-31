@@ -37,6 +37,19 @@ function dieticiansController() {
     }
   }
 
+  async function getByType(req, res) {
+    const { dietType } = req.params;
+
+    try {
+      const dietById = await Diet.find({ dietType });
+      res.status(200);
+      res.json(dietById);
+    } catch (error) {
+      res.status(404);
+      res.send(`The diet with the id ${dietType} doesn't exist`);
+    }
+  }
+
   async function deleteById(req, res) {
     const { dietId } = req.params;
 
@@ -71,6 +84,7 @@ function dieticiansController() {
     getById,
     deleteById,
     updateById,
+    getByType,
   };
 }
 
