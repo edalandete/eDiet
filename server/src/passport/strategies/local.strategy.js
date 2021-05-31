@@ -12,17 +12,26 @@ module.exports = function localStrategyConfig() {
       {
         usernameField: 'email',
         passwordField: 'password',
-
+        passReqToCallback: true,
       },
 
-      async (email, password, done) => {
+      async (req, email, password, done) => {
         try {
           const existingUser = await Dietician.findOne({ email });
           if (existingUser) {
             return done(null, false, { message: 'User alredy exists' });
           }
 
-          const user = await Dietician.create({ email, password: md5(password) });
+          const user = await Dietician.create(
+            {
+              firstName: req.body.firstName,
+              lastName: req.body.lastName,
+              idCard: req.body.idCard,
+              schedule: req.body.schedule,
+              email: email.toLowerCase(),
+              password: md5(password),
+            },
+          );
 
           return done(null, user);
         } catch (error) {
