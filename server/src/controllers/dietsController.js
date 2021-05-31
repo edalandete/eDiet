@@ -1,23 +1,23 @@
-const debug = require('debug')('app:dieticiansController');
-const Dietician = require('../models/dietician.model');
+const debug = require('debug')('app:dietsController');
+const Diet = require('../models/diet.model');
 
 function dieticiansController() {
   async function getAll(req, res) {
     try {
       debug('dentro de la function getAll');
-      const dieticians = await Dietician.find();
-      res.json(dieticians);
+      const diets = await Diet.find();
+      res.json(diets);
     } catch (error) {
       res.send(404);
     }
   }
 
   async function createOne(req, res) {
-    const newDietician = new Dietician(req.body);
-
+    debug('dentro de la function createOne');
+    const newDiet = new Diet(req.body);
     try {
-      await newDietician.save();
-      res.json(newDietician);
+      await newDiet.save();
+      res.json(newDiet);
     } catch (error) {
       res.send(error);
       debug(error);
@@ -25,23 +25,23 @@ function dieticiansController() {
   }
 
   async function getById(req, res) {
-    const { dieticianId } = req.params;
+    const { dietId } = req.params;
 
     try {
-      const dieticianById = await Dietician.findById(dieticianId);
+      const dietById = await Diet.findById(dietId);
       res.status(200);
-      res.json(dieticianById);
+      res.json(dietById);
     } catch (error) {
       res.status(404);
-      res.send(`The user with the id ${dieticianId} doesn't exist`);
+      res.send(`The diet with the id ${dietId} doesn't exist`);
     }
   }
 
   async function deleteById(req, res) {
-    const { dieticianId } = req.params;
+    const { dietId } = req.params;
 
     try {
-      await Dietician.findByIdAndDelete(dieticianId);
+      await Diet.findByIdAndDelete(dietId);
       res.status(204);
     } catch (error) {
       res.status(404);
@@ -49,16 +49,16 @@ function dieticiansController() {
   }
 
   async function updateById(req, res) {
-    const { dieticianId } = req.params;
+    const { dietId } = req.params;
     const updatedData = req.body;
     try {
-      const updatedDietician = await Dietician.findByIdAndUpdate(
-        dieticianId,
+      const updatedDiet = await Diet.findByIdAndUpdate(
+        dietId,
         updatedData,
         { new: true },
       );
 
-      res.json(updatedDietician);
+      res.json(updatedDiet);
     } catch (error) {
       res.send(404);
       debug(error);
