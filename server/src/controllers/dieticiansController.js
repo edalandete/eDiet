@@ -1,13 +1,12 @@
-const debug = require('debug')('server:heroesController');
-const chalk = require('chalk');
+const debug = require('debug')('app:dieticianController');
 const Dietician = require('../models/dietician.model');
 
-function heroesController() {
+function dieticiansController() {
   async function getAll(req, res) {
     try {
-      debug(`dentro de la función ${chalk.magenta('getAll')}`);
-      const users = await Dietician.find();
-      res.json(users);
+      debug('dentro de la function getAll');
+      const dieticians = await Dietician.find();
+      res.json(dieticians);
     } catch (error) {
       res.send(404);
     }
@@ -17,7 +16,6 @@ function heroesController() {
     const newDietician = new Dietician(req.body);
 
     try {
-      debug(`dentro de la función ${chalk.magenta('createOne')}`);
       await newDietician.save();
       res.json(newDietician);
     } catch (error) {
@@ -28,44 +26,41 @@ function heroesController() {
 
   async function getById(req, res) {
     const { dieticianId } = req.params;
+
     try {
-      debug(`dentro de la función ${chalk.magenta('getById')}`);
       const dieticianById = await Dietician.findById(dieticianId);
       res.status(200);
       res.json(dieticianById);
     } catch (error) {
       res.status(404);
-      res.send(`The hero with the id ${dieticianId} doesn't exist`);
-      debug(error);
+      res.send(`The user with the id ${dieticianId} doesn't exist`);
     }
   }
 
   async function deleteById(req, res) {
     const { dieticianId } = req.params;
+
     try {
-      debug(`dentro de la función ${chalk.magenta('deleteById')}`);
       await Dietician.findByIdAndDelete(dieticianId);
       res.status(204);
-      res.json();
     } catch (error) {
       res.status(404);
-      debug(error);
     }
   }
 
   async function updateById(req, res) {
     const { dieticianId } = req.params;
-    const updateData = req.body;
+    const updatedData = req.body;
     try {
-      debug(`dentro de la función ${chalk.magenta('updateById')}`);
-
       const updatedDietician = await Dietician.findByIdAndUpdate(
         dieticianId,
-        updateData,
+        updatedData,
         { new: true },
       );
+
       res.json(updatedDietician);
     } catch (error) {
+      res.send(404);
       debug(error);
     }
   }
@@ -79,4 +74,4 @@ function heroesController() {
   };
 }
 
-module.exports = heroesController;
+module.exports = dieticiansController;
