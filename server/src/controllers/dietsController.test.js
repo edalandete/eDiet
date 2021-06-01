@@ -1,10 +1,10 @@
 const {
-  getAll, createOne, getById, deleteById, updateById,
-} = require('./dieticiansController')();
+  getAll, createOne, getById, deleteById, updateById, getByType,
+} = require('./dietsController')();
 
-const Dietician = require('../models/dietician.model');
+const Diet = require('../models/diet.model');
 
-jest.mock('../models/dietician.model');
+jest.mock('../models/diet.model');
 
 describe('Given dieticiansController', () => {
   describe('When it is called with getAll function', () => {
@@ -13,18 +13,18 @@ describe('Given dieticiansController', () => {
       send: jest.fn(),
     };
     describe('And the promise is resolved', () => {
-      test('Then all users should be returned', async () => {
-        Dietician.find.mockResolvedValueOnce([{ name: 'Edgar' }]);
+      test('Then all diets should be returned', async () => {
+        Diet.find.mockResolvedValueOnce([{ name: 'diet1' }]);
         await getAll(null, res);
 
         expect(res.json).toHaveBeenCalledWith([{
-          name: 'Edgar',
+          name: 'diet1',
         }]);
       });
     });
     describe('And the promise is rejected', () => {
       test('Then a 404 status should be sent', async () => {
-        Dietician.find.mockRejectedValueOnce();
+        Diet.find.mockRejectedValueOnce();
         await getAll(null, res);
         expect(res.send).toHaveBeenCalledWith(404);
       });
@@ -41,7 +41,7 @@ describe('Given dieticiansController', () => {
     };
     describe('And the promise is resolved', () => {
       test('Then a new user should be created', async () => {
-        class UserMock {
+        class DietMock {
           constructor(name) {
             this.name = name;
           }
@@ -50,9 +50,9 @@ describe('Given dieticiansController', () => {
           save() {}
         }
 
-        const newUser = new UserMock('New User');
+        const newUser = new DietMock('new diet');
 
-        Dietician.mockReturnValueOnce(newUser);
+        Diet.mockReturnValueOnce(newUser);
         await createOne(req, res);
         expect(res.json).toHaveBeenCalledWith(newUser);
       });
@@ -60,7 +60,7 @@ describe('Given dieticiansController', () => {
 
     describe('And the promise is rejected', () => {
       test('Then an error should be send', async () => {
-        Dietician.mockReturnValueOnce({
+        Diet.mockReturnValueOnce({
           save: jest.fn().mockRejectedValueOnce('error'),
         });
         await createOne(req, res);
@@ -73,7 +73,7 @@ describe('Given dieticiansController', () => {
     const req = {
       body: null,
       params: {
-        userId: 1,
+        dietId: 1,
       },
     };
     const res = {
@@ -83,20 +83,50 @@ describe('Given dieticiansController', () => {
     };
 
     describe('And the promise is resolved', () => {
-      test('Then a user with an specific id should be shown', async () => {
-        Dietician.findById.mockResolvedValueOnce({ id: 1, name: 'Batman' });
+      test('Then a diet with an specific id should be shown', async () => {
+        Diet.findById.mockResolvedValueOnce({ id: 1, name: 'diet1' });
         await getById(req, res);
         expect(res.json).toHaveBeenCalledWith({
           id: 1,
-          name: 'Batman',
+          name: 'diet1',
         });
       });
     });
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findById.mockRejectedValueOnce();
+        Diet.findById.mockRejectedValueOnce();
         await getById(req, res);
+        expect(res.status).toHaveBeenCalledWith(404);
+      });
+    });
+  });
+
+  describe('When it is called with a getById function', () => {
+    const req = {
+      body: null,
+      params: {
+        dietId: 1,
+      },
+    };
+    const res = {
+      json: jest.fn(),
+      send: jest.fn(),
+      status: jest.fn(),
+    };
+
+    describe('And the promise is resolved', () => {
+      test('Then a diet with an specific id should be shown', async () => {
+        Diet.find.mockResolvedValueOnce([{ id: 1, type: 'Hypertrophy' }]);
+        await getByType(req, res);
+        expect(res.json).toHaveBeenCalledWith([{ id: 1, type: 'Hypertrophy' }]);
+      });
+    });
+
+    describe('And the promise is rejected', () => {
+      test('Then the status code 404 should be sent', async () => {
+        Diet.find.mockRejectedValueOnce();
+        await getByType(req, res);
         expect(res.status).toHaveBeenCalledWith(404);
       });
     });
@@ -115,7 +145,7 @@ describe('Given dieticiansController', () => {
 
     describe('And the promise is resolved', () => {
       test('Then a status 204 should be sent', async () => {
-        Dietician.findByIdAndDelete.mockResolvedValueOnce();
+        Diet.findByIdAndDelete.mockResolvedValueOnce();
         await deleteById(req, res);
         expect(res.status).toHaveBeenCalledWith(204);
       });
@@ -123,7 +153,7 @@ describe('Given dieticiansController', () => {
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findByIdAndDelete.mockRejectedValueOnce();
+        Diet.findByIdAndDelete.mockRejectedValueOnce();
         await deleteById(req, res);
         expect(res.status).toHaveBeenCalledWith(404);
       });
@@ -133,7 +163,7 @@ describe('Given dieticiansController', () => {
     const req = {
       body: null,
       params: {
-        userId: null,
+        dietId: null,
       },
     };
     const res = {
@@ -144,15 +174,15 @@ describe('Given dieticiansController', () => {
 
     describe('And the promise is resolved', () => {
       test('Then a status 204 should be sent', async () => {
-        Dietician.findByIdAndUpdate.mockResolvedValueOnce({ id: 1, name: 'Man in the sun' });
+        Diet.findByIdAndUpdate.mockResolvedValueOnce({ id: 1, breakfast: 'bacon with eggs' });
         await updateById(req, res);
-        expect(res.json).toHaveBeenCalledWith({ id: 1, name: 'Man in the sun' });
+        expect(res.json).toHaveBeenCalledWith({ id: 1, breakfast: 'bacon with eggs' });
       });
     });
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findByIdAndUpdate.mockRejectedValueOnce();
+        Diet.findByIdAndUpdate.mockRejectedValueOnce();
         await updateById(req, res);
         expect(res.send).toHaveBeenCalledWith(404);
       });
