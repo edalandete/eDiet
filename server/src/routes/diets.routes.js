@@ -12,7 +12,7 @@ function dietsRouter() {
     .delete(dietsController.deleteById)
     .put(dietsController.updateById);
 
-  routes.route('/:dietType')
+  routes.route('/type/:dietType')
     .get(dietsController.getByType);
 
   return routes;

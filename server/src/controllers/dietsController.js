@@ -41,12 +41,12 @@ function dieticiansController() {
     const { dietType } = req.params;
 
     try {
-      const dietById = await Diet.find({ dietType });
+      const dietById = await Diet.find({ type: dietType });
       res.status(200);
       res.json(dietById);
     } catch (error) {
       res.status(404);
-      res.send(`The diet with the id ${dietType} doesn't exist`);
+      res.send(`The diet with the type ${dietType} doesn't exist`);
     }
   }
 
