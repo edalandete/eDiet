@@ -68,8 +68,8 @@ function dieticiansController() {
     }
   }
 
-  function isIncluded(availableHours, takenHours, value) {
-    return availableHours.includes(value) && takenHours.includes(value);
+  function isHourIncluded(availableHours, takenHours, hour) {
+    return availableHours.includes(hour) && takenHours.includes(hour);
   }
 
   async function getAvailableHours(req, res) {
@@ -83,7 +83,7 @@ function dieticiansController() {
       const appointments = await Appointment.find({ date });
       const takenHours = appointments && appointments.map(({ time }) => time);
       const availableHours = workingHours.filter(
-        (hour) => !isIncluded(workingHours, takenHours, hour),
+        (hour) => !isHourIncluded(workingHours, takenHours, hour),
       );
       debug(takenHours);
       res.json(availableHours);
