@@ -1,4 +1,4 @@
-const debug = require('debug')('app:dieticianController');
+const debug = require('debug')('app:dieticiansController');
 const Dietician = require('../models/dietician.model');
 
 function dieticiansController() {

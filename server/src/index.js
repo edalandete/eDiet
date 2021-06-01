@@ -4,6 +4,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 const authRoutes = require('./routes/auth.routes')();
 const dieticiansRouter = require('./routes/dieticians.routes');
+const dietsRouter = require('./routes/diets.routes');
 
 require('./ddbb/mongoose.config');
 
@@ -17,5 +18,6 @@ require('./passport/passport.config')(app);
 
 app.use('/', authRoutes);
 app.use('/api/dieticians', dieticiansRouter);
+app.use('/api/diets', dietsRouter);
 
 app.listen(port, debug(`server is running on port ${port}`));
