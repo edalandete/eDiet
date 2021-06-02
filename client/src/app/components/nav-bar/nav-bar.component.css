@@ -16,6 +16,7 @@
           flex-direction: column;
   text-align: center;
   cursor: pointer;
+  height: 100%;
 }
 
 .main-navigator .navigator-list__item {
@@ -28,7 +29,21 @@
 }
 
 .main-navigator .navigator-list__item--logo {
-  background-color: #E2E5EF;
+  background-color: #FFFFFF;
+  border-bottom: none;
+}
+
+.main-navigator .navigator-list__item--logo img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.main-navigator .navigator-list__item--logout {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  height: auto;
+  border-bottom: none;
 }
 
 .main-navigator .navigator-list .nav-icons {
