@@ -19,8 +19,8 @@ const patientsSchema = Schema({
   },
   goal: String,
   lastVisit: Date,
-  diet: [Schema.Types.ObjectId],
-  appointment: [Schema.Types.ObjectId],
+  diet: { type: Schema.Types.ObjectId, ref: 'Diets' },
+  appointment: { type: Schema.Types.ObjectId, ref: 'Appointments' },
   isActive: Boolean,
 
 });
