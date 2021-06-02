@@ -1,31 +1,39 @@
 const {
-  getAll, createOne, getById, deleteById, updateById,
+  getDayAppointments, createOne, getById, deleteById, updateById,
 } = require('./appointmentsController')();
 
-const Dietician = require('../models/dietician.model');
+const Appointment = require('../models/appointment.model');
 
-jest.mock('../models/dietician.model');
+jest.mock('../models/appointment.model');
 
 describe('Given appointmentsController', () => {
-  describe('When it is called with getAll function', () => {
+  describe('When it is called with getDayAppointments function', () => {
+    const req = {
+      params: {
+        date: '',
+      },
+      body: {
+        dieticianId: '',
+      },
+    };
     const res = {
       json: jest.fn(),
       send: jest.fn(),
     };
     describe('And the promise is resolved', () => {
-      test('Then all users should be returned', async () => {
-        Dietician.find.mockResolvedValueOnce([{ name: 'Edgar' }]);
-        await getAll(null, res);
+      test('Then all appointments from the day should be returned', async () => {
+        Appointment.find.mockResolvedValueOnce([{ patientName: 'Edgar' }]);
+        await getDayAppointments(req, res);
 
         expect(res.json).toHaveBeenCalledWith([{
-          name: 'Edgar',
+          patientName: 'Edgar',
         }]);
       });
     });
     describe('And the promise is rejected', () => {
       test('Then a 404 status should be sent', async () => {
-        Dietician.find.mockRejectedValueOnce();
-        await getAll(null, res);
+        Appointment.find.mockRejectedValueOnce();
+        await getDayAppointments(req, res);
         expect(res.send).toHaveBeenCalledWith(404);
       });
     });
@@ -40,8 +48,8 @@ describe('Given appointmentsController', () => {
       send: jest.fn(),
     };
     describe('And the promise is resolved', () => {
-      test('Then a new user should be created', async () => {
-        class UserMock {
+      test('Then a new appointment should be created', async () => {
+        class AppointmentMock {
           constructor(name) {
             this.name = name;
           }
@@ -50,17 +58,17 @@ describe('Given appointmentsController', () => {
           save() {}
         }
 
-        const newUser = new UserMock('New User');
+        const newAppointment = new AppointmentMock('New Appointment');
 
-        Dietician.mockReturnValueOnce(newUser);
+        Appointment.mockReturnValueOnce(newAppointment);
         await createOne(req, res);
-        expect(res.json).toHaveBeenCalledWith(newUser);
+        expect(res.json).toHaveBeenCalledWith(newAppointment);
       });
     });
 
     describe('And the promise is rejected', () => {
       test('Then an error should be send', async () => {
-        Dietician.mockReturnValueOnce({
+        Appointment.mockReturnValueOnce({
           save: jest.fn().mockRejectedValueOnce('error'),
         });
         await createOne(req, res);
@@ -73,7 +81,7 @@ describe('Given appointmentsController', () => {
     const req = {
       body: null,
       params: {
-        userId: 1,
+        appointmentId: 1,
       },
     };
     const res = {
@@ -83,19 +91,19 @@ describe('Given appointmentsController', () => {
     };
 
     describe('And the promise is resolved', () => {
-      test('Then a user with an specific id should be shown', async () => {
-        Dietician.findById.mockResolvedValueOnce({ id: 1, name: 'Batman' });
+      test('Then an appointment with an specific id should be shown', async () => {
+        Appointment.findById.mockResolvedValueOnce({ id: 1, patientName: 'Batman' });
         await getById(req, res);
         expect(res.json).toHaveBeenCalledWith({
           id: 1,
-          name: 'Batman',
+          patientName: 'Batman',
         });
       });
     });
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findById.mockRejectedValueOnce();
+        Appointment.findById.mockRejectedValueOnce();
         await getById(req, res);
         expect(res.status).toHaveBeenCalledWith(404);
       });
@@ -106,7 +114,7 @@ describe('Given appointmentsController', () => {
     const req = {
       body: null,
       params: {
-        userId: null,
+        appointmentId: null,
       },
     };
     const res = {
@@ -115,7 +123,7 @@ describe('Given appointmentsController', () => {
 
     describe('And the promise is resolved', () => {
       test('Then a status 204 should be sent', async () => {
-        Dietician.findByIdAndDelete.mockResolvedValueOnce();
+        Appointment.findByIdAndDelete.mockResolvedValueOnce();
         await deleteById(req, res);
         expect(res.status).toHaveBeenCalledWith(204);
       });
@@ -123,7 +131,7 @@ describe('Given appointmentsController', () => {
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findByIdAndDelete.mockRejectedValueOnce();
+        Appointment.findByIdAndDelete.mockRejectedValueOnce();
         await deleteById(req, res);
         expect(res.status).toHaveBeenCalledWith(404);
       });
@@ -133,7 +141,7 @@ describe('Given appointmentsController', () => {
     const req = {
       body: null,
       params: {
-        userId: null,
+        appointmentId: null,
       },
     };
     const res = {
@@ -144,15 +152,15 @@ describe('Given appointmentsController', () => {
 
     describe('And the promise is resolved', () => {
       test('Then a status 204 should be sent', async () => {
-        Dietician.findByIdAndUpdate.mockResolvedValueOnce({ id: 1, name: 'Man in the sun' });
+        Appointment.findByIdAndUpdate.mockResolvedValueOnce({ id: 1, time: '1000' });
         await updateById(req, res);
-        expect(res.json).toHaveBeenCalledWith({ id: 1, name: 'Man in the sun' });
+        expect(res.json).toHaveBeenCalledWith({ id: 1, time: '1000' });
       });
     });
 
     describe('And the promise is rejected', () => {
       test('Then the status code 404 should be sent', async () => {
-        Dietician.findByIdAndUpdate.mockRejectedValueOnce();
+        Appointment.findByIdAndUpdate.mockRejectedValueOnce();
         await updateById(req, res);
         expect(res.send).toHaveBeenCalledWith(404);
       });

@@ -40,7 +40,7 @@ describe('Given dieticiansController', () => {
       send: jest.fn(),
     };
     describe('And the promise is resolved', () => {
-      test('Then a new user should be created', async () => {
+      test('Then a new diet should be created', async () => {
         class DietMock {
           constructor(name) {
             this.name = name;
@@ -50,11 +50,11 @@ describe('Given dieticiansController', () => {
           save() {}
         }
 
-        const newUser = new DietMock('new diet');
+        const newDiet = new DietMock('new diet');
 
-        Diet.mockReturnValueOnce(newUser);
+        Diet.mockReturnValueOnce(newDiet);
         await createOne(req, res);
-        expect(res.json).toHaveBeenCalledWith(newUser);
+        expect(res.json).toHaveBeenCalledWith(newDiet);
       });
     });
 
@@ -136,7 +136,7 @@ describe('Given dieticiansController', () => {
     const req = {
       body: null,
       params: {
-        userId: null,
+        dietId: null,
       },
     };
     const res = {
