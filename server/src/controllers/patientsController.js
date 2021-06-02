@@ -18,7 +18,7 @@ function patientsController() {
     const { patientId } = req.params;
 
     try {
-      const patientById = await Patient.findById(patientId).populate('diet').populate('appointment');
+      const patientById = await Patient.findById(patientId).populate(['diet', 'appointment']);
       res.status(200);
       res.json(patientById);
     } catch (error) {
