@@ -1,10 +1,12 @@
 const {
-  getAll, createOne, getById, deleteById, updateById,
+  getAll, createOne, getById, deleteById, updateById, getAvailableHours,
 } = require('./dieticiansController')();
 
 const Dietician = require('../models/dietician.model');
+const Appointment = require('../models/appointment.model');
 
 jest.mock('../models/dietician.model');
+jest.mock('../models/appointment.model');
 
 describe('Given dieticiansController', () => {
   describe('When it is called with getAll function', () => {
@@ -155,6 +157,28 @@ describe('Given dieticiansController', () => {
         Dietician.findByIdAndUpdate.mockRejectedValueOnce();
         await updateById(req, res);
         expect(res.send).toHaveBeenCalledWith(404);
+      });
+    });
+  });
+  describe('When it is called with getAvailableHours function', () => {
+    const req = {
+      json: jest.fn(),
+      send: jest.fn(),
+      body: { dieticianId: '' },
+      params: { date: '' },
+    };
+
+    const res = {
+      json: jest.fn(),
+      send: jest.fn(),
+    };
+    describe('And the promise is resolved', () => {
+      test('Then available hours should be returned', async () => {
+        Dietician.findById.mockResolvedValueOnce([{ schedule: { monday: ['1000', '1100'] } }]);
+        Appointment.find.mockResolvedValueOnce([{ time: '1000' }]);
+        await getAvailableHours(req, res);
+
+        expect(res.json).toHaveBeenCalledWith(['1100']);
       });
     });
   });
