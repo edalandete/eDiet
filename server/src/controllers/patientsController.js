@@ -28,11 +28,11 @@ function patientsController() {
   }
 
   async function updateById(req, res) {
-    const { appointmentId } = req.params;
+    const { patientId } = req.params;
     const updatedData = req.body;
     try {
       const updatedPatient = await Patient.findByIdAndUpdate(
-        appointmentId,
+        patientId,
         updatedData,
         { new: true },
       );

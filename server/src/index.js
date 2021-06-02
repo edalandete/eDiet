@@ -6,6 +6,7 @@ const authRoutes = require('./routes/auth.routes')();
 const dieticiansRouter = require('./routes/dieticians.routes');
 const dietsRouter = require('./routes/diets.routes');
 const appointmentsRouter = require('./routes/appointments.routes');
+const patientsRouter = require('./routes/patients.routes');
 
 require('./ddbb/mongoose.config');
 
@@ -21,5 +22,6 @@ app.use('/', authRoutes);
 app.use('/api/dieticians', dieticiansRouter);
 app.use('/api/diets', dietsRouter);
 app.use('/api/appointments', appointmentsRouter);
+app.use('/api/patients', patientsRouter);
 
 app.listen(port, debug(`server is running on port ${port}`));
