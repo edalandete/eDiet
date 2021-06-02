@@ -1,0 +1,53 @@
+.main-navigator {
+  width: 9.70rem;
+  height: 100%;
+  position: absolute;
+  background-color: #653A6A;
+}
+
+.main-navigator .navigator-list {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  height: 100%;
+}
+
+.main-navigator .navigator-list__item {
+  width: 100%;
+  height: 6.25rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: solid 2px #E2E5EF;
+}
+
+.main-navigator .navigator-list__item--logo {
+  background-color: #FFFFFF;
+  border-bottom: none;
+}
+
+.main-navigator .navigator-list__item--logo img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.main-navigator .navigator-list__item--logout {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  height: auto;
+  border-bottom: none;
+}
+
+.main-navigator .navigator-list .nav-icons {
+  font-size: 2rem;
+  color: #E2E5EF;
+}
+/*# sourceMappingURL=nav-bar.component.css.map */

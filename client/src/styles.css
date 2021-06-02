@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap");
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
+  font-family: "Montserrat";
+}
+
+html ul {
+  list-style: none;
+}
+
+html body {
+  overflow: auto;
+  height: 100%;
+}
+
+html a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+/*# sourceMappingURL=styles.css.map */
