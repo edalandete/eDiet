@@ -1,8 +1,7 @@
 const debug = require('debug')('app:dieticiansController');
-const dayjs = require('dayjs');
 const Dietician = require('../models/dietician.model');
-const weekDays = require('../assets/weekdays');
 const Appointment = require('../models/appointment.model');
+const { calculateAvailableHours } = require('../helpers/datesHelper');
 
 function dieticiansController() {
   async function getAll(req, res) {
@@ -68,10 +67,6 @@ function dieticiansController() {
     }
   }
 
-  function isHourIncluded(availableHours, takenHours, hour) {
-    return availableHours.includes(hour) && takenHours.includes(hour);
-  }
-
   async function getAvailableHours(req, res) {
     const { date } = req.params;
     const { dieticianId } = req.body;
@@ -79,13 +74,8 @@ function dieticiansController() {
     try {
       debug('dentro de la function getAvailableHours');
       const { schedule } = await Dietician.findById(dieticianId);
-      const workingHours = schedule[weekDays[dayjs(date).day()]];
       const appointments = await Appointment.find({ date });
-      const takenHours = appointments && appointments.map(({ time }) => time);
-      const availableHours = workingHours.filter(
-        (hour) => !isHourIncluded(workingHours, takenHours, hour),
-      );
-      debug(takenHours);
+      const availableHours = calculateAvailableHours(schedule, date, appointments);
       res.json(availableHours);
     } catch (error) {
       res.send(404);

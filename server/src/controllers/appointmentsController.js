@@ -1,7 +1,7 @@
 const debug = require('debug')('app:appointmentsController');
 const Appointment = require('../models/appointment.model');
 
-function dieticiansController() {
+function appointmentsController() {
   async function getDayAppointments(req, res) {
     const { date } = req.params;
     const { dieticianId } = req.body;
@@ -76,4 +76,4 @@ function dieticiansController() {
   };
 }
 
-module.exports = dieticiansController;
+module.exports = appointmentsController;

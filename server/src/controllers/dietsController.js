@@ -1,7 +1,7 @@
 const debug = require('debug')('app:dietsController');
 const Diet = require('../models/diet.model');
 
-function dieticiansController() {
+function dietsController() {
   async function getAll(req, res) {
     try {
       debug('dentro de la function getAll');
@@ -88,4 +88,4 @@ function dieticiansController() {
   };
 }
 
-module.exports = dieticiansController;
+module.exports = dietsController;

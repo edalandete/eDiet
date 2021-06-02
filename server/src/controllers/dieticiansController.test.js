@@ -176,9 +176,10 @@ describe('Given dieticiansController', () => {
       test('Then available hours should be returned', async () => {
         Dietician.findById.mockResolvedValueOnce([{ schedule: { monday: ['1000', '1100'] } }]);
         Appointment.find.mockResolvedValueOnce([{ time: '1000' }]);
+        const calculateAvailableHours = jest.fn(() => ['1100']);
         await getAvailableHours(req, res);
 
-        expect(res.json).toHaveBeenCalledWith(['1100']);
+        expect(res.json).toHaveBeenCalledWith(calculateAvailableHours);
       });
     });
   });

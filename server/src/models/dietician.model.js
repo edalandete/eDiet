@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const { model, Schema } = require('mongoose');
 const md5 = require('md5');
 
-const dieticianSchema = mongoose.Schema({
+const dieticianSchema = Schema({
   firstName: String,
   lastName: String,
   email: String,
@@ -20,4 +20,4 @@ dieticianSchema.methods.verifyPassword = function verifyPassword(password) {
   return md5(password) === this.password;
 };
 
-module.exports = mongoose.model('Dieticians', dieticianSchema);
+module.exports = model('Dieticians', dieticianSchema);
