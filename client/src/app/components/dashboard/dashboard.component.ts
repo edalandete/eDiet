@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/core/models/appointment.model';
-import { AppointmentService } from 'src/app/core/services/appointment/appointment.service';
+import {   StoreService } from 'src/app/core/services/store/store.service';
 import { DieticianService } from 'src/app/core/services/dietician/dietician.service';
 import * as dayjs from 'dayjs';
 import { environment } from 'src/environments/environment';
@@ -18,14 +18,14 @@ export class DashboardComponent implements OnInit {
   dieticianId: string = environment.dieticianId;
   date: string = dayjs().format("YYYYMMDD"); 
 
-  constructor(private appointmentService : AppointmentService, private dieticianService : DieticianService) { }
+  constructor(public storeService : StoreService, private dieticianService : DieticianService) { }
 
   ngOnInit(): void {
     this.getAppointments();
   }
 
   getAppointments(): void {
-    this.appointmentService.getAppointments(this.dieticianId, this.date)
+    this.storeService.getTodayAppointments(this.dieticianId, this.date)
       .subscribe(appointments => this.appointments = appointments);
   }
 
