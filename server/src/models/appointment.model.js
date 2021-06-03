@@ -2,7 +2,7 @@ const { model, Schema } = require('mongoose');
 
 const appointmentsSchema = Schema({
   dieticianId: String,
-  patientId: String,
+  patient: { type: Schema.Types.ObjectId, ref: 'Patients' },
   patientName: String,
   date: String,
   time: String,
