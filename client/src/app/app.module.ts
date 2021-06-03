@@ -9,6 +9,7 @@ import { PatientDetailComponent } from './components/patient-detail/patient-deta
 import { LoginComponent } from './components/login/login.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 import { NewPatientFormComponent } from './components/new-patient-form/new-patient-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NewPatientFormComponent } from './components/new-patient-form/new-patie
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
