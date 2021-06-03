@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 
@@ -12,7 +13,8 @@ export class PatientDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private storeService: StoreService) { }
 
-  patient! : Patient 
+  patient! : Patient
+  lastVisit : String = '';
   ngOnInit(): void {
     this.getPatient();
   }
@@ -20,7 +22,10 @@ export class PatientDetailComponent implements OnInit {
   getPatient(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
     this.storeService.getPatientDetail(id)
-      .subscribe(patient => this.patient = patient);
+      .subscribe(patient => {
+        this.patient = patient;
+        this.lastVisit = dayjs(this.patient.lastVisit).format("DD/MM/YYYY");
+      });
   }
 
 }

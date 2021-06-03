@@ -1,5 +1,41 @@
 
-<main class="main" *ngIf="patient">
+<main class="main">
     <h2 class="main__title">Patient Details</h2>
-    {{patient | json}}
+    <input type="text" class="search-bar" placeholder="Search patient..."/>
+    <section *ngIf="patient else noPatientSelected">
+       <section class="patient-card">
+           <ul class="patient-card__list list">
+                <li class="list__item">
+                    <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
+                    <span>{{patient.firstName}} {{patient.lastName}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="carbon:email" data-inline="false"></span>
+                    <span>{{patient.email}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="teenyicons:id-outline" data-inline="false"></span>
+                    <span>{{patient.idCard}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="clarity:phone-handset-line" data-inline="false"></span>
+                    <span>{{patient.phone}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
+                    <span>{{patient.birthdate}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
+                    <span>{{patient.goal}}</span>
+                </li>
+                <li class="list__item">
+                    <span>Last: </span> <span>{{lastVisit}}</span>
+                </li>
+           </ul>
+       </section>
+    </section>
+    <ng-template #noPatientSelected>
+        <section>No patient selected</section>
+    </ng-template>
 </main>

@@ -1,15 +1,15 @@
 .appointments {
-  width: 70%;
   margin: 0 auto;
+  width: 70%;
 }
 
 .appointments__item {
+  background-color: #E2E5EF;
   border: solid 1px #d1d1d1;
   border-radius: 15px;
-  padding: 1rem;
   font-size: 1.5rem;
-  background-color: #E2E5EF;
   margin-bottom: 0.7rem;
+  padding: 1rem;
 }
 
 .appointments__item a {
