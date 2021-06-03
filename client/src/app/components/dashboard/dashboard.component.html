@@ -2,9 +2,10 @@
     <h2 class="main-title">Today's patients</h2>
     <div *ngIf="appointments.length else noAppointments">
         <ul class="appointments">
-            <li *ngFor="let appointment of appointments">
+            <li *ngFor="let appointment of appointments" class="appointments__item">
                 <a routerLink="/detail/{{appointment.patient._id}}">
-                    <span class="badge">{{appointment.patient.firstName}}</span> <p>{{appointment.patient.lastName}}</p>
+                    <span class="badge">{{appointment.patient.firstName}} {{appointment.patient.lastName}}</span>
+                    <span>{{appointment.time}}</span>
                 </a>
             </li>
         </ul>
