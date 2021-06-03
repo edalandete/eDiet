@@ -20,12 +20,12 @@ describe('Given appointmentsController', () => {
     };
     describe('And the promise is resolved', () => {
       test('Then all appointments from the day should be returned', async () => {
-        Appointment.find.mockResolvedValueOnce([{ patientName: 'Edgar' }]);
+        Appointment.find.mockImplementationOnce(() => ({
+          populate: jest.fn().mockImplementationOnce(() => ([{}])),
+        }));
         await getDayAppointments(req, res);
 
-        expect(res.json).toHaveBeenCalledWith([{
-          patientName: 'Edgar',
-        }]);
+        expect(res.json).toHaveBeenCalledWith([{}]);
       });
     });
     describe('And the promise is rejected', () => {
