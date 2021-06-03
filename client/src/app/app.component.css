@@ -1,4 +1,12 @@
-.main-title {
+.main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 100vh;
+  width: calc(100vw - 9.70rem);
+}
+
+.main__title {
   background-color: #653A6A;
   color: #E2E5EF;
   margin: 2rem auto;

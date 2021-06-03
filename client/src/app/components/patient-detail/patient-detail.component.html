@@ -1,1 +1,5 @@
-<p>patient-detail works!</p>
+
+<main class="main" *ngIf="patient">
+    <h2 class="main__title">Patient Details</h2>
+    {{patient | json}}
+</main>

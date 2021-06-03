@@ -1,14 +1,22 @@
 @import './styles/global/colors.scss';
 
-.main-title {
-    background-color: $background-color-secondary;
-    color: $color-secondary;
-    margin: 2rem auto;
-    border-radius: 1.25rem;
-    border: solid 1px $border-color-main;
-    width: 55rem;
-    height: 3.43rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.main {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-height: 100vh;
+    width: calc(100vw - 9.70rem);
+
+    &__title {
+        background-color: $background-color-secondary;
+        color: $color-secondary;
+        margin: 2rem auto;
+        border-radius: 1.25rem;
+        border: solid 1px $border-color-main;
+        width: 55rem;
+        height: 3.43rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

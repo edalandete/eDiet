@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Appointment } from './../../models/appointment.model';
 import { environment } from 'src/environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
+import { HelperService } from 'src/app/helper/services.helper';
 
 
 
@@ -11,7 +12,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AppointmentService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private helperService: HelperService) { }
   
   private appointmentsUrl = environment.appointmentsUrl;
   
@@ -22,24 +23,8 @@ export class AppointmentService {
   getAppointments(dieticianId: string, date: string): Observable<Appointment[]> {
     return this.http.post<Appointment[]>(`${this.appointmentsUrl}/day`, { dieticianId: dieticianId, date: date }, this.httpOptions)
       .pipe(
-        tap(_ => this.log('fetched appointments')),
-        catchError(this.handleError<Appointment[]>('getAppointments', []))
+        tap(_ => this.helperService.log('fetched appointments')),
+        catchError(this.helperService.handleError<Appointment[]>('getAppointments', []))
       );
   } 
-
-  private log(message: string) {
-    console.log(`AppointmentService: ${message}`);
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-  
-      console.error(error); 
-  
-      this.log(`${operation} failed: ${error.message}`);
-  
-      return of(result as T);
-    };
-  }
-
 }
