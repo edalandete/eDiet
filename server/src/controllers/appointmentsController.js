@@ -3,11 +3,10 @@ const Appointment = require('../models/appointment.model');
 
 function appointmentsController() {
   async function getDayAppointments(req, res) {
-    const { date } = req.params;
-    const { dieticianId } = req.body;
+    const { dieticianId, date } = req.body;
     try {
       debug('dentro de la function getDayAppointments');
-      const appointments = await Appointment.find({ date, dieticianId });
+      const appointments = await Appointment.find({ date, dieticianId }).populate('patient', ['_id', 'firstName', 'lastName']);
       res.json(appointments);
     } catch (error) {
       res.send(404);

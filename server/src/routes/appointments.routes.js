@@ -6,8 +6,8 @@ function appointmentsRouter() {
 
   routes.route('/')
     .post(appointmentsController.createOne);
-  routes.route('/day/:date')
-    .get(appointmentsController.getDayAppointments);
+  routes.route('/day')
+    .post(appointmentsController.getDayAppointments);
   routes.route('/:appointmentId')
     .get(appointmentsController.getById)
     .delete(appointmentsController.deleteById)

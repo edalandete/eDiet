@@ -9,10 +9,8 @@ jest.mock('../models/appointment.model');
 describe('Given appointmentsController', () => {
   describe('When it is called with getDayAppointments function', () => {
     const req = {
-      params: {
-        date: '',
-      },
       body: {
+        date: '',
         dieticianId: '',
       },
     };
