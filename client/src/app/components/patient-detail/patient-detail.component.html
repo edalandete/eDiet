@@ -1,7 +1,10 @@
 
 <main class="main">
     <h2 class="main__title">Patient Details</h2>
-    <input type="text" class="search-bar" placeholder="Search patient..."/>
+    <div class="search-container">
+        <input type="text" class="search-container__search-bar" placeholder="Search patient..."/>
+        <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
+    </div>
     <section *ngIf="patient else noPatientSelected">
        <section class="patient-card">
            <ul class="patient-card__list list">
@@ -23,7 +26,7 @@
                 </li>
                 <li class="list__item">
                     <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
-                    <span>{{patient.birthdate}}</span>
+                    <span>{{birthDate}}</span>
                 </li>
                 <li class="list__item">
                     <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
@@ -33,6 +36,7 @@
                     <span>Last: </span> <span>{{lastVisit}}</span>
                 </li>
            </ul>
+           <img alt="patient.name" [src]="transform()" className="profile-picture" />
        </section>
     </section>
     <ng-template #noPatientSelected>

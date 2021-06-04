@@ -1,4 +1,5 @@
 import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
@@ -11,13 +12,21 @@ import { StoreService } from 'src/app/core/services/store/store.service';
 })
 export class PatientDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private storeService: StoreService) { }
+  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, private storeService: StoreService) { }
 
   patient! : Patient
   lastVisit : String = '';
+  birthDate : String = '';
+  test: String = ''
+
+
   ngOnInit(): void {
     this.getPatient();
   }
+
+  transform(){
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(this.patient.picture);
+}
 
   getPatient(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
@@ -25,6 +34,7 @@ export class PatientDetailComponent implements OnInit {
       .subscribe(patient => {
         this.patient = patient;
         this.lastVisit = dayjs(this.patient.lastVisit).format("DD/MM/YYYY");
+        this.birthDate = dayjs(this.patient.birthdate).format("DD/MM/YYYY");
       });
   }
 

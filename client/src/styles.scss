@@ -20,4 +20,15 @@ html {
         color: inherit;
         cursor: pointer;
     }
+
+    button {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        outline: none;
+    }
+
+    input {
+        outline: none;
+    }
 }
