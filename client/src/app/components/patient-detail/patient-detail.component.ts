@@ -18,14 +18,15 @@ export class PatientDetailComponent implements OnInit {
   lastVisit : String = '';
   nextVisit: String = '';
   birthDate : String = '';
+  picture : any = '';
 
 
   ngOnInit(): void {
     this.getPatient();
   }
 
-  transform(){
-    return this.domSanitizer.bypassSecurityTrustResourceUrl(this.patient.picture);
+  transform(base : string){
+    return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
 }
 
   getPatient(): void {
@@ -35,8 +36,8 @@ export class PatientDetailComponent implements OnInit {
         this.patient = patient;
         this.lastVisit = dayjs(this.patient.lastVisit).format("DD/MM/YYYY");
         this.birthDate = dayjs(this.patient.birthdate).format("DD/MM/YYYY");
-        debugger;
         this.nextVisit = dayjs(this.patient.appointment.date).format("DD/MM/YYYY");
+        this.picture = this.transform(this.patient.picture)
       });
   }
 
