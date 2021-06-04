@@ -57,4 +57,27 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.secondary-title {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 2rem auto;
+  height: 3rem;
+  width: 55rem;
+  border-radius: 1.5rem;
+  border: solid 1px #E2E5EF;
+  color: #5E5E5E;
+  background-color: #FCFBFE;
+}
+
+.bolder {
+  font-weight: bold;
+}
 /*# sourceMappingURL=app.component.css.map */

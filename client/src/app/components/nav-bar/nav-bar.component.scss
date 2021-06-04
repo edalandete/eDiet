@@ -2,7 +2,7 @@
 .main-navigator {
     background-color: $background-color-secondary;
     height: 100%;
-    position: absolute;
+    position: fixed;
     width: 9.70rem;
     .navigator-list {
         cursor: pointer;

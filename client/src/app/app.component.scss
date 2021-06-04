@@ -49,3 +49,20 @@
     }
 }
 
+.secondary-title {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 2rem auto;
+    height: 3rem;
+    width: 55rem;
+    border-radius: 1.5rem;
+    border: solid 1px $color-secondary;
+    color: $color-secondary-title;
+    background-color: $background-color-secondary-title;
+}
+
+.bolder {
+    font-weight: bold;
+}
+

@@ -1,7 +1,7 @@
 .main-navigator {
   background-color: #653A6A;
   height: 100%;
-  position: absolute;
+  position: fixed;
   width: 9.70rem;
 }
 
