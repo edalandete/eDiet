@@ -1,0 +1,37 @@
+.patient-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 1rem auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 32rem;
+}
+
+.patient-card__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.patient-card__list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.patient-card__list .list__item .iconify {
+  margin-right: 0.5rem;
+}
+/*# sourceMappingURL=patient-detail.component.css.map */

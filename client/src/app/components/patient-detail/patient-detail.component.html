@@ -33,7 +33,8 @@
                     <span>{{patient.goal}}</span>
                 </li>
                 <li class="list__item">
-                    <span>Last: </span> <span>{{lastVisit}}</span>
+                    <span class="iconify" data-icon="clarity:calendar-line" data-inline="false"></span>
+                    <span>Last: </span> <span>{{lastVisit}}</span> <span>Next: </span> <span>{{nextVisit}}</span>
                 </li>
            </ul>
            <img alt="patient.name" [src]="transform()" className="profile-picture" />
