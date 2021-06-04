@@ -1,22 +1,15 @@
 @import './../../styles/global/colors.scss';
-main {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-height: 100vh;
-    width: calc(100vw - 9.70rem);
-}
 
 .appointments {
-    width: 70%;
     margin: 0 auto;
+    width: 70%;
     &__item {
+        background-color: $color-secondary;
         border: solid 1px rgb(209, 209, 209);
         border-radius: 15px;
-        padding: 1rem;
         font-size: 1.5rem;
-        background-color: $color-secondary;
         margin-bottom: 0.7rem;
+        padding: 1rem;
         a {
             width: 100%;
             display: flex;

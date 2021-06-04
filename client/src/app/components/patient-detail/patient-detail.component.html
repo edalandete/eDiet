@@ -1,1 +1,120 @@
-<p>patient-detail works!</p>
+
+<main class="main">
+    <h2 class="main__title">patient petails</h2>
+    <div class="search-container">
+        <input type="text" class="search-container__search-bar" placeholder="Search patient..."/>
+        <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
+    </div>
+    <section *ngIf="patient else noPatientSelected">
+       <section class="patient-card">
+           <ul class="patient-card__list list">
+                <li class="list__item">
+                    <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
+                    <span class="bolder">{{patient.firstName}} {{patient.lastName}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="carbon:email" data-inline="false"></span>
+                    <span>{{patient.email}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="teenyicons:id-outline" data-inline="false"></span>
+                    <span>{{patient.idCard}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="clarity:phone-handset-line" data-inline="false"></span>
+                    <span>{{patient.phone}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
+                    <span>{{birthDate}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
+                    <span>{{patient.goal}}</span>
+                </li>
+                <li class="list__item">
+                    <span class="iconify" data-icon="clarity:calendar-line" data-inline="false"></span>
+                    <span class="bolder">Last: </span> <span>{{lastVisit}}</span> <span class="bolder">Next: </span> <span>{{nextVisit}}</span>
+                </li>
+           </ul>
+           <img alt=patient.name [src]="picture" class="profile-picture" />
+       </section>
+       <section class="somatotype">
+           <h3 class="secondary-title">somatotype</h3>
+           <ul class="somatotype__list">
+               <li class="somatotype__item somatotype__item--orange">
+                <span class="bolder">BMI: </span>   
+                <span>{{patient.bmi}}</span>
+                </li>
+               <li class="somatotype__item somatotype__item--orange">
+                <span class="bolder">Weight: </span>   
+                <span>{{patient.weight[patient.weight.length-1]}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Biceps: </span>
+                   <span>{{patient.perimeter.biceps}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Shoulders: </span>
+                   <span>{{patient.perimeter.shoulders}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Back: </span>
+                   <span>{{patient.perimeter.back}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Wist: </span>
+                   <span>{{patient.perimeter.wist}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Quadriceps: </span>
+                   <span>{{patient.perimeter.quadriceps}}</span>
+                </li>
+               <li class="somatotype__item">
+                   <span class="bolder">Height: </span>
+                   <span>{{patient.height}}</span>
+                </li>
+           </ul>
+       </section>
+       <section class="diet">
+        <h3 class="secondary-title">diet</h3>
+        <div class="table-container"></div>
+            
+        <div class="Rtable Rtable--3cols Rtable--collapse">
+            <div class="Rtable-cell Rtable-cell--head">
+                <h4>06:00 - 08:00</h4>
+            </div>
+            <div class="Rtable-cell Rtable-cell--title">breakfast</div>
+            <div class="Rtable-cell">{{patient.diet.breakfast}}</div>
+            <div class="Rtable-cell Rtable-cell--head">
+                <h4>10:00 - 11:00</h4>
+            </div>
+            <div class="Rtable-cell Rtable-cell--title">mid day</div>
+            <div class="Rtable-cell">{{patient.diet.midday}}</div>
+            <div class="Rtable-cell Rtable-cell--head">
+                <h4>13:00 - 15:00</h4>
+            </div>
+            <div class="Rtable-cell Rtable-cell--title">lunch</div>
+            <div class="Rtable-cell ">{{patient.diet.lunch}}</div>
+            <div class="Rtable-cell Rtable-cell--head">
+                <h4>17:00 - 18:00</h4>
+            </div>
+            <div class="Rtable-cell Rtable-cell--title">snack</div>
+            <div class="Rtable-cell">{{patient.diet.snack}}</div>
+            <div class="Rtable-cell Rtable-cell--head">
+                <h4>20:00 - 21:00</h4>
+            </div>
+            <div class="Rtable-cell Rtable-cell--title">dinner</div>
+            <div class="Rtable-cell">{{patient.diet.dinner}}</div>
+            
+        </div>
+       </section>
+    </section>
+    <ng-template #noPatientSelected>
+        <section>No patient selected</section>
+    </ng-template>
+
+    <ng-template #noPerimeterData>
+        <section>No perimeter data</section>
+    </ng-template>
+</main>

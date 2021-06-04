@@ -7,7 +7,6 @@
 }
 
 html {
-  overflow: hidden;
   height: 100%;
   font-family: "Montserrat";
 }
@@ -25,5 +24,16 @@ html a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+}
+
+html button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+html input {
+  outline: none;
 }
 /*# sourceMappingURL=styles.css.map */

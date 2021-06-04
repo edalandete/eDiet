@@ -1,14 +1,68 @@
 @import './styles/global/colors.scss';
 
-.main-title {
-    background-color: $background-color-secondary;
-    color: $color-secondary;
-    margin: 2rem auto;
-    border-radius: 1.25rem;
-    border: solid 1px $border-color-main;
-    width: 55rem;
-    height: 3.43rem;
+.main {
+    min-height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: calc(100vw - 9.70rem);
+    &__title {
+        align-items: center;
+        background-color: $background-color-secondary;
+        border: solid 1px $border-color-main;
+        border-radius: 1.25rem;
+        color: $color-secondary;
+        display: flex;
+        height: 3.43rem;
+        justify-content: center;
+        margin: 2rem auto;
+        width: 55rem;
+    }
+}
+
+.search-container {
     display: flex;
+    margin: 0 auto;
+    height: 3rem;
+    width: 55rem;
+    &__search-bar {
+        width: 85%;
+        height: 3rem;
+        border: 1px solid $border-color-main;
+        border-right: none;
+        border-bottom-left-radius: 1.5rem;
+        border-top-left-radius: 1.5rem;
+        padding: 1rem 2rem;
+    }
+
+    button {
+        width: 15%;
+        height: 3rem;
+        border: 1px solid $border-color-main;
+        border-left: none;
+        border-bottom-right-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        .iconify {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+}
+
+.secondary-title {
     align-items: center;
     justify-content: center;
+    display: flex;
+    margin: 2rem auto;
+    height: 3rem;
+    width: 55rem;
+    border-radius: 1.5rem;
+    border: solid 1px $color-secondary;
+    color: $color-secondary-title;
+    background-color: $background-color-secondary-title;
 }
+
+.bolder {
+    font-weight: bold;
+}
+

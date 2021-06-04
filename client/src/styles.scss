@@ -5,7 +5,6 @@
   box-sizing: border-box;
 }
 html {
-    overflow: hidden;
     height: 100%;
     font-family: 'Montserrat',;
     ul {
@@ -19,5 +18,16 @@ html {
         text-decoration: none;
         color: inherit;
         cursor: pointer;
+    }
+
+    button {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        outline: none;
+    }
+
+    input {
+        outline: none;
     }
 }

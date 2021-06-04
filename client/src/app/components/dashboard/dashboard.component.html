@@ -1,5 +1,5 @@
-<main>
-    <h2 class="main-title">Today's patients</h2>
+<main class="main">
+    <h2 class="main__title">Today's patients</h2>
     <div *ngIf="appointments.length else noAppointments">
         <ul class="appointments">
             <li *ngFor="let appointment of appointments" class="appointments__item">
@@ -12,5 +12,5 @@
     </div>
     <ng-template #noAppointments>
         <div>No appointments</div>
-       </ng-template>
+    </ng-template>
 </main>

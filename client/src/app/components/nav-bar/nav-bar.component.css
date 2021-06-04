@@ -1,12 +1,12 @@
 .main-navigator {
-  width: 9.70rem;
-  height: 100%;
-  position: absolute;
   background-color: #653A6A;
+  height: 100%;
+  position: fixed;
+  width: 9.70rem;
 }
 
 .main-navigator .navigator-list {
-  list-style: none;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,23 +14,23 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  cursor: pointer;
   height: 100%;
+  list-style: none;
 }
 
 .main-navigator .navigator-list__item {
-  width: 100%;
-  height: 6.25rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-bottom: solid 2px #E2E5EF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 6.25rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  width: 100%;
 }
 
 .main-navigator .navigator-list__item--logo {
@@ -39,16 +39,16 @@
 }
 
 .main-navigator .navigator-list__item--logo img {
-  width: 4rem;
   height: 4rem;
+  width: 4rem;
 }
 
 .main-navigator .navigator-list__item--logout {
+  border-bottom: none;
   -webkit-box-flex: 2;
       -ms-flex-positive: 2;
           flex-grow: 2;
   height: auto;
-  border-bottom: none;
 }
 
 .main-navigator .navigator-list .nav-icons {
