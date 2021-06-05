@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppointmentFormComponent } from './components/appointment-form/appointment-form.component';
 import { NewPatientFormComponent } from './components/new-patient-form/new-patient-form.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     PatientDetailComponent,
     LoginComponent,
     AppointmentFormComponent,
-    NewPatientFormComponent
+    NewPatientFormComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

@@ -20,35 +20,6 @@
     }
 }
 
-.search-container {
-    display: flex;
-    margin: 0 auto;
-    height: 3rem;
-    width: 55rem;
-    &__search-bar {
-        width: 85%;
-        height: 3rem;
-        border: 1px solid $border-color-main;
-        border-right: none;
-        border-bottom-left-radius: 1.5rem;
-        border-top-left-radius: 1.5rem;
-        padding: 1rem 2rem;
-    }
-
-    button {
-        width: 15%;
-        height: 3rem;
-        border: 1px solid $border-color-main;
-        border-left: none;
-        border-bottom-right-radius: 1.5rem;
-        border-top-right-radius: 1.5rem;
-        .iconify {
-            width: 1.5rem;
-            height: 1.5rem;
-        }
-    }
-}
-
 .secondary-title {
     align-items: center;
     justify-content: center;

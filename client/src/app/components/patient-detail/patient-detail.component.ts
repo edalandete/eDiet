@@ -1,9 +1,10 @@
-import { AfterContentInit, AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-patient-detail',
@@ -26,8 +27,10 @@ export class PatientDetailComponent implements OnInit {
   }
 
   transform(base : string){
-    return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
-}
+    debugger;
+    if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
+    else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
+  }
 
   getPatient(): void {
     const id = String(this.route.snapshot.paramMap.get('id'));
@@ -36,9 +39,8 @@ export class PatientDetailComponent implements OnInit {
         this.patient = patient;
         this.lastVisit = dayjs(this.patient.lastVisit).format("DD/MM/YYYY");
         this.birthDate = dayjs(this.patient.birthdate).format("DD/MM/YYYY");
-        this.nextVisit = dayjs(this.patient.appointment.date).format("DD/MM/YYYY");
+        this.nextVisit = dayjs(this.patient.appointment?.date).format("DD/MM/YYYY");
         this.picture = this.transform(this.patient.picture);
-        debugger;
       });
   }
 

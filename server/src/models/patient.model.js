@@ -3,6 +3,7 @@ const { model, Schema } = require('mongoose');
 const patientsSchema = Schema({
   firstName: String,
   lastName: String,
+  fullName: String,
   email: String,
   phone: Number,
   birthdate: Date,

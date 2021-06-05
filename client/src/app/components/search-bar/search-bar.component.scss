@@ -1,0 +1,66 @@
+@import './../../styles/global/colors.scss';
+
+.search-container {
+    display: flex;
+    margin: 2rem auto;
+    height: 3rem;
+    width: 55rem;
+    &__search-bar {
+        width: 85%;
+        height: 3rem;
+        border: 1px solid $border-color-main;
+        border-right: none;
+        border-bottom-left-radius: 1.5rem;
+        border-top-left-radius: 1.5rem;
+        padding: 1rem 2rem;
+    }
+
+    button {
+        width: 15%;
+        height: 3rem;
+        border: 1px solid $border-color-main;
+        border-left: none;
+        border-bottom-right-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        .iconify {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+    }
+}
+
+.patients {
+    margin: 0 auto;
+    width: 70%;
+    &__item {
+        background-color: $color-secondary;
+        border: solid 1px rgb(209, 209, 209);
+        border-radius: 15px;
+        font-size: 1.5rem;
+        margin-bottom: 0.7rem;
+        padding: 1rem;
+        a {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10rem;
+
+            img {
+                width: auto;
+                height: 5rem;
+                object-fit: cover;
+                border-radius: 1rem;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+
+            .patient-info {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+    }
+    &__item:hover {
+       background-color: rgba(226, 229, 239, 0.6); 
+    }
+}

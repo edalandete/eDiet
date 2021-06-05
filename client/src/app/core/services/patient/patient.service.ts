@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
@@ -25,6 +25,17 @@ export class PatientService {
       tap(_ => this.helperService.log('fetched patient')),
       catchError(this.helperService.handleError<Patient>(`error fetching patient with id ${patientId}`))
     );
+  }
+
+  searchPatients(fullName: string): Observable<Patient[]> {
+    if (!fullName.trim()) return of([]);
+    return this.http.get<Patient[]>(`${this.patientsUrl}/?fullName=${fullName}`).pipe(
+      tap(patients => patients.length ?
+         this.helperService.log(`found heroes matching "${fullName}"`) :
+         this.helperService.log(`no heroes matching "${fullName}"`)),
+      catchError(this.helperService.handleError<Patient[]>('searchPatients', []))
+    );
+
   }
 
 

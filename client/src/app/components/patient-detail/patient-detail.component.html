@@ -1,10 +1,6 @@
 
 <main class="main">
     <h2 class="main__title">patient petails</h2>
-    <div class="search-container">
-        <input type="text" class="search-container__search-bar" placeholder="Search patient..."/>
-        <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
-    </div>
     <section *ngIf="patient else noPatientSelected">
        <section class="patient-card">
            <ul class="patient-card__list list">
@@ -78,9 +74,8 @@
        </section>
        <section class="diet">
         <h3 class="secondary-title">diet</h3>
-        <div class="table-container"></div>
             
-        <div class="Rtable Rtable--3cols Rtable--collapse">
+        <div *ngIf="patient.diet else noDiet" class="Rtable Rtable--3cols Rtable--collapse">
             <div class="Rtable-cell Rtable-cell--head">
                 <h4>06:00 - 08:00</h4>
             </div>
@@ -114,7 +109,7 @@
         <section>No patient selected</section>
     </ng-template>
 
-    <ng-template #noPerimeterData>
-        <section>No perimeter data</section>
+    <ng-template #noDiet>
+        <section>Patient with no selected diet</section>
     </ng-template>
 </main>

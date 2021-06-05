@@ -15,6 +15,7 @@ export class StoreService {
 
   appointments$ = new BehaviorSubject<Appointment[]>([]);
   patient$ = new BehaviorSubject<Patient>(<Patient>{});
+  patients$ = new BehaviorSubject<Patient[]>([]);
 
   constructor(
       private appointmentService: AppointmentService,
@@ -27,6 +28,10 @@ export class StoreService {
 
   getPatientDetail(patientId: string):Observable<Patient>{
     return this.patientService.getPatient(patientId);
+  }
+
+  searchPatients(term: string): Observable<Patient[]> {
+    return this.patientService.searchPatients(term);
   }
 
 

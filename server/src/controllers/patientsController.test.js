@@ -1,5 +1,5 @@
 const {
-  createOne, getById, updateById,
+  createOne, getById, updateById, getAllByName,
 } = require('./patientsController')();
 
 const Patient = require('../models/patient.model');
@@ -7,6 +7,35 @@ const Patient = require('../models/patient.model');
 jest.mock('../models/patient.model');
 
 describe('Given patientsController', () => {
+  describe('When it is called with getAllByName function', () => {
+    const req = {
+      query: {
+        fullName: 'edg',
+      },
+    };
+    const res = {
+      json: jest.fn(),
+      send: jest.fn(),
+    };
+    describe('And the promise is resolved', () => {
+      test('Then all patients matching the name should be returned', async () => {
+        Patient.find.mockResolvedValueOnce([{ fullName: 'edg' }]);
+        await getAllByName(req, res);
+
+        expect(res.json).toHaveBeenCalledWith([{
+          fullName: 'edg',
+        }]);
+      });
+    });
+    describe('And the promise is rejected', () => {
+      test('Then a 404 status should be sent', async () => {
+        Patient.find.mockRejectedValueOnce();
+        await getAllByName(req, res);
+        expect(res.send).toHaveBeenCalledWith(404);
+      });
+    });
+  });
+
   describe('When it is called with a createOne function', () => {
     const req = {
       body: null,

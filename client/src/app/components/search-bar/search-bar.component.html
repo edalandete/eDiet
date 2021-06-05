@@ -1,0 +1,27 @@
+<main class="main">
+    <h2 class="main__title">search patients</h2>
+
+    <div class="search-container">
+        <input 
+            type="text" 
+            class="search-container__search-bar"
+            #searchBox id="search-box" 
+            (input)="search(searchBox.value)"
+            placeholder="Search patient..."/>
+        <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
+    </div>
+
+    <ul class="patients">
+        <li *ngFor="let patient of patients$ | async" class="patients__item">
+          <a routerLink="/detail/{{patient._id}}">
+            <div class="test">
+                <img alt=patient.name [src]="transform(patient.picture)" class="profile-picture" />
+            </div>
+            <div class="patient-info">
+                <span class="badge">{{patient.fullName}}</span>
+                <span>{{patient.goal}}</span>
+            </div>
+        </a>
+        </li>
+      </ul>
+</main>
