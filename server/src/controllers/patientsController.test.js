@@ -7,7 +7,7 @@ const Patient = require('../models/patient.model');
 jest.mock('../models/patient.model');
 
 describe('Given patientsController', () => {
-  describe('When it is called with getAll function', () => {
+  describe('When it is called with getAllByName function', () => {
     const req = {
       query: {
         fullName: 'edg',
@@ -30,7 +30,7 @@ describe('Given patientsController', () => {
     describe('And the promise is rejected', () => {
       test('Then a 404 status should be sent', async () => {
         Patient.find.mockRejectedValueOnce();
-        await getAllByName(null, res);
+        await getAllByName(req, res);
         expect(res.send).toHaveBeenCalledWith(404);
       });
     });
