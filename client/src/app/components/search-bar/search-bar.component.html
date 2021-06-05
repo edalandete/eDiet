@@ -11,11 +11,17 @@
         <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
     </div>
 
-    <ul class="search-result">
-        <li *ngFor="let patient of patients$ | async" >
+    <ul class="patients">
+        <li *ngFor="let patient of patients$ | async" class="patients__item">
           <a routerLink="/detail/{{patient._id}}">
-            {{patient.firstName}}
-          </a>
+            <div class="test">
+                <img alt=patient.name [src]="transform(patient.picture)" class="profile-picture" />
+            </div>
+            <div class="patient-info">
+                <span class="badge">{{patient.fullName}}</span>
+                <span>{{patient.goal}}</span>
+            </div>
+        </a>
         </li>
       </ul>
 </main>
