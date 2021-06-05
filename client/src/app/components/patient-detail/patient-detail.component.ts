@@ -38,7 +38,6 @@ export class PatientDetailComponent implements OnInit {
         this.birthDate = dayjs(this.patient.birthdate).format("DD/MM/YYYY");
         this.nextVisit = dayjs(this.patient.appointment.date).format("DD/MM/YYYY");
         this.picture = this.transform(this.patient.picture);
-        debugger;
       });
   }
 

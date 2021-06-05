@@ -1,10 +1,6 @@
 
 <main class="main">
     <h2 class="main__title">patient petails</h2>
-    <div class="search-container">
-        <input type="text" class="search-container__search-bar" placeholder="Search patient..."/>
-        <button type="button"><span class="iconify" data-icon="ant-design:search-outlined" data-inline="false"></span></button>
-    </div>
     <section *ngIf="patient else noPatientSelected">
        <section class="patient-card">
            <ul class="patient-card__list list">

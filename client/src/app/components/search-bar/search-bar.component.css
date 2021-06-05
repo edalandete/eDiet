@@ -1,0 +1,33 @@
+.search-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  height: 3rem;
+  width: 55rem;
+}
+
+.search-container__search-bar {
+  width: 85%;
+  height: 3rem;
+  border: 1px solid #E2E5EF;
+  border-right: none;
+  border-bottom-left-radius: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  padding: 1rem 2rem;
+}
+
+.search-container button {
+  width: 15%;
+  height: 3rem;
+  border: 1px solid #E2E5EF;
+  border-left: none;
+  border-bottom-right-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.search-container button .iconify {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+/*# sourceMappingURL=search-bar.component.css.map */

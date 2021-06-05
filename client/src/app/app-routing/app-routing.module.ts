@@ -5,11 +5,13 @@ import { DashboardComponent } from '../components/dashboard/dashboard.component'
 import { LoginComponent } from '../components/login/login.component';
 import { NewPatientFormComponent } from '../components/new-patient-form/new-patient-form.component';
 import { PatientDetailComponent } from '../components/patient-detail/patient-detail.component';
+import { SearchBarComponent } from '../components/search-bar/search-bar.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'search', component: SearchBarComponent },
   { path: 'createAppointment', component: AppointmentFormComponent},
   { path: 'createPatient', component: NewPatientFormComponent},
   { path: 'logout', component: LoginComponent},
