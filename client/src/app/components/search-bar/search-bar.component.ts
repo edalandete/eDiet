@@ -7,6 +7,7 @@ import {
  } from 'rxjs/operators';
 import { Patient } from 'src/app/core/models/patient.model';
 import { PatientService } from 'src/app/core/services/patient/patient.service';
+import { StoreService } from 'src/app/core/services/store/store.service';
  
 @Component({
   selector: 'app-search-bar',
@@ -17,7 +18,7 @@ export class SearchBarComponent implements OnInit {
   patients$!: Observable<Patient[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private patientService: PatientService) {}
+  constructor(private storeService: StoreService) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
@@ -27,7 +28,7 @@ export class SearchBarComponent implements OnInit {
     this.patients$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.patientService.searchPatients(term)),
+      switchMap((term: string) => this.storeService.searchPatients(term)),
     );
   }
 }
