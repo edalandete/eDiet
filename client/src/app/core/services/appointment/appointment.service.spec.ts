@@ -29,7 +29,7 @@ describe('Given an AppointmentService', () => {
   });
 
   describe('When it is called with getAppointments function', ()=> {
-    it('Then should benn called once', () => {
+    it('Then should been called once', () => {
       const appointments: Appointment[] = [];
       httpClientSpy.post.and.returnValue(of(appointments));
       const dieticianId: string = "ssss";
