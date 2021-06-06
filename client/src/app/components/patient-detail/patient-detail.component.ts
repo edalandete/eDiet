@@ -27,7 +27,6 @@ export class PatientDetailComponent implements OnInit {
   }
 
   transform(base : string){
-    debugger;
     if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
     else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
   }
