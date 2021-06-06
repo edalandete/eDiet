@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
-import { AppComponent } from 'src/app/app.component';
+import { Appointment } from 'src/app/core/models/appointment.model';
 
 
 describe('Given a DashboardComponent', () => {
@@ -27,10 +27,14 @@ describe('Given a DashboardComponent', () => {
 
   describe('When the component is rendered', () => {
     it(`Then the text today should appear in the screen` , () => {
-      // const appointments : AppComponent[] = [];
-      // const spyFn = spyOn(component.storeService,'getTodayAppointments').and.returnValue(of(appointments))
       const compiled = fixture.debugElement.nativeElement;
       expect(compiled.querySelector('h2').textContent).toContain('Today');
+    });
+    it(`Then the text today should appear in the screen` , () => {
+      const appointments : Appointment[] = [];
+      const spyFn = spyOn(component.storeService,'getTodayAppointments').and.returnValue(of(appointments))
+      component.ngOnInit();
+      expect(spyFn).toHaveBeenCalled();
     });
     
   });
