@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, private storeService: StoreService) { }
+  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, public storeService: StoreService) { }
 
   patient! : Patient
   lastVisit : String = '';

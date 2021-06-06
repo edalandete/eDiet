@@ -38,8 +38,4 @@ describe('Given a DashboardComponent', () => {
     });
     
   });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });
