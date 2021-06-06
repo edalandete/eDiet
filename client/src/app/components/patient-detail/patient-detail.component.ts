@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, private storeService: StoreService) { }
+  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, public storeService: StoreService) { }
 
   patient! : Patient
   lastVisit : String = '';
@@ -27,7 +27,6 @@ export class PatientDetailComponent implements OnInit {
   }
 
   transform(base : string){
-    debugger;
     if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
     else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
   }
