@@ -7,7 +7,8 @@ import {
  } from 'rxjs/operators';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
-import { environment } from 'src/environments/environment';
+import { ComponentsHelper } from './../../helper/components.helper';
+
  
 @Component({
   selector: 'app-search-bar',
@@ -18,17 +19,15 @@ export class SearchBarComponent implements OnInit {
   patients$!: Observable<Patient[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private storeService: StoreService, private domSanitizer: DomSanitizer) {}
+  constructor(private storeService: StoreService, private componentsHelper: ComponentsHelper) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
   transform(base : string){
-    if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
-    else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
+    return this.componentsHelper.transform(base);
   }
-
 
   ngOnInit(): void {
     this.patients$ = this.searchTerms.pipe(

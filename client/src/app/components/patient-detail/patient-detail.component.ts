@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
-import { environment } from 'src/environments/environment';
-
+import { ComponentsHelper } from './../../helper/components.helper';
 @Component({
   selector: 'app-patient-detail',
   templateUrl: './patient-detail.component.html',
@@ -13,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private domSanitizer: DomSanitizer, public storeService: StoreService) { }
+  constructor(private route: ActivatedRoute, public storeService: StoreService, private componentsHelper: ComponentsHelper) { }
 
   patient! : Patient
   lastVisit : String = '';
@@ -27,8 +25,7 @@ export class PatientDetailComponent implements OnInit {
   }
 
   transform(base : string){
-    if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
-    else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
+    return this.componentsHelper.transform(base);
   }
 
   getPatient(): void {
