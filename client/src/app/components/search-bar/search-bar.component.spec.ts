@@ -1,8 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreService } from 'src/app/core/services/store/store.service';
+import { of } from 'rxjs';
 
 import { SearchBarComponent } from './search-bar.component';
+import { ComponentsHelper } from 'src/app/helper/components.helper';
+import { Patient } from 'src/app/core/models/patient.model';
+
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -12,7 +16,7 @@ describe('SearchBarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SearchBarComponent ],
       imports: [HttpClientTestingModule],
-      providers: [StoreService]
+      providers: [StoreService, ComponentsHelper]
     })
     .compileComponents();
   });
@@ -23,7 +27,11 @@ describe('SearchBarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  describe("When a new term is introduced", () => {
+    it("Then the search should been called", () => {
+      const spyFn = spyOn(component.storeService,'searchPatients').and.returnValue(of())
+      component.ngOnInit();
+      expect(spyFn).toHaveBeenCalled();
+    })
+  })
 });

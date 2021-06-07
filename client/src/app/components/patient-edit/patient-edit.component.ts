@@ -31,13 +31,7 @@ export class PatientEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPatient();
-    this.editPatientForm.valueChanges
-    .pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap((formValue)=> this.storeService.updatedPatient$.next(formValue))
-    )
-    .subscribe();
+    this.detectFormChanges();
 
   }
 
@@ -53,6 +47,16 @@ export class PatientEditComponent implements OnInit {
   getPatient(): void {
     this.storeService.getPatientDetail(this.id)
       .subscribe(patient=> this.editPatientForm.patchValue(patient));
+  }
+
+  detectFormChanges(): void {
+    this.editPatientForm.valueChanges
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap((formValue)=> this.storeService.updatedPatient$.next(formValue))
+    )
+    .subscribe();
   }
 
 }
