@@ -22,7 +22,14 @@ export class PatientEditComponent implements OnInit {
     lastName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', [Validators.required, Validators.maxLength(9)]],
-    goal: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]]
+    goal: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
+    perimeter: this.formBuilder.group({
+      biceps: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
+      shoulders: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
+      back: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
+      wist: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
+      quadriceps: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
+    })
 
   })
   constructor(private route: ActivatedRoute, public storeService: StoreService, private formBuilder: FormBuilder) { }

@@ -2,8 +2,8 @@
   <h2 class="main__title">edit patient</h2>
   <form [formGroup]="editPatientForm">
         <label>
-            First Name:
-            <input type="text" placeholder="firstName" formControlName="firstName">
+          First Name:
+          <input type="text" placeholder="firstName" formControlName="firstName">
         </label>
         <label>
           Last Name:
@@ -23,7 +23,29 @@
             <option *ngFor="let value of goals" [value]="value">{{value}}</option>
           </select>
         </label>
+        <div formGroupName="perimeter">
+          <label>
+            biceps:
+            <input type="text" placeholder="biceps" formControlName="biceps">
+          </label>
+          <label>
+            shoulders:
+            <input type="text" placeholder="shoulders" formControlName="shoulders">
+          </label>
+          <label>
+            back:
+            <input type="text" placeholder="shoulders" formControlName="back">
+          </label>
+          <label>
+            wist:
+            <input type="text" placeholder="wist" formControlName="wist">
+          </label>
+          <label>
+            quadriceps:
+            <input type="text" placeholder="quadriceps" formControlName="quadriceps">
+          </label>
 
+        </div>
         <button [disabled]="editPatientForm.invalid" (click)="save()">save</button>
     </form>
 </main>
