@@ -11,6 +11,8 @@ import { AppointmentFormComponent } from './components/appointment-form/appointm
 import { NewPatientFormComponent } from './components/new-patient-form/new-patient-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { PatientEditComponent } from './components/patient-edit/patient-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     LoginComponent,
     AppointmentFormComponent,
     NewPatientFormComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    PatientEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

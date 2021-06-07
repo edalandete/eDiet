@@ -34,6 +34,9 @@
                 </li>
            </ul>
            <img alt=patient.name [src]="picture" class="profile-picture" />
+           <a routerLink="/editPatient/{{patient._id}}">
+            <span class="badge">Edit patient</span>
+           </a>
        </section>
        <section class="somatotype">
            <h3 class="secondary-title">somatotype</h3>

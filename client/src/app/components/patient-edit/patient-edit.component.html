@@ -1,0 +1,29 @@
+<main class="main">
+  <h2 class="main__title">edit patient</h2>
+  <form [formGroup]="editPatientForm">
+        <label>
+            First Name:
+            <input type="text" placeholder="firstName" formControlName="firstName">
+        </label>
+        <label>
+          Last Name:
+          <input type="text" placeholder="lastName" formControlName="lastName">
+        </label>
+        <label>
+          Email:
+          <input type="text" placeholder="email" formControlName="email">
+        </label>
+        <label>
+          Phone:
+          <input type="text" placeholder="phone" formControlName="phone">
+        </label>
+        <label>
+          Goal:
+          <select formControlName="goal" (change)="goalChanged($event)">
+            <option *ngFor="let value of goals" [value]="value">{{value}}</option>
+          </select>
+        </label>
+
+        <button [disabled]="editPatientForm.invalid" (click)="save()">save</button>
+    </form>
+</main>
