@@ -47,4 +47,14 @@
 .bolder {
   font-weight: bold;
 }
+
+.buttons {
+  background-color: #A76BAE;
+  color: #FFFFFF;
+  border-radius: 2rem;
+}
+
+.buttons:hover {
+  background-color: rgba(167, 107, 174, 0.7);
+}
 /*# sourceMappingURL=app.component.css.map */

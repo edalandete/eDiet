@@ -30,7 +30,7 @@ describe('Given a PatientEditComponent', () => {
     fullName: "aaaa bbbbb",
     email: "mail",
     phone: 643555544,
-    birthdate: new Date(),
+    birthdate: 'string',
     idCard: "11111111H",
     bmi: "22",
     picture: "fffff",

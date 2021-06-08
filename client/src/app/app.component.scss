@@ -37,3 +37,11 @@
     font-weight: bold;
 }
 
+.buttons {
+  background-color: $button-color;
+  color: $color-secondary-important;
+  border-radius: 2rem;
+  &:hover {
+    background-color: rgba(167, 107, 174,0.7);
+  }
+}
