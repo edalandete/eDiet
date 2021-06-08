@@ -9,7 +9,7 @@ import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
 
- 
+
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
@@ -19,7 +19,7 @@ export class SearchBarComponent implements OnInit {
   patients$!: Observable<Patient[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(private storeService: StoreService, private componentsHelper: ComponentsHelper) {}
+  constructor(public storeService: StoreService, private componentsHelper: ComponentsHelper) {}
 
   search(term: string): void {
     this.searchTerms.next(term);

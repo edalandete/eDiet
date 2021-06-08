@@ -1,0 +1,61 @@
+<main class="main">
+  <h2 class="main__title">edit patient</h2>
+  <form [formGroup]="editPatientForm">
+    <div class="patient-card">
+      <ul class="patient-card__list">
+        <li class="list__item">
+          <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
+          <input type="text" placeholder="firstName" formControlName="firstName">
+          <input type="text" placeholder="lastName" formControlName="lastName">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="carbon:email" data-inline="false"></span>
+          <input type="text" placeholder="email" formControlName="email">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="teenyicons:id-outline" data-inline="false"></span>
+          <input type="text" placeholder="idCard" formControlName="idCard">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="clarity:phone-handset-line" data-inline="false"></span>
+          <input type="text" placeholder="phone" formControlName="phone">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
+          <input type="text" placeholder="birthDate" formControlName="birthdate">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
+          <select formControlName="goal" (change)="goalChanged($event)">
+            <option *ngFor="let value of goals" [value]="value">{{value}}</option>
+          </select>
+        </li>
+      </ul>
+      <img alt=patient.name [src]="picture" class="profile-picture" />
+      </div>
+        <div formGroupName="perimeter">
+          <label>
+            biceps:
+            <input type="text" placeholder="biceps" formControlName="biceps">
+          </label>
+          <label>
+            shoulders:
+            <input type="text" placeholder="shoulders" formControlName="shoulders">
+          </label>
+          <label>
+            back:
+            <input type="text" placeholder="shoulders" formControlName="back">
+          </label>
+          <label>
+            wist:
+            <input type="text" placeholder="wist" formControlName="wist">
+          </label>
+          <label>
+            quadriceps:
+            <input type="text" placeholder="quadriceps" formControlName="quadriceps">
+          </label>
+
+        </div>
+        <button [disabled]="editPatientForm.invalid" (click)="save()">save</button>
+    </form>
+</main>

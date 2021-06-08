@@ -5,7 +5,7 @@ export interface Patient {
     fullName: string,
     email: string,
     phone: number,
-    birthdate: Date,
+    birthdate: string,
     idCard: string,
     bmi: string,
     picture: string,
@@ -21,7 +21,7 @@ export interface Patient {
     goal: string,
     lastVisit: Date,
     diet: {
-        _id: string, 
+        _id: string,
         type: string,
         breakfast: string,
         midday: string,
@@ -29,8 +29,8 @@ export interface Patient {
         snack: string,
         dinner: string,
     },
-    appointment: { 
-        _id: string; 
+    appointment: {
+        _id: string;
         dieticianId: string;
         patient: {
             _id: string,

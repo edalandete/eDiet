@@ -16,6 +16,8 @@ export class StoreService {
   appointments$ = new BehaviorSubject<Appointment[]>([]);
   patient$ = new BehaviorSubject<Patient>(<Patient>{});
   patients$ = new BehaviorSubject<Patient[]>([]);
+  updatedPatient$ = new BehaviorSubject<Patient>(<Patient>{});
+
 
   constructor(
       private appointmentService: AppointmentService,
@@ -32,6 +34,12 @@ export class StoreService {
 
   searchPatients(term: string): Observable<Patient[]> {
     return this.patientService.searchPatients(term);
+  }
+
+  updatePatient(id:string):void {
+    const patient: Patient = this.updatedPatient$.getValue();
+    patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    this.patientService.updatePatient(patient,id).subscribe();
   }
 
 

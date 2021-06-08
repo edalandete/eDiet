@@ -31,12 +31,20 @@ export class PatientService {
     if (!fullName.trim()) return of([]);
     return this.http.get<Patient[]>(`${this.patientsUrl}/?fullName=${fullName}`).pipe(
       tap(patients => patients.length ?
-         this.helperService.log(`found heroes matching "${fullName}"`) :
-         this.helperService.log(`no heroes matching "${fullName}"`)),
+         this.helperService.log(`found patients matching "${fullName}"`) :
+         this.helperService.log(`no patients matching "${fullName}"`)),
       catchError(this.helperService.handleError<Patient[]>('searchPatients', []))
     );
 
   }
+
+  updatePatient(patient:Patient, patientId:string):Observable<Patient>{
+    return this.http.put<Patient>(`${environment.patientsUrl}/${patientId}`, patient).pipe(
+      tap(_ => this.helperService.log('updated patient')),
+      catchError(this.helperService.handleError<Patient>(`error updating patient with id ${patientId}`))
+    );;
+  }
+
 
 
 }
