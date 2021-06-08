@@ -1,28 +1,38 @@
 <main class="main">
   <h2 class="main__title">edit patient</h2>
   <form [formGroup]="editPatientForm">
-        <label>
-          First Name:
+    <div class="patient-card">
+      <ul class="patient-card__list">
+        <li class="list__item">
+          <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
           <input type="text" placeholder="firstName" formControlName="firstName">
-        </label>
-        <label>
-          Last Name:
           <input type="text" placeholder="lastName" formControlName="lastName">
-        </label>
-        <label>
-          Email:
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="carbon:email" data-inline="false"></span>
           <input type="text" placeholder="email" formControlName="email">
-        </label>
-        <label>
-          Phone:
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="teenyicons:id-outline" data-inline="false"></span>
+          <input type="text" placeholder="idCard" formControlName="idCard">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="clarity:phone-handset-line" data-inline="false"></span>
           <input type="text" placeholder="phone" formControlName="phone">
-        </label>
-        <label>
-          Goal:
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
+          <input type="text" placeholder="birthDate" formControlName="birthdate">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
           <select formControlName="goal" (change)="goalChanged($event)">
             <option *ngFor="let value of goals" [value]="value">{{value}}</option>
           </select>
-        </label>
+        </li>
+      </ul>
+      <img alt=patient.name [src]="picture" class="profile-picture" />
+      </div>
         <div formGroupName="perimeter">
           <label>
             biceps:
