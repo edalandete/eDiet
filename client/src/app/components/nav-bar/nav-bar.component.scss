@@ -1,4 +1,4 @@
-@import './../../styles/global/colors.scss';
+@import './../../../assets/styles/global/colors.scss';
 .main-navigator {
     background-color: $background-color-secondary;
     height: 100%;
@@ -31,12 +31,12 @@
                 flex-grow: 2;
                 height: auto;
             }
-            
+
         }
 
         .nav-icons {
             font-size: 2rem;
-            color: $color-secondary; 
+            color: $color-secondary;
         }
 
     }

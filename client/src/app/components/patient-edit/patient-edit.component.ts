@@ -37,9 +37,12 @@ export class PatientEditComponent implements OnInit {
     })
 
   })
-  constructor(private route: ActivatedRoute, public storeService: StoreService, private formBuilder: FormBuilder, private componentsHelper: ComponentsHelper) { }
-
-
+  constructor(
+    private route: ActivatedRoute,
+    public storeService: StoreService,
+    private formBuilder: FormBuilder,
+    private componentsHelper: ComponentsHelper
+  ) { }
 
   ngOnInit(): void {
     this.getPatient();
@@ -52,7 +55,9 @@ export class PatientEditComponent implements OnInit {
   }
 
   save() {
-    this.storeService.updatePatient(this.id)
+    const patient: Patient = this.storeService.updatedPatient$.getValue();
+    patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    this.storeService.updatePatient(patient, this.id).subscribe();
   }
 
   formatDate(date: Date): string {

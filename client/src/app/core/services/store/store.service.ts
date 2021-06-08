@@ -36,10 +36,8 @@ export class StoreService {
     return this.patientService.searchPatients(term);
   }
 
-  updatePatient(id:string):void {
-    const patient: Patient = this.updatedPatient$.getValue();
-    patient.fullName = `${patient.firstName} ${patient.lastName}`;
-    this.patientService.updatePatient(patient,id).subscribe();
+  updatePatient(patient: Patient, patientId: string):Observable<Patient> {
+    return this.patientService.updatePatient(patient, patientId);
   }
 
 
