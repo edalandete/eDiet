@@ -14,7 +14,7 @@ import { ComponentsHelper } from './../../helper/components.helper';
 })
 export class PatientEditComponent implements OnInit {
 
-  patient! : Patient;
+  currentPatient! : Patient;
   picture : any = '';
   id = String(this.route.snapshot.paramMap.get('id'));
   goals: string[] = [
@@ -27,7 +27,10 @@ export class PatientEditComponent implements OnInit {
     phone: ['', [Validators.required, Validators.maxLength(9)]],
     idCard: ['', [Validators.required, Validators.maxLength(9)]],
     birthdate: ['', [Validators.required]],
-    goal: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
+    goal: ['', [Validators.required]],
+    weight: ['', [Validators.required]],
+    height: ['', [Validators.required]],
+    bmi: ['', [Validators.required]],
     perimeter: this.formBuilder.group({
       biceps: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       shoulders: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
@@ -57,6 +60,7 @@ export class PatientEditComponent implements OnInit {
   save() {
     const patient: Patient = this.storeService.updatedPatient$.getValue();
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    patient.weight = [...this.currentPatient.weight, patient.weight.toString()];
     this.storeService.updatePatient(patient, this.id).subscribe();
   }
 
@@ -72,9 +76,11 @@ export class PatientEditComponent implements OnInit {
   getPatient(): void {
     this.storeService.getPatientDetail(this.id)
       .subscribe(patient => {
+        this.currentPatient = patient;
         patient.birthdate = dayjs(patient.birthdate).format("DD/MM/YYYY");
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
+        this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);
       }
       )
   }

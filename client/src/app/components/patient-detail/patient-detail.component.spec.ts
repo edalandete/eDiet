@@ -48,7 +48,7 @@ describe('Given a PatientDetailComponent', () => {
         fullName: "aaaa bbbbb",
         email: "mail",
         phone: 643555544,
-        birthdate: new Date(),
+        birthdate: "stirng",
         idCard: "11111111H",
         bmi: "22",
         picture: "fffff",
@@ -64,7 +64,7 @@ describe('Given a PatientDetailComponent', () => {
         goal: "string",
         lastVisit: new Date,
         diet: {
-            _id: "string", 
+            _id: "string",
             type: "string",
             breakfast: "string",
             midday: "string",
@@ -72,8 +72,8 @@ describe('Given a PatientDetailComponent', () => {
             snack: "string",
             dinner: "string",
         },
-        appointment: { 
-            _id: "string", 
+        appointment: {
+            _id: "string",
             dieticianId: "string",
             patient: {
                 _id: "string",
@@ -89,7 +89,7 @@ describe('Given a PatientDetailComponent', () => {
       component.ngOnInit();
       expect(spyFn).toHaveBeenCalled();
     });
-    
+
   });
 
 });

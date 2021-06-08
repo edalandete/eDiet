@@ -10,7 +10,7 @@ export interface Patient {
     bmi: string,
     picture: string,
     height: string,
-    weight: [string],
+    weight: string[],
     perimeter: {
         biceps: string,
         shoulders: string,
