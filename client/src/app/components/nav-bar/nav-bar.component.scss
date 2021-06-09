@@ -1,28 +1,24 @@
 @import './../../../assets/styles/global/colors.scss';
+@import './../../../assets/styles/global/mixins.scss';
+
 .main-navigator {
     background-color: $background-color-secondary;
-    height: 100%;
+    @include size-configuration(9.70rem, 100%);
     position: fixed;
-    width: 9.70rem;
     .navigator-list {
+      @include flex-configuration(null, null, column);
         cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
+        @include size-configuration(null, 100%);
         list-style: none;
         &__item {
-            align-items: center;
+          @include flex-configuration(center, center);
+          @include size-configuration(100%, 6.25rem);
             border-bottom: solid 2px $color-secondary;
-            display: flex;
-            height: 6.25rem;
-            justify-content: center;
-            width: 100%;
             &--logo {
                 background-color: $background-color-main;
                 border-bottom: none;
                 img {
-                    height: 4rem;
-                    width: 4rem;
+                  @include size-configuration(4rem, 4rem);
                 }
             }
 

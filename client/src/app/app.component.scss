@@ -1,5 +1,5 @@
 @import './../assets/styles/global/colors.scss';
-
+@import './../assets/styles/global/mixins.scss';
 .main {
     min-height: 100vh;
     position: absolute;
@@ -7,26 +7,20 @@
     top: 0;
     width: calc(100vw - 9.70rem);
     &__title {
-        align-items: center;
+      @include flex-configuration(center, center);
+      @include size-configuration(55rem, 3.43rem);
         background-color: $background-color-secondary;
         border: solid 1px $border-color-main;
         border-radius: 1.25rem;
         color: $color-secondary;
-        display: flex;
-        height: 3.43rem;
-        justify-content: center;
         margin: 2rem auto;
-        width: 55rem;
     }
 }
 
 .secondary-title {
-    align-items: center;
-    justify-content: center;
-    display: flex;
+  @include flex-configuration(center, center);
+  @include size-configuration(50rem, 3rem);
     margin: 2rem auto;
-    height: 3rem;
-    width: 50rem;
     border-radius: 1.5rem;
     border: solid 1px $color-secondary;
     color: $color-secondary-title;

@@ -1,0 +1,11 @@
+@mixin flex-configuration($justify: unset, $align: unset, $direction: row) {
+  align-items: $align;
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+}
+
+@mixin size-configuration($width, $height) {
+  height: $height;
+  width: $width;
+}

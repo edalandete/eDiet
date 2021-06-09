@@ -1,11 +1,12 @@
+@import './../../../assets/styles/global/mixins.scss';
+
 .forms {
-  display: flex;
-  flex-direction: column;
+  @include flex-configuration(null, null, column);
 
   &__button {
-    width: 20em;
-    padding: 1rem;
-    margin: 1rem auto;
+    @include size-configuration(20rem, null);
+      padding: 1rem;
+      margin: 1rem auto;
   }
 
   .patient-select {
@@ -19,12 +20,12 @@
     text-align: center;
 
     &--email {
-      width: 15rem;
+    @include size-configuration(15rem, null);
     }
   }
 
   .somatotype__item > input {
-    width: 15%;
+    @include size-configuration(15%, null);
   }
 }
 

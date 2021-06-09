@@ -1,8 +1,9 @@
 @import './../../../assets/styles/global/colors.scss';
+@import './../../../assets/styles/global/mixins.scss';
 
 .appointments {
     margin: 0 auto;
-    width: 70%;
+    @include size-configuration(70%, null);
     &__item {
         background-color: $color-secondary;
         border: solid 1px rgb(209, 209, 209);
@@ -11,13 +12,12 @@
         margin-bottom: 0.7rem;
         padding: 1rem;
         a {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
+          @include flex-configuration(space-around);
+          @include size-configuration(100%, null);
         }
 
-    }
-    &__item:hover {
-       background-color: rgba(226, 229, 239, 0.6);
+        &:hover {
+           background-color: rgba(226, 229, 239, 0.6);
+        }
     }
 }

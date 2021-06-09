@@ -1,12 +1,11 @@
 .main-navigator {
   background-color: #653A6A;
   height: 100%;
+  width: 9.7rem;
   position: fixed;
-  width: 9.70rem;
 }
 
 .main-navigator .navigator-list {
-  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -14,6 +13,7 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  cursor: pointer;
   height: 100%;
   list-style: none;
 }
@@ -22,15 +22,19 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-bottom: solid 2px #E2E5EF;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 6.25rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  height: 6.25rem;
   width: 100%;
+  border-bottom: solid 2px #E2E5EF;
 }
 
 .main-navigator .navigator-list__item--logo {
