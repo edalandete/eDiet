@@ -1,4 +1,4 @@
-@import './../../styles/global/colors.scss';
+@import './../../../assets/styles/global/colors.scss';
 
 .search-container {
     display: flex;
@@ -58,9 +58,9 @@
                 flex-direction: column;
             }
         }
-        
+
     }
     &__item:hover {
-       background-color: rgba(226, 229, 239, 0.6); 
+       background-color: rgba(226, 229, 239, 0.6);
     }
 }

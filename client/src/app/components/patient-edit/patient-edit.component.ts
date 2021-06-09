@@ -1,11 +1,12 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
+import { Diet } from 'src/app/core/models/diet.model';
 
 @Component({
   selector: 'app-patient-edit',
@@ -14,12 +15,16 @@ import { ComponentsHelper } from './../../helper/components.helper';
 })
 export class PatientEditComponent implements OnInit {
 
-  patient! : Patient;
+  currentPatient! : Patient;
+  selectedDiet? : Diet;
   picture : any = '';
   id = String(this.route.snapshot.paramMap.get('id'));
   goals: string[] = [
     "Hypertrophy", "Loss Weight", "Maintenance"
   ];
+
+  diets!: Diet[];
+
   editPatientForm: FormGroup = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
     lastName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
@@ -27,7 +32,10 @@ export class PatientEditComponent implements OnInit {
     phone: ['', [Validators.required, Validators.maxLength(9)]],
     idCard: ['', [Validators.required, Validators.maxLength(9)]],
     birthdate: ['', [Validators.required]],
-    goal: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
+    goal: ['', [Validators.required]],
+    weight: ['', [Validators.required]],
+    height: ['', [Validators.required]],
+    bmi: ['', [Validators.required]],
     perimeter: this.formBuilder.group({
       biceps: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       shoulders: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
@@ -37,9 +45,13 @@ export class PatientEditComponent implements OnInit {
     })
 
   })
-  constructor(private route: ActivatedRoute, public storeService: StoreService, private formBuilder: FormBuilder, private componentsHelper: ComponentsHelper) { }
-
-
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public storeService: StoreService,
+    private formBuilder: FormBuilder,
+    private componentsHelper: ComponentsHelper
+  ) { }
 
   ngOnInit(): void {
     this.getPatient();
@@ -48,11 +60,25 @@ export class PatientEditComponent implements OnInit {
   }
 
   goalChanged(event: any): void {
-    console.log(event.target.value)
+    this.getDietsByType();
+    debugger;
+    this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
+  }
+
+  changeDiet(event: any) {
+    this.selectedDiet = this.diets.find(diet => diet._id === event.target.value);
   }
 
   save() {
-    this.storeService.updatePatient(this.id)
+    const patient: Patient = this.storeService.updatedPatient$.getValue();
+    patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    patient.weight = [...this.currentPatient.weight, patient.weight.toString()];
+    patient.diet = this.selectedDiet ? this.selectedDiet : patient.diet;
+    this.storeService.updatePatient(patient, this.id).subscribe();
+  }
+
+  cancel() {
+    this.router.navigateByUrl(`/detail/${this.id}`);
   }
 
   formatDate(date: Date): string {
@@ -67,11 +93,21 @@ export class PatientEditComponent implements OnInit {
   getPatient(): void {
     this.storeService.getPatientDetail(this.id)
       .subscribe(patient => {
+        this.currentPatient = patient;
         patient.birthdate = dayjs(patient.birthdate).format("DD/MM/YYYY");
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
-      }
-      )
+        this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);
+        this.getDietsByType();
+      });
+  }
+
+  getDietsByType(): void {
+    this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
+      .subscribe(goalDiets => {
+        this.diets = goalDiets;
+        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet._id);
+      })
   }
 
   detectFormChanges(): void {

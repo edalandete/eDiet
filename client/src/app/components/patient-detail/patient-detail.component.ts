@@ -11,7 +11,11 @@ import { ComponentsHelper } from './../../helper/components.helper';
 })
 export class PatientDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, public storeService: StoreService, private componentsHelper: ComponentsHelper) { }
+  constructor(
+    private route: ActivatedRoute,
+    public storeService: StoreService,
+    private componentsHelper: ComponentsHelper
+  ) { }
 
   patient! : Patient
   lastVisit : String = '';

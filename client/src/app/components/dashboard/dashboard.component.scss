@@ -1,4 +1,4 @@
-@import './../../styles/global/colors.scss';
+@import './../../../assets/styles/global/colors.scss';
 
 .appointments {
     margin: 0 auto;
@@ -15,9 +15,9 @@
             display: flex;
             justify-content: space-around;
         }
-        
+
     }
     &__item:hover {
-       background-color: rgba(226, 229, 239, 0.6); 
+       background-color: rgba(226, 229, 239, 0.6);
     }
 }

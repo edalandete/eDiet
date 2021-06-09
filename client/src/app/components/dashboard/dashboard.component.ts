@@ -13,9 +13,9 @@ import { environment } from 'src/environments/environment';
 export class DashboardComponent implements OnInit {
 
   appointments: Appointment[] = [];
-  //Replace for loggedDietician
+  // TODO Replace for loggedDietician
   dieticianId: string = environment.dieticianId;
-  date: string = dayjs().format("YYYYMMDD"); 
+  date: string = dayjs().format("YYYYMMDD");
 
   constructor(public storeService : StoreService) { }
 

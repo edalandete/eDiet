@@ -6,6 +6,8 @@ import { DieticianService } from './../../services/dietician/dietician.service';
 import { AppointmentService } from './../../services/appointment/appointment.service';
 import { Patient } from '../../models/patient.model';
 import { PatientService } from '../patient/patient.service';
+import { Diet } from '../../models/diet.model';
+import { DietService } from '../diet/diet.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +19,13 @@ export class StoreService {
   patient$ = new BehaviorSubject<Patient>(<Patient>{});
   patients$ = new BehaviorSubject<Patient[]>([]);
   updatedPatient$ = new BehaviorSubject<Patient>(<Patient>{});
+  dietsType$ = new BehaviorSubject<Diet[]>([]);
 
 
   constructor(
       private appointmentService: AppointmentService,
-      private patientService: PatientService
+      private patientService: PatientService,
+      private dietService: DietService
   ) { }
 
   getTodayAppointments(dieticianId: string, date: string):Observable<Appointment[]>{
@@ -36,10 +40,12 @@ export class StoreService {
     return this.patientService.searchPatients(term);
   }
 
-  updatePatient(id:string):void {
-    const patient: Patient = this.updatedPatient$.getValue();
-    patient.fullName = `${patient.firstName} ${patient.lastName}`;
-    this.patientService.updatePatient(patient,id).subscribe();
+  updatePatient(patient: Patient, patientId: string):Observable<Patient> {
+    return this.patientService.updatePatient(patient, patientId);
+  }
+
+  getDietsByType(type: string): Observable<Diet[]> {
+    return this.dietService.getDietsByType(type);
   }
 
 

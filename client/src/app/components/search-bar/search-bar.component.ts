@@ -19,7 +19,10 @@ export class SearchBarComponent implements OnInit {
   patients$!: Observable<Patient[]>;
   private searchTerms = new Subject<string>();
 
-  constructor(public storeService: StoreService, private componentsHelper: ComponentsHelper) {}
+  constructor(
+    public storeService: StoreService,
+    private componentsHelper: ComponentsHelper
+  ) {}
 
   search(term: string): void {
     this.searchTerms.next(term);
