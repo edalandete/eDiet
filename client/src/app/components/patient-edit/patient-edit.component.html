@@ -5,28 +5,28 @@
       <ul class="patient-card__list">
         <li class="list__item">
           <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
-          <input type="text" placeholder="firstName" formControlName="firstName">
-          <input type="text" placeholder="lastName" formControlName="lastName">
+          <input type="text" class="editable-input" placeholder="firstName" formControlName="firstName">
+          <input type="text" class="editable-input" placeholder="lastName" formControlName="lastName">
         </li>
         <li class="list__item">
           <span class="iconify" data-icon="carbon:email" data-inline="false"></span>
-          <input type="text" placeholder="email" formControlName="email">
+          <input type="text" class="editable-input editable-input--email" placeholder="email" formControlName="email">
         </li>
         <li class="list__item">
           <span class="iconify" data-icon="teenyicons:id-outline" data-inline="false"></span>
-          <input type="text" placeholder="idCard" formControlName="idCard">
+          <input type="text" class="editable-input" placeholder="idCard" formControlName="idCard">
         </li>
         <li class="list__item">
           <span class="iconify" data-icon="clarity:phone-handset-line" data-inline="false"></span>
-          <input type="text" placeholder="phone" formControlName="phone">
+          <input type="text" class="editable-input" placeholder="phone" formControlName="phone">
         </li>
         <li class="list__item">
           <span class="iconify" data-icon="cil:birthday-cake" data-inline="false"></span>
-          <input type="text" placeholder="birthDate" formControlName="birthdate">
+          <input type="text" class="editable-input" placeholder="birthDate" formControlName="birthdate">
         </li>
         <li class="list__item">
           <span class="iconify" data-icon="icons8:finish-flag" data-inline="false"></span>
-          <select formControlName="goal" (change)="goalChanged($event)">
+          <select formControlName="goal" (change)="goalChanged($event)" class="main-select patient-select">
             <option *ngFor="let value of goals" [value]="value">{{value}}</option>
           </select>
         </li>
@@ -38,69 +38,73 @@
       <ul class="somatotype__list">
         <li class="somatotype__item somatotype__item--orange">
           <span class="bolder">BMI: </span>
-          <input type="text" placeholder="bmi" formControlName="bmi">
+          <input type="text" class="editable-input" placeholder="bmi" formControlName="bmi">
         </li>
         <li class="somatotype__item somatotype__item--orange">
           <span class="bolder">Weight: </span>
-          <input type="text" placeholder="weight" formControlName="weight">
+          <input type="text" class="editable-input" placeholder="weight" formControlName="weight">
         </li>
         <ng-container formGroupName="perimeter">
           <li class="somatotype__item">
             <span class="bolder">Biceps: </span>
-            <input type="text" placeholder="biceps" formControlName="biceps">
+            <input type="text" class="editable-input" placeholder="biceps" formControlName="biceps">
           </li>
           <li class="somatotype__item">
             <span class="bolder">Shoulders: </span>
-            <input type="text" placeholder="shoulders" formControlName="shoulders">
+            <input type="text" class="editable-input" placeholder="shoulders" formControlName="shoulders">
           </li>
           <li class="somatotype__item">
             <span class="bolder">Back: </span>
-            <input type="text" placeholder="back" formControlName="back">
+            <input type="text" class="editable-input" placeholder="back" formControlName="back">
           </li>
           <li class="somatotype__item">
             <span class="bolder">Wist: </span>
-            <input type="text" placeholder="wist" formControlName="wist">
+            <input type="text" class="editable-input" placeholder="wist" formControlName="wist">
           </li>
           <li class="somatotype__item">
             <span class="bolder">Quadriceps: </span>
-            <input type="text" placeholder="quadriceps" formControlName="quadriceps">
+            <input type="text" class="editable-input" placeholder="quadriceps" formControlName="quadriceps">
           </li>
         </ng-container>
         <li class="somatotype__item">
           <span class="bolder">Height: </span>
-          <input type="text" placeholder="height" formControlName="height">
+          <input type="text" class="editable-input" placeholder="height" formControlName="height">
         </li>
       </ul>
     </section>
     <h3 class="secondary-title">diet</h3>
-    <div *ngFor="let diet of diets" class="Rtable Rtable--3cols Rtable--collapse">
-      <div class="Rtable-cell Rtable-cell--head">
-          <h4>06:00 - 08:00</h4>
-      </div>
-      <div class="Rtable-cell Rtable-cell--title">breakfast</div>
-      <div class="Rtable-cell">{{diet.breakfast}}</div>
-      <div class="Rtable-cell Rtable-cell--head">
-          <h4>10:00 - 11:00</h4>
-      </div>
-      <div class="Rtable-cell Rtable-cell--title">mid day</div>
-      <div class="Rtable-cell">{{diet.midday}}</div>
-      <div class="Rtable-cell Rtable-cell--head">
-          <h4>13:00 - 15:00</h4>
-      </div>
-      <div class="Rtable-cell Rtable-cell--title">lunch</div>
-      <div class="Rtable-cell ">{{diet.lunch}}</div>
-      <div class="Rtable-cell Rtable-cell--head">
-          <h4>17:00 - 18:00</h4>
-      </div>
-      <div class="Rtable-cell Rtable-cell--title">snack</div>
-      <div class="Rtable-cell">{{diet.snack}}</div>
-      <div class="Rtable-cell Rtable-cell--head">
-          <h4>20:00 - 21:00</h4>
-      </div>
-      <div class="Rtable-cell Rtable-cell--title">dinner</div>
-      <div class="Rtable-cell">{{diet.dinner}}</div>
-
-  </div>
+    <select (change)="changeDiet($event)" class="main-select">
+      <option *ngFor="let diet of diets" [value]="diet._id">{{diet.type}}</option>
+    </select>
+    <ng-container *ngIf="selectedDiet">
+      <div class="Rtable Rtable--3cols Rtable--collapse">
+        <div class="Rtable-cell Rtable-cell--head">
+            <h4>06:00 - 08:00</h4>
+        </div>
+        <div class="Rtable-cell Rtable-cell--title">breakfast</div>
+        <div class="Rtable-cell">{{selectedDiet.breakfast}}</div>
+        <div class="Rtable-cell Rtable-cell--head">
+            <h4>10:00 - 11:00</h4>
+        </div>
+        <div class="Rtable-cell Rtable-cell--title">mid day</div>
+        <div class="Rtable-cell">{{selectedDiet.midday}}</div>
+        <div class="Rtable-cell Rtable-cell--head">
+            <h4>13:00 - 15:00</h4>
+        </div>
+        <div class="Rtable-cell Rtable-cell--title">lunch</div>
+        <div class="Rtable-cell ">{{selectedDiet.lunch}}</div>
+        <div class="Rtable-cell Rtable-cell--head">
+            <h4>17:00 - 18:00</h4>
+        </div>
+        <div class="Rtable-cell Rtable-cell--title">snack</div>
+        <div class="Rtable-cell">{{selectedDiet.snack}}</div>
+        <div class="Rtable-cell Rtable-cell--head">
+            <h4>20:00 - 21:00</h4>
+        </div>
+        <div class="Rtable-cell Rtable-cell--title">dinner</div>
+        <div class="Rtable-cell">{{selectedDiet.dinner}}</div>
+    </div>
+  </ng-container>
         <button class="buttons forms__button" type="button" [disabled]="editPatientForm.invalid" (click)="save()">save</button>
     </form>
 </main>

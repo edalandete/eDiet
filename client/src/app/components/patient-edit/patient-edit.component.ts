@@ -16,6 +16,7 @@ import { Diet } from 'src/app/core/models/diet.model';
 export class PatientEditComponent implements OnInit {
 
   currentPatient! : Patient;
+  selectedDiet? : Diet;
   picture : any = '';
   id = String(this.route.snapshot.paramMap.get('id'));
   goals: string[] = [
@@ -59,12 +60,19 @@ export class PatientEditComponent implements OnInit {
 
   goalChanged(event: any): void {
     this.getDietsByType();
+    debugger;
+    this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
+  }
+
+  changeDiet(event: any) {
+    this.selectedDiet = this.diets.find(diet => diet._id === event.target.value);
   }
 
   save() {
     const patient: Patient = this.storeService.updatedPatient$.getValue();
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
     patient.weight = [...this.currentPatient.weight, patient.weight.toString()];
+    patient.diet = this.selectedDiet ? this.selectedDiet : patient.diet;
     this.storeService.updatePatient(patient, this.id).subscribe();
   }
 
@@ -93,6 +101,7 @@ export class PatientEditComponent implements OnInit {
     this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
       .subscribe(goalDiets => {
         this.diets = goalDiets;
+        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet._id);
       })
   }
 

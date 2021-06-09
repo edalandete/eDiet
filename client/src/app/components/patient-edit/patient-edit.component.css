@@ -14,12 +14,23 @@
   margin: 1rem auto;
 }
 
-.somatotype__item input {
+.forms .patient-select {
+  margin: auto;
+}
+
+.forms .editable-input {
   padding: 1px;
   border: none;
   background-color: transparent;
   border-bottom: 2px solid #8ff58f;
-  width: 15%;
   text-align: center;
+}
+
+.forms .editable-input--email {
+  width: 15rem;
+}
+
+.forms .somatotype__item > input {
+  width: 15%;
 }
 /*# sourceMappingURL=patient-edit.component.css.map */
