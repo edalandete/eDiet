@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
-import { ComponentsHelper } from 'src/app/helper/components.helper';
 import { patientGoals } from 'src/assets/constants';
 @Component({
   selector: 'app-new-patient-form',
@@ -37,7 +36,6 @@ export class NewPatientFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public storeService: StoreService,
-    private componentsHelper: ComponentsHelper
     ) { }
 
   ngOnInit(): void {

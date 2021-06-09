@@ -4,6 +4,8 @@ import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
+import { DATE_FORMAT_DDMMYYYY_SLASH } from 'src/assets/constants';
+
 @Component({
   selector: 'app-patient-detail',
   templateUrl: './patient-detail.component.html',
@@ -37,9 +39,9 @@ export class PatientDetailComponent implements OnInit {
     this.storeService.getPatientDetail(id)
       .subscribe(patient => {
         this.patient = patient;
-        this.lastVisit = dayjs(this.patient.lastVisit).format("DD/MM/YYYY");
-        this.birthDate = dayjs(this.patient.birthdate).format("DD/MM/YYYY");
-        this.nextVisit = dayjs(this.patient.appointment?.date).format("DD/MM/YYYY");
+        this.lastVisit = dayjs(this.patient.lastVisit).format(DATE_FORMAT_DDMMYYYY_SLASH);
+        this.birthDate = dayjs(this.patient.birthdate).format(DATE_FORMAT_DDMMYYYY_SLASH);
+        this.nextVisit = dayjs(this.patient.appointment?.date).format(DATE_FORMAT_DDMMYYYY_SLASH);
         this.picture = this.transform(this.patient.picture);
       });
   }

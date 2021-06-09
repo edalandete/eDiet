@@ -12,13 +12,13 @@ describe('Given a ComponentsHelper', () => {
         componentsHelper = TestBed.inject(ComponentsHelper);
         sanitizer = TestBed.inject(DomSanitizer);
     });
-    
+
     describe('When transform function is called with empty base', () => {
         it('Then the default image should appear', () => {
             const base: string = '';
             const result = componentsHelper.transform(base);
             const sanitizedValue = sanitizer.sanitize(SecurityContext.RESOURCE_URL, result);
-            expect(sanitizedValue).toEqual('data:image/png;base64,'+environment.defaultProfileImgae);
+            expect(sanitizedValue).toEqual('data:image/png;base64,'+environment.defaultProfileImage);
         })
     });
     describe('When transform function is called with filled base', () => {

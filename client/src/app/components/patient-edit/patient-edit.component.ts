@@ -8,6 +8,7 @@ import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
 import { Diet } from 'src/app/core/models/diet.model';
 import { patientGoals } from 'src/assets/constants';
+import { DATE_FORMAT_DDMMYYYY_SLASH } from 'src/assets/constants';
 
 @Component({
   selector: 'app-patient-edit',
@@ -81,7 +82,7 @@ export class PatientEditComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    return dayjs(date).format("DD/MM/YYYY");
+    return dayjs(date).format(DATE_FORMAT_DDMMYYYY_SLASH);
   }
 
   transform(base : string){
@@ -92,7 +93,7 @@ export class PatientEditComponent implements OnInit {
     this.storeService.getPatientDetail(this.id)
       .subscribe(patient => {
         this.currentPatient = patient;
-        patient.birthdate = dayjs(patient.birthdate).format("DD/MM/YYYY");
+        patient.birthdate = dayjs(patient.birthdate).format(DATE_FORMAT_DDMMYYYY_SLASH);
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
         this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);

@@ -3,6 +3,7 @@ import {Injectable} from "@angular/core";
 import { environment } from 'src/environments/environment';
 import * as dayjs from 'dayjs';
 import { FormControl } from '@angular/forms';
+import { DATE_FORMAT_DDMMYYYY_SLASH } from 'src/assets/constants';
 
 
 @Injectable({
@@ -14,10 +15,10 @@ export class ComponentsHelper {
 
    public transform(base : string){
     if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
-    else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImgae)
+    else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImage)
   }
 
-  public DateValidator(format = "dd/MM/YYYY"): any {
+  public DateValidator(format = DATE_FORMAT_DDMMYYYY_SLASH): any {
     return (control: FormControl): { [key: string]: any } => {
       const val = dayjs(control.value, format, true);
 

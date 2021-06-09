@@ -3,6 +3,7 @@ import { Appointment } from 'src/app/core/models/appointment.model';
 import {   StoreService } from 'src/app/core/services/store/store.service';
 import * as dayjs from 'dayjs';
 import { environment } from 'src/environments/environment';
+import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class DashboardComponent implements OnInit {
   appointments: Appointment[] = [];
   // TODO Replace for loggedDietician
   dieticianId: string = environment.dieticianId;
-  date: string = dayjs().format("YYYYMMDD");
+  date: string = dayjs().format(DATE_FORMAT_YYYYMMDD);
 
   constructor(public storeService : StoreService) { }
 
