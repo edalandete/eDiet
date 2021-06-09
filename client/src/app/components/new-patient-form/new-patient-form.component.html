@@ -1,1 +1,69 @@
-<p>new-patient-form works!</p>
+<main class="main">
+  <h2 class="main__title">new patient</h2>
+  <form [formGroup]="newPatientForm" class="forms">
+    <label>
+      First Name:
+      <input type="text" placeholder="First Name" formControlName="firstName">
+    </label>
+    <label>
+      Last Name:
+      <input type="text" placeholder="Last Name" formControlName="lastName">
+    </label>
+    <label>
+      Email:
+      <input type="text" placeholder="Email" formControlName="email">
+    </label>
+    <label>
+      ID Card:
+      <input type="text" placeholder="ID card" formControlName="idCard">
+    </label>
+    <label>
+      Phone:
+      <input type="text" placeholder="Phone" formControlName="phone">
+    </label>
+    <label>
+      Birthdate:
+      <input type="text" placeholder="Birthdate" formControlName="birthdate">
+    </label>
+    <label>
+      Goal:
+      <select formControlName="goal" class="main-select patient-select">
+        <option *ngFor="let goal of goals" [value]="goal">{{goal}}</option>
+      </select>
+    </label>
+    <label>
+      Height:
+      <input type="text" placeholder="Height" formControlName="height">
+    </label>
+    <label>
+      Weight:
+      <input type="text" placeholder="Weight" formControlName="weight">
+    </label>
+    <label>
+      BMI:
+      <input type="text" placeholder="BMI" formControlName="bmi">
+    </label>
+    <ng-container formGroupName="perimeter">
+      <label>
+        Biceps Perimeter:
+        <input type="text" placeholder="biceps" formControlName="biceps">
+      </label>
+      <label>
+        Shoulders:
+        <input type="text" placeholder="Shoulders" formControlName="shoulders">
+      </label>
+      <label>
+        Back:
+        <input type="text" placeholder="Back" formControlName="back">
+      </label>
+      <label>
+        Wist:
+        <input type="text" placeholder="Wist" formControlName="wist">
+      </label>
+      <label>
+        Quadriceps:
+        <input type="text" placeholder="Quadriceps" formControlName="quadriceps">
+      </label>
+  </ng-container>
+  </form>
+</main>

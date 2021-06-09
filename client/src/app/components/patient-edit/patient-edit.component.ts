@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
 import { Diet } from 'src/app/core/models/diet.model';
+import { patientGoals } from 'src/assets/constants';
 
 @Component({
   selector: 'app-patient-edit',
@@ -19,9 +20,7 @@ export class PatientEditComponent implements OnInit {
   selectedDiet? : Diet;
   picture : any = '';
   id = String(this.route.snapshot.paramMap.get('id'));
-  goals: string[] = [
-    "Hypertrophy", "Loss Weight", "Maintenance"
-  ];
+  goals = patientGoals;
 
   diets!: Diet[];
 
@@ -50,7 +49,7 @@ export class PatientEditComponent implements OnInit {
     private router: Router,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
-    private componentsHelper: ComponentsHelper
+    private componentsHelper: ComponentsHelper,
   ) { }
 
   ngOnInit(): void {
@@ -88,7 +87,6 @@ export class PatientEditComponent implements OnInit {
   transform(base : string){
     return this.componentsHelper.transform(base);
   }
-
 
   getPatient(): void {
     this.storeService.getPatientDetail(this.id)
