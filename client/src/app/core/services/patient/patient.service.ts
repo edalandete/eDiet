@@ -42,7 +42,15 @@ export class PatientService {
     return this.http.put<Patient>(`${environment.patientsUrl}/${patientId}`, patient).pipe(
       tap(_ => this.helperService.log('updated patient')),
       catchError(this.helperService.handleError<Patient>(`error updating patient with id ${patientId}`))
-    );;
+    );
+
+  }
+
+  createPatient(patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
+      tap((newPatient: Patient) => this.helperService.log(`added Patient w/ id=${newPatient._id}`)),
+      catchError(this.helperService.handleError<Patient>('createPAtient'))
+    );
   }
 
 

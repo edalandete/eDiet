@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from 'src/app/helper/components.helper';
 import { patientGoals } from 'src/assets/constants';
@@ -39,7 +41,23 @@ export class NewPatientFormComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.goals);
+    this.detectFormChanges();
+  }
+
+  createPatient() {
+    const patient: Patient = this.storeService.patient$.getValue();
+    patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    this.storeService.createPatient(patient).subscribe();
+  }
+
+  detectFormChanges(): void {
+    this.newPatientForm.valueChanges
+    .pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap((formValue)=> this.storeService.patient$.next(formValue))
+    )
+    .subscribe();
   }
 
 }

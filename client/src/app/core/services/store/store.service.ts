@@ -48,5 +48,9 @@ export class StoreService {
     return this.dietService.getDietsByType(type);
   }
 
+  createPatient(newPatient: Patient): Observable<Patient> {
+    return this.patientService.createPatient(newPatient);
+  }
+
 
 }
