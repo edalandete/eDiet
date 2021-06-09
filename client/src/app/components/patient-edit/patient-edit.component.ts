@@ -81,8 +81,17 @@ export class PatientEditComponent implements OnInit {
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
         this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);
-      }
-      )
+        this.getDietsByType();
+      });
+  }
+
+  getDietsByType(): void {
+    console.log(this.editPatientForm.controls['goal'].value);
+    debugger;
+    this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
+      .subscribe(diets => {
+        console.log(diets);
+      });
   }
 
   detectFormChanges(): void {
