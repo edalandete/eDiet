@@ -16,8 +16,8 @@
           @include size-configuration(100%, null);
         }
 
-    }
-    &__item:hover {
-       background-color: rgba(226, 229, 239, 0.6);
+        &:hover {
+           background-color: rgba(226, 229, 239, 0.6);
+        }
     }
 }

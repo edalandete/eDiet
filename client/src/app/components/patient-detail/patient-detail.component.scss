@@ -1,21 +1,15 @@
 @import './../../../assets/styles/global/colors.scss';
+@import './../../../assets/styles/global/mixins.scss';
 
 .patient-card {
-    display: flex;
+  @include flex-configuration(space-around, center);
+  @include size-configuration(32rem, null);
     margin: 1rem auto;
-    justify-content: space-around;
-    align-items: center;
-    width: 32rem;
-
     &__list {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
+      @include flex-configuration(unset, baseline, column);
         .list__item {
-            display: flex;
-            align-items: baseline;
+          @include flex-configuration(unset, baseline);
             margin-bottom: 0.5rem;
-
             .iconify {
                 margin-right: 0.5rem;
             }
@@ -23,8 +17,7 @@
     }
 
     .profile-picture {
-        width: auto;
-        height: 10rem;
+      @include size-configuration(auto, 10rem);
         object-fit: cover;
         border-radius: 1rem;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -32,38 +25,26 @@
 }
 
 .somatotype {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-
+  @include flex-configuration(center, center, column);
     &__list {
-        display: flex;
+      @include flex-configuration(center);
+      @include size-configuration(50%, null);
         flex-wrap: wrap;
-        justify-content: center;
-        width: 50%;
     }
     &__item {
+      @include flex-configuration(space-around, center, null);
+      @include size-configuration(46%, 3rem);
         background-color: $color-secondary;
-        width: 46%;
-        height: 3rem;
         padding: 10px;
         border-radius: 2rem;
         margin: 10px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
         &--orange {
             background-color: $background-color-secondary-important;
             color: $color-secondary-important;
         }
     }
-
-
 }
 
-/* Tables
-================================== */
 .Rtable {
     display: flex;
     flex-wrap: wrap;
@@ -87,19 +68,8 @@
         color: $color-secondary-important;
     }
   }
-
-  .test {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-
-  /* Table column sizing
-  ================================== */
   .Rtable--3cols > .Rtable-cell  { width: 33.33%; }
 
-/* Responsive
-==================================== */
 @media all and (max-width: 500px) {
 .Rtable--collapse  {
     display: block;
@@ -108,7 +78,6 @@
 }
 }
 
-// Non-Flex modernizer fallback
 .no-flexbox .Rtable {
 display: block;
 > .Rtable-cell { width: 100%; }

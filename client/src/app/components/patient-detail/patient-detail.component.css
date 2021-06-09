@@ -1,17 +1,24 @@
 .patient-card {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 1rem auto;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   width: 32rem;
+  margin: 1rem auto;
 }
 
 .patient-card__list {
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -19,18 +26,25 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  -webkit-box-pack: unset;
+      -ms-flex-pack: unset;
+          justify-content: unset;
 }
 
 .patient-card__list .list__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: unset;
+      -ms-flex-pack: unset;
+          justify-content: unset;
   margin-bottom: 0.5rem;
 }
 
@@ -39,8 +53,8 @@
 }
 
 .patient-card .profile-picture {
-  width: auto;
   height: 10rem;
+  width: auto;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 1rem;
@@ -49,48 +63,55 @@
 }
 
 .somatotype {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .somatotype__list {
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   width: 50%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .somatotype__item {
-  background-color: #E2E5EF;
-  width: 46%;
-  height: 3rem;
-  padding: 10px;
-  border-radius: 2rem;
-  margin: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  height: 3rem;
+  width: 46%;
+  background-color: #E2E5EF;
+  padding: 10px;
+  border-radius: 2rem;
+  margin: 10px;
 }
 
 .somatotype__item--orange {
@@ -98,8 +119,6 @@
   color: #FFFFFF;
 }
 
-/* Tables
-================================== */
 .Rtable {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -135,26 +154,10 @@
   color: #FFFFFF;
 }
 
-.test {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-/* Table column sizing
-  ================================== */
 .Rtable--3cols > .Rtable-cell {
   width: 33.33%;
 }
 
-/* Responsive
-==================================== */
 @media all and (max-width: 500px) {
   .Rtable--collapse {
     display: block;
