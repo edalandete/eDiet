@@ -73,7 +73,34 @@
       </ul>
     </section>
     <h3 class="secondary-title">diet</h3>
+    <div *ngFor="let diet of diets" class="Rtable Rtable--3cols Rtable--collapse">
+      <div class="Rtable-cell Rtable-cell--head">
+          <h4>06:00 - 08:00</h4>
+      </div>
+      <div class="Rtable-cell Rtable-cell--title">breakfast</div>
+      <div class="Rtable-cell">{{diet.breakfast}}</div>
+      <div class="Rtable-cell Rtable-cell--head">
+          <h4>10:00 - 11:00</h4>
+      </div>
+      <div class="Rtable-cell Rtable-cell--title">mid day</div>
+      <div class="Rtable-cell">{{diet.midday}}</div>
+      <div class="Rtable-cell Rtable-cell--head">
+          <h4>13:00 - 15:00</h4>
+      </div>
+      <div class="Rtable-cell Rtable-cell--title">lunch</div>
+      <div class="Rtable-cell ">{{diet.lunch}}</div>
+      <div class="Rtable-cell Rtable-cell--head">
+          <h4>17:00 - 18:00</h4>
+      </div>
+      <div class="Rtable-cell Rtable-cell--title">snack</div>
+      <div class="Rtable-cell">{{diet.snack}}</div>
+      <div class="Rtable-cell Rtable-cell--head">
+          <h4>20:00 - 21:00</h4>
+      </div>
+      <div class="Rtable-cell Rtable-cell--title">dinner</div>
+      <div class="Rtable-cell">{{diet.dinner}}</div>
 
+  </div>
         <button class="buttons forms__button" type="button" [disabled]="editPatientForm.invalid" (click)="save()">save</button>
     </form>
 </main>

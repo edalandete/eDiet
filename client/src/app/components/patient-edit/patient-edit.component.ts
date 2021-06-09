@@ -6,6 +6,7 @@ import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
+import { Diet } from 'src/app/core/models/diet.model';
 
 @Component({
   selector: 'app-patient-edit',
@@ -20,6 +21,9 @@ export class PatientEditComponent implements OnInit {
   goals: string[] = [
     "Hypertrophy", "Loss Weight", "Maintenance"
   ];
+
+  diets!: Diet[];
+
   editPatientForm: FormGroup = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
     lastName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
@@ -54,7 +58,7 @@ export class PatientEditComponent implements OnInit {
   }
 
   goalChanged(event: any): void {
-    console.log(event.target.value)
+    this.getDietsByType();
   }
 
   save() {
@@ -86,12 +90,10 @@ export class PatientEditComponent implements OnInit {
   }
 
   getDietsByType(): void {
-    console.log(this.editPatientForm.controls['goal'].value);
-    debugger;
     this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
-      .subscribe(diets => {
-        console.log(diets);
-      });
+      .subscribe(goalDiets => {
+        this.diets = goalDiets;
+      })
   }
 
   detectFormChanges(): void {
