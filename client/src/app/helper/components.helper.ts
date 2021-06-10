@@ -14,7 +14,7 @@ export class ComponentsHelper {
    constructor(private domSanitizer: DomSanitizer) { }
 
    public transform(base : string){
-    if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+base);
+    if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl(base);
     else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImage)
   }
 
@@ -26,6 +26,4 @@ export class ComponentsHelper {
 
     };
   }
-
-
 }

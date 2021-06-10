@@ -7,11 +7,12 @@ import { patientGoals } from 'src/assets/constants';
 @Component({
   selector: 'app-new-patient-form',
   templateUrl: './new-patient-form.component.html',
-  styleUrls: ['./new-patient-form.component.scss', './../../app.component.scss']
+  styleUrls: ['./new-patient-form.component.scss', './../../app.component.scss', './../patient-edit/patient-edit.component.scss']
 })
 export class NewPatientFormComponent implements OnInit {
 
   goals = patientGoals;
+  image!:ArrayBuffer | string | null;
 
   newPatientForm: FormGroup = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.maxLength(15), Validators.minLength(2)]],
@@ -24,6 +25,7 @@ export class NewPatientFormComponent implements OnInit {
     weight: ['', [Validators.required]],
     height: ['', [Validators.required]],
     bmi: ['', [Validators.required]],
+    picture: [],
     perimeter: this.formBuilder.group({
       biceps: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
       shoulders: ['', [Validators.required, Validators.maxLength(3), Validators.minLength(2)]],
@@ -45,6 +47,7 @@ export class NewPatientFormComponent implements OnInit {
   createPatient() {
     const patient: Patient = this.storeService.patient$.getValue();
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
+    patient.picture = typeof(this.image) === 'string' ? this.image : "";
     this.storeService.createPatient(patient).subscribe();
   }
 
@@ -56,6 +59,21 @@ export class NewPatientFormComponent implements OnInit {
       tap((formValue)=> this.storeService.patient$.next(formValue))
     )
     .subscribe();
+  }
+
+  fileChangeEvent($event: any) : void {
+    this.readThis($event.target);
+  }
+
+  readThis(inputValue: any): void {
+    const file:File = inputValue.files[0];
+    const myReader:FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.image = myReader.result;
+    }
+
+    myReader.readAsDataURL(file);
   }
 
 }

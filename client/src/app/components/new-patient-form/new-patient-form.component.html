@@ -1,70 +1,74 @@
 <main class="main">
   <h2 class="main__title">new patient</h2>
-  <form [formGroup]="newPatientForm" class="forms">
-    <label>
-      First Name:
+  <form [formGroup]="newPatientForm" class="new-patient">
+    <label class="new-patient__label">
+      <p>First Name:</p>
       <input type="text" placeholder="First Name" formControlName="firstName">
     </label>
-    <label>
-      Last Name:
+    <label class="new-patient__label">
+      <p>Last Name:</p>
       <input type="text" placeholder="Last Name" formControlName="lastName">
     </label>
-    <label>
-      Email:
+    <label class="new-patient__label">
+      <p>Email:</p>
       <input type="text" placeholder="Email" formControlName="email">
     </label>
-    <label>
-      ID Card:
+    <label class="new-patient__label">
+      <p>ID Card:</p>
       <input type="text" placeholder="ID card" formControlName="idCard">
     </label>
-    <label>
-      Phone:
+    <label class="new-patient__label">
+      <p>Phone:</p>
       <input type="text" placeholder="Phone" formControlName="phone">
     </label>
-    <label>
-      Birthdate:
+    <label class="new-patient__label">
+      <p>Birthdate:</p>
       <input type="text" placeholder="Birthdate" formControlName="birthdate">
     </label>
-    <label>
-      Goal:
-      <select formControlName="goal" class="main-select patient-select">
+    <label class="new-patient__label">
+      <p>Picture:</p>
+      <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" formArrayName="picture">
+    </label>
+    <label class="new-patient__label">
+      <p>Goal:</p>
+      <select formControlName="goal" class="">
         <option *ngFor="let goal of goals" [value]="goal">{{goal}}</option>
       </select>
     </label>
-    <label>
-      Height:
+    <label class="new-patient__label">
+      <p>Height:</p>
       <input type="text" placeholder="Height" formControlName="height">
     </label>
-    <label>
-      Weight:
+    <label class="new-patient__label">
+      <p>Weight:</p>
       <input type="text" placeholder="Weight" formControlName="weight">
     </label>
-    <label>
-      BMI:
+    <label class="new-patient__label">
+      <p>BMI:</p>
       <input type="text" placeholder="BMI" formControlName="bmi">
     </label>
     <ng-container formGroupName="perimeter">
-      <label>
-        Biceps Perimeter:
+      <label class="new-patient__label">
+        <p>Biceps Perimeter:</p>
         <input type="text" placeholder="biceps" formControlName="biceps">
       </label>
-      <label>
-        Shoulders:
+      <label class="new-patient__label">
+        <p>Shoulders:</p>
         <input type="text" placeholder="Shoulders" formControlName="shoulders">
       </label>
-      <label>
-        Back:
+      <label class="new-patient__label">
+        <p>Back:</p>
         <input type="text" placeholder="Back" formControlName="back">
       </label>
-      <label>
-        Wist:
+      <label class="new-patient__label">
+        <p>Wist:</p>
         <input type="text" placeholder="Wist" formControlName="wist">
       </label>
-      <label>
-        Quadriceps:
+      <label class="new-patient__label">
+        <p>Quadriceps:</p>
         <input type="text" placeholder="Quadriceps" formControlName="quadriceps">
       </label>
   </ng-container>
-    <button class="buttons forms__button" type="button" (click)="createPatient()">new patient</button>
+    <button class="buttons forms__button" type="button" (click)="createPatient()" [disabled]="newPatientForm.invalid">new patient</button>
   </form>
 </main>
