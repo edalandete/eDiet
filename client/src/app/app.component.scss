@@ -14,6 +14,7 @@
         border-radius: 1.25rem;
         color: $color-secondary;
         margin: 2rem auto;
+        text-transform: uppercase;
     }
 }
 
@@ -25,6 +26,7 @@
     border: solid 1px $color-secondary;
     color: $color-secondary-title;
     background-color: $background-color-secondary-title;
+    text-transform: uppercase;
 }
 
 .bolder {

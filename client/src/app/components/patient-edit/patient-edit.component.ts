@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
@@ -7,6 +7,8 @@ import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { ComponentsHelper } from './../../helper/components.helper';
 import { Diet } from 'src/app/core/models/diet.model';
+import { patientGoals } from 'src/assets/constants';
+import { DATE_FORMAT_DDMMYYYY_SLASH } from 'src/assets/constants';
 
 @Component({
   selector: 'app-patient-edit',
@@ -19,9 +21,7 @@ export class PatientEditComponent implements OnInit {
   selectedDiet? : Diet;
   picture : any = '';
   id = String(this.route.snapshot.paramMap.get('id'));
-  goals: string[] = [
-    "Hypertrophy", "Loss Weight", "Maintenance"
-  ];
+  goals = patientGoals;
 
   diets!: Diet[];
 
@@ -50,7 +50,7 @@ export class PatientEditComponent implements OnInit {
     private router: Router,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
-    private componentsHelper: ComponentsHelper
+    private componentsHelper: ComponentsHelper,
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +61,6 @@ export class PatientEditComponent implements OnInit {
 
   goalChanged(event: any): void {
     this.getDietsByType();
-    debugger;
     this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
   }
 
@@ -82,19 +81,18 @@ export class PatientEditComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    return dayjs(date).format("DD/MM/YYYY");
+    return dayjs(date).format(DATE_FORMAT_DDMMYYYY_SLASH);
   }
 
   transform(base : string){
     return this.componentsHelper.transform(base);
   }
 
-
   getPatient(): void {
     this.storeService.getPatientDetail(this.id)
       .subscribe(patient => {
         this.currentPatient = patient;
-        patient.birthdate = dayjs(patient.birthdate).format("DD/MM/YYYY");
+        patient.birthdate = dayjs(patient.birthdate).format(DATE_FORMAT_DDMMYYYY_SLASH);
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
         this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);
@@ -105,8 +103,10 @@ export class PatientEditComponent implements OnInit {
   getDietsByType(): void {
     this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
       .subscribe(goalDiets => {
+        debugger;
         this.diets = goalDiets;
-        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet._id);
+        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet?._id);
+        if (!this.selectedDiet) this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
       })
   }
 
