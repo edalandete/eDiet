@@ -34,19 +34,32 @@
                 </li>
            </ul>
            <img alt=patient.name [src]="picture" class="profile-picture" />
-           <a routerLink="/editPatient/{{patient._id}}">
-            <span class="badge">Edit patient</span>
-           </a>
+           <aside *ngIf="patient.isActive">
+             <a routerLink="/editPatient/{{patient._id}}">
+              <p class="badge">Edit patient</p>
+             </a>
+             <a (click) = "updateSubscription(patient.isActive)">
+               <p class="badge">Unsuscribe</p>
+             </a>
+             <a>
+               <p class="badge">Add Appointment</p>
+             </a>
+           </aside>
+           <aside *ngIf="!patient.isActive">
+            <a (click) = "updateSubscription(patient.isActive)">
+              <p class="badge">Suscribe</p>
+            </a>
+          </aside>
        </section>
        <section class="somatotype">
            <h3 class="secondary-title">somatotype</h3>
            <ul class="somatotype__list">
                <li class="somatotype__item somatotype__item--orange">
-                <span class="bolder">BMI: </span>   
+                <span class="bolder">BMI: </span>
                 <span>{{patient.bmi}}</span>
                 </li>
                <li class="somatotype__item somatotype__item--orange">
-                <span class="bolder">Weight: </span>   
+                <span class="bolder">Weight: </span>
                 <span>{{patient.weight[patient.weight.length-1]}}</span>
                 </li>
                <li class="somatotype__item">
@@ -77,7 +90,7 @@
        </section>
        <section class="diet">
         <h3 class="secondary-title">diet</h3>
-            
+
         <div *ngIf="patient.diet else noDiet" class="Rtable Rtable--3cols Rtable--collapse">
             <div class="Rtable-cell Rtable-cell--head">
                 <h4>06:00 - 08:00</h4>
@@ -104,7 +117,7 @@
             </div>
             <div class="Rtable-cell Rtable-cell--title">dinner</div>
             <div class="Rtable-cell">{{patient.diet.dinner}}</div>
-            
+
         </div>
        </section>
     </section>

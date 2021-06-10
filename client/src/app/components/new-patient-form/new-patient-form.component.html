@@ -1,74 +1,78 @@
 <main class="main">
   <h2 class="main__title">new patient</h2>
   <form [formGroup]="newPatientForm" class="new-patient">
-    <label class="new-patient__label">
-      <p>First Name:</p>
-      <input type="text" placeholder="First Name" formControlName="firstName">
-    </label>
-    <label class="new-patient__label">
-      <p>Last Name:</p>
-      <input type="text" placeholder="Last Name" formControlName="lastName">
-    </label>
-    <label class="new-patient__label">
-      <p>Email:</p>
-      <input type="text" placeholder="Email" formControlName="email">
-    </label>
-    <label class="new-patient__label">
-      <p>ID Card:</p>
-      <input type="text" placeholder="ID card" formControlName="idCard">
-    </label>
-    <label class="new-patient__label">
-      <p>Phone:</p>
-      <input type="text" placeholder="Phone" formControlName="phone">
-    </label>
-    <label class="new-patient__label">
-      <p>Birthdate:</p>
-      <input type="text" placeholder="Birthdate" formControlName="birthdate">
-    </label>
-    <label class="new-patient__label">
-      <p>Picture:</p>
-      <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" formArrayName="picture">
-    </label>
-    <label class="new-patient__label">
-      <p>Goal:</p>
-      <select formControlName="goal" class="">
-        <option *ngFor="let goal of goals" [value]="goal">{{goal}}</option>
-      </select>
-    </label>
-    <label class="new-patient__label">
-      <p>Height:</p>
-      <input type="text" placeholder="Height" formControlName="height">
-    </label>
-    <label class="new-patient__label">
-      <p>Weight:</p>
-      <input type="text" placeholder="Weight" formControlName="weight">
-    </label>
-    <label class="new-patient__label">
-      <p>BMI:</p>
-      <input type="text" placeholder="BMI" formControlName="bmi">
-    </label>
-    <ng-container formGroupName="perimeter">
+    <div class="new-patient__left-side">
       <label class="new-patient__label">
-        <p>Biceps Perimeter:</p>
-        <input type="text" placeholder="biceps" formControlName="biceps">
+        <p>First Name:</p>
+        <input type="text" placeholder="First Name" formControlName="firstName">
       </label>
       <label class="new-patient__label">
-        <p>Shoulders:</p>
-        <input type="text" placeholder="Shoulders" formControlName="shoulders">
+        <p>Last Name:</p>
+        <input type="text" placeholder="Last Name" formControlName="lastName">
       </label>
       <label class="new-patient__label">
-        <p>Back:</p>
-        <input type="text" placeholder="Back" formControlName="back">
+        <p>Email:</p>
+        <input type="text" placeholder="Email" formControlName="email">
       </label>
       <label class="new-patient__label">
-        <p>Wist:</p>
-        <input type="text" placeholder="Wist" formControlName="wist">
+        <p>ID Card:</p>
+        <input type="text" placeholder="ID card" formControlName="idCard">
       </label>
       <label class="new-patient__label">
-        <p>Quadriceps:</p>
-        <input type="text" placeholder="Quadriceps" formControlName="quadriceps">
+        <p>Phone:</p>
+        <input type="text" placeholder="Phone" formControlName="phone">
       </label>
-  </ng-container>
-    <button class="buttons forms__button" type="button" (click)="createPatient()" [disabled]="newPatientForm.invalid">new patient</button>
+      <label class="new-patient__label">
+        <p>Birthdate:</p>
+        <input type="text" placeholder="Birthdate" formControlName="birthdate">
+      </label>
+      <label class="new-patient__label">
+        <p>Picture:</p>
+        <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile" formArrayName="picture">
+      </label>
+      <label class="new-patient__label">
+        <p>Goal:</p>
+        <select formControlName="goal" class="">
+          <option *ngFor="let goal of goals" [value]="goal">{{goal}}</option>
+        </select>
+      </label>
+    </div>
+    <div class="new-patient__right-side">
+      <label class="new-patient__label">
+        <p>Height:</p>
+        <input type="text" placeholder="Height" formControlName="height">
+      </label>
+      <label class="new-patient__label">
+        <p>Weight:</p>
+        <input type="text" placeholder="Weight" formControlName="weight">
+      </label>
+      <label class="new-patient__label">
+        <p>BMI:</p>
+        <input type="text" placeholder="BMI" formControlName="bmi">
+      </label>
+      <ng-container formGroupName="perimeter">
+        <label class="new-patient__label">
+          <p>Biceps:</p>
+          <input type="text" placeholder="biceps" formControlName="biceps">
+        </label>
+        <label class="new-patient__label">
+          <p>Shoulders:</p>
+          <input type="text" placeholder="Shoulders" formControlName="shoulders">
+        </label>
+        <label class="new-patient__label">
+          <p>Back:</p>
+          <input type="text" placeholder="Back" formControlName="back">
+        </label>
+        <label class="new-patient__label">
+          <p>Wist:</p>
+          <input type="text" placeholder="Wist" formControlName="wist">
+        </label>
+        <label class="new-patient__label">
+          <p>Quadriceps:</p>
+          <input type="text" placeholder="Quadriceps" formControlName="quadriceps">
+        </label>
+      </ng-container>
+    </div>
   </form>
+  <button class="buttons forms__button new-patient-button" type="button" (click)="createPatient()" [disabled]="newPatientForm.invalid">new patient</button>
 </main>

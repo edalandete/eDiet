@@ -48,6 +48,7 @@ export class NewPatientFormComponent implements OnInit {
     const patient: Patient = this.storeService.patient$.getValue();
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
     patient.picture = typeof(this.image) === 'string' ? this.image : "";
+    patient.isActive = true;
     this.storeService.createPatient(patient).subscribe();
   }
 

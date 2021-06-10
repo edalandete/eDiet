@@ -46,4 +46,9 @@ export class PatientDetailComponent implements OnInit {
       });
   }
 
+  updateSubscription(isActive: boolean) {
+    this.patient.isActive = !isActive;
+    this.storeService.updatePatient(this.patient, this.patient._id).subscribe();
+  }
+
 }
