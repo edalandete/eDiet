@@ -1,3 +1,6 @@
+import { Appointment } from "./appointment.model";
+import { Diet } from "./diet.model";
+
 export interface Patient {
     _id: string,
     firstName: string,
@@ -20,25 +23,7 @@ export interface Patient {
     },
     goal: string,
     lastVisit: Date,
-    diet: {
-        _id: string,
-        type: string,
-        breakfast: string,
-        midday: string,
-        lunch: string,
-        snack: string,
-        dinner: string,
-    },
-    appointment: {
-        _id: string;
-        dieticianId: string;
-        patient: {
-            _id: string,
-            firstName: string,
-            lastName: string
-        };
-        date: string;
-        time: string;
-     },
+    diet: Diet,
+    appointment: Appointment,
     isActive: boolean,
 }

@@ -29,9 +29,24 @@ describe('SearchBarComponent', () => {
 
   describe("When a new term is introduced", () => {
     it("Then the search should been called", () => {
-      const spyFn = spyOn(component.storeService,'searchPatients').and.returnValue(of())
+      const spyFn = spyOn(component.storeService,'searchPatients').and.returnValue(of());
+      const pipe = spyOn(component.searchTerms,'pipe').and.callThrough().and.returnValue(of());
       component.ngOnInit();
       expect(spyFn).toHaveBeenCalled();
+    });
+
+    it("Then search function should been called", () => {
+      const searchValue = "Bruce";
+      const spyFn = spyOn(component.searchTerms,'next');
+      component.search(searchValue);
+      expect(spyFn).toHaveBeenCalled();
+    });
+
+    it("Then transform function should been called", () => {
+      const base = "img";
+      const spyFn = spyOn(component.componentsHelper,'transform');
+      component.transform(base);
+      expect(spyFn).toHaveBeenCalled();
     })
-  })
+  });
 });

@@ -47,7 +47,7 @@ export class PatientEditComponent implements OnInit {
   })
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
     private componentsHelper: ComponentsHelper,

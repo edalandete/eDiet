@@ -7,7 +7,7 @@ import { StoreService } from 'src/app/core/services/store/store.service';
 import { Patient } from 'src/app/core/models/patient.model';
 
 import { PatientEditComponent } from './patient-edit.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Diet } from 'src/app/core/models/diet.model';
 
 describe('Given a PatientEditComponent', () => {
@@ -80,6 +80,8 @@ describe('Given a PatientEditComponent', () => {
     dinner: "dbjnndvndjkv"
   }
 
+  const diets : Diet [] = [];
+
   const storeServiceMock = {
     getPatientDetail: () => of(patient),
     updatePatient: () => of(patient),
@@ -93,7 +95,8 @@ describe('Given a PatientEditComponent', () => {
       imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
       providers: [
         {provide: StoreService, useValue: storeServiceMock},
-        {provide: ActivatedRoute, useValue: fakeActivatedRoute},                ]
+        {provide: ActivatedRoute, useValue: fakeActivatedRoute},
+      ]
     })
     .compileComponents();
   });
@@ -120,21 +123,74 @@ describe('Given a PatientEditComponent', () => {
     });
 
     it(`Then the text detectFormChanges to have been called` , () => {
-      const spyProp = spyOnProperty(storeService, 'updatedPatient$', 'get').and.returnValue({ 'username': 'username'});
+      const spyProp = spyOn(storeService.updatedPatient$, 'next');
 
       component.ngOnInit();
       component.detectFormChanges();
-      expect(spyProp).toHaveBeenCalledWith({ 'username': 'username'});
+      expect(spyProp).toHaveBeenCalled();
     });
 
-    it(`Then the text detectFormChanges to have been called` , () => {
+    it(`Then the text updatePatient to have been called` , () => {
       component.selectedDiet = diet;
       const spyFn = spyOn(storeService, 'updatePatient');
       component.ngOnInit();
       component.save();
       expect(spyFn).toHaveBeenCalled();
     });
+  });
 
+  describe("When cancel button is clicked", () => {
+    it("Then the detail page is shown", () => {
+      const spyFn = spyOn(component.router,'navigateByUrl');
+      component.cancel();
+      expect(spyFn).toHaveBeenCalled();
+    });
+  });
+
+  describe("When goal is changed", () => {
+    it("Then diets of the goal are loaded", () => {
+      const goal = "Hypertrophy";
+      const diets : Diet [] = [
+        {
+        _id: 'kkfcvsv',
+        type: 'brucewayneana',
+        breakfast: "fjgkgk",
+        midday: "klmvlgv",
+        lunch: "ggbf",
+        snack: "bjknvedv",
+        dinner: "dbjnndvndjkv"
+        }
+      ];
+      const spyFn = spyOn(component,'getDietsByType');
+      component.goalChanged(goal);
+      component.diets = diets;
+      component.selectedDiet = {
+        _id: 'kkfcvsv',
+        type: 'brucewayneana',
+        breakfast: "fjgkgk",
+        midday: "klmvlgv",
+        lunch: "ggbf",
+        snack: "bjknvedv",
+        dinner: "dbjnndvndjkv"
+        }
+      expect(component.selectedDiet).toEqual(diets[0]);
+    });
+
+    it("And the goal has no diets", () => {
+      const goal = "Hypertrophy";
+      spyOn(component,'getDietsByType');
+      component.goalChanged(goal);
+      component.diets = diets;
+      expect(component.selectedDiet).toBe(undefined);
+    });
+  });
+
+  describe("When diet is changed", () => {
+    it("Then the diet appears on the screen", () => {
+      component.changeDiet(diet);
+      component.selectedDiet = diet;
+      expect(component.selectedDiet).toEqual(diet);
+    });
   });
 
 });
