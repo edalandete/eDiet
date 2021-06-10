@@ -61,7 +61,6 @@ export class PatientEditComponent implements OnInit {
 
   goalChanged(event: any): void {
     this.getDietsByType();
-    debugger;
     this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
   }
 
@@ -104,8 +103,10 @@ export class PatientEditComponent implements OnInit {
   getDietsByType(): void {
     this.storeService.getDietsByType(this.editPatientForm.controls['goal'].value)
       .subscribe(goalDiets => {
+        debugger;
         this.diets = goalDiets;
-        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet._id);
+        this.selectedDiet = this.diets.find(diet => diet._id === this.currentPatient.diet?._id);
+        if (!this.selectedDiet) this.selectedDiet = this.diets.length ? this.diets[0] : undefined;
       })
   }
 
