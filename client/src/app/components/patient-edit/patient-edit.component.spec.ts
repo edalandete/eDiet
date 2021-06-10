@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from "@angular/router/testing";
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { Patient } from 'src/app/core/models/patient.model';
 
 import { PatientEditComponent } from './patient-edit.component';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Diet } from 'src/app/core/models/diet.model';
 
 describe('Given a PatientEditComponent', () => {
   let component: PatientEditComponent;
   let fixture: ComponentFixture<PatientEditComponent>;
+  let storeService: StoreService;
 
   const fakeActivatedRoute = {
     snapshot: {
@@ -30,7 +32,7 @@ describe('Given a PatientEditComponent', () => {
     fullName: "aaaa bbbbb",
     email: "mail",
     phone: 643555544,
-    birthdate: 'string',
+    birthdate: new Date().toISOString(),
     idCard: "11111111H",
     bmi: "22",
     picture: "fffff",
@@ -68,11 +70,30 @@ describe('Given a PatientEditComponent', () => {
     isActive: true,
   };
 
+  const diet : Diet = {
+    _id: 'kkfcvsv',
+    type: 'brucewayneana',
+    breakfast: "fjgkgk",
+    midday: "klmvlgv",
+    lunch: "ggbf",
+    snack: "bjknvedv",
+    dinner: "dbjnndvndjkv"
+  }
+
+  const storeServiceMock = {
+    getPatientDetail: () => of(patient),
+    updatePatient: () => of(patient),
+    getDietsByType: () => of([]),
+    updatedPatient$: new BehaviorSubject<Patient>(patient)
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PatientEditComponent ],
-      imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [StoreService, {provide: ActivatedRoute, useValue: fakeActivatedRoute}, FormBuilder]
+      imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
+      providers: [
+        {provide: StoreService, useValue: storeServiceMock},
+        {provide: ActivatedRoute, useValue: fakeActivatedRoute},                ]
     })
     .compileComponents();
   });
@@ -80,6 +101,7 @@ describe('Given a PatientEditComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PatientEditComponent);
     component = fixture.componentInstance;
+    storeService = TestBed.inject(StoreService);
     fixture.detectChanges();
   });
 
@@ -91,23 +113,27 @@ describe('Given a PatientEditComponent', () => {
     });
 
     it(`Then the text updatePatient to have been called` , () => {
-      const spyFn = spyOn(component.storeService,'updatePatient');
+      const spyFn = spyOn(storeService,'updatePatient');
+      component.ngOnInit();
       component.save();
       expect(spyFn).toHaveBeenCalled();
     });
 
     it(`Then the text detectFormChanges to have been called` , () => {
-      const spyFn = spyOn(component.editPatientForm, 'value');
+      const spyProp = spyOnProperty(storeService, 'updatedPatient$', 'get').and.returnValue({ 'username': 'username'});
+
       component.ngOnInit();
-      expect(spyFn).toHaveBeenCalled();
+      component.detectFormChanges();
+      expect(spyProp).toHaveBeenCalledWith({ 'username': 'username'});
     });
 
-    // Finish test when end edit component
-    // it(`Then the text detectFormChanges to have been called` , () => {
-    //   const spyFn = spyOn(component.storeService., 'value');
-    //   component.goalChanged(e);
-    //   expect(spyFn).toHaveBeenCalled();
-    // });
+    it(`Then the text detectFormChanges to have been called` , () => {
+      component.selectedDiet = diet;
+      const spyFn = spyOn(storeService, 'updatePatient');
+      component.ngOnInit();
+      component.save();
+      expect(spyFn).toHaveBeenCalled();
+    });
 
   });
 

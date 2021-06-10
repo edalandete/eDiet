@@ -26,7 +26,7 @@ describe('Given a ComponentsHelper', () => {
             const base: string = '123';
             const result = componentsHelper.transform(base);
             const sanitizedValue = sanitizer.sanitize(SecurityContext.RESOURCE_URL, result);
-            expect(sanitizedValue).toEqual('data:image/png;base64,123');
+            expect(sanitizedValue).toEqual('123');
         })
     });
 

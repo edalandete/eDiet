@@ -90,6 +90,57 @@ describe('Given a PatientDetailComponent', () => {
       expect(spyFn).toHaveBeenCalled();
     });
 
+    it(`Then update patient should be invoked` , () => {
+      const patient : Patient = {
+        _id: "sss",
+        firstName: "aaaa",
+        lastName: "bbbbb",
+        fullName: "aaaa bbbbb",
+        email: "mail",
+        phone: 643555544,
+        birthdate: "stirng",
+        idCard: "11111111H",
+        bmi: "22",
+        picture: "fffff",
+        height: "string",
+        weight: ["string"],
+        perimeter: {
+            biceps: "string",
+            shoulders: "string",
+            wist: "string",
+            back: "string",
+            quadriceps: "string",
+        },
+        goal: "string",
+        lastVisit: new Date,
+        diet: {
+            _id: "string",
+            type: "string",
+            breakfast: "string",
+            midday: "string",
+            lunch: "string",
+            snack: "string",
+            dinner: "string",
+        },
+        appointment: {
+            _id: "string",
+            dieticianId: "string",
+            patient: {
+                _id: "string",
+                firstName: "string",
+                lastName: "string"
+            },
+            date: "string",
+            time: "string"
+        },
+        isActive: true,
+      };
+      const spyFn = spyOn(component.storeService,'updatePatient').and.returnValue(of(patient))
+      component.ngOnInit();
+      component.updateSubscription(true);
+      expect(spyFn).toHaveBeenCalled();
+    });
+
   });
 
 });
