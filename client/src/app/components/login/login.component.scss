@@ -1,0 +1,15 @@
+@import './../../../assets/styles/global/colors.scss';
+@import './../../../assets/styles/global/mixins.scss';
+
+.aa {
+  background-color: $background-color-login;
+}
+
+.login-form {
+  @include flex-configuration(center, null, null);
+  @include size-configuration(30rem, auto);
+  margin: 0 auto;
+  background-color: white;
+
+
+}
