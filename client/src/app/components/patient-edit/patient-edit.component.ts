@@ -47,7 +47,7 @@ export class PatientEditComponent implements OnInit {
   })
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
     private componentsHelper: ComponentsHelper,
@@ -73,7 +73,7 @@ export class PatientEditComponent implements OnInit {
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
     patient.weight = [...this.currentPatient.weight, patient.weight.toString()];
     patient.diet = this.selectedDiet ? this.selectedDiet : patient.diet;
-    this.storeService.updatePatient(patient, this.id).subscribe();
+    this.storeService.updatePatient(patient, this.id)?.subscribe();
   }
 
   cancel() {
@@ -95,7 +95,7 @@ export class PatientEditComponent implements OnInit {
         patient.birthdate = dayjs(patient.birthdate).format(DATE_FORMAT_DDMMYYYY_SLASH);
         this.picture = this.transform(patient.picture);
         this.editPatientForm.patchValue(patient);
-        this.editPatientForm.controls['weight'].setValue(patient.weight[patient.weight.length-1]);
+        this.editPatientForm.controls['weight'].setValue(patient?.weight[patient.weight.length-1]);
         this.getDietsByType();
       });
   }

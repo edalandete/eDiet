@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import {
    debounceTime, distinctUntilChanged, switchMap
@@ -17,11 +16,11 @@ import { ComponentsHelper } from './../../helper/components.helper';
 })
 export class SearchBarComponent implements OnInit {
   patients$!: Observable<Patient[]>;
-  private searchTerms = new Subject<string>();
+  searchTerms = new Subject<string>();
 
   constructor(
     public storeService: StoreService,
-    private componentsHelper: ComponentsHelper
+    public componentsHelper: ComponentsHelper
   ) {}
 
   search(term: string): void {

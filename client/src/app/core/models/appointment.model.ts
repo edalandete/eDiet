@@ -1,11 +1,11 @@
 export interface Appointment {
-    _id: string; 
+    _id: string;
     dieticianId: string;
     patient: {
         _id: string,
         firstName: string,
         lastName: string
     };
-    date: string;
+    date: string | undefined;
     time: string;
 }
