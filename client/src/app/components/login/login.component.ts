@@ -18,6 +18,9 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     })
   });
+
+  error: string = '';
+
   constructor(
     private formBuilder: FormBuilder,
     public storeService: StoreService,
@@ -29,14 +32,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.storeService.login()?.subscribe(
-      (loggedDietician) => {
-        if(loggedDietician.token) {
-          this.storeService.dietician$.next(loggedDietician);
-          this.router.navigateByUrl(`/dashboard`);
-        }
-      }
-    );
+    this.storeService.login().subscribe(
+      loggedDietician => this.setAndRedirect(loggedDietician), ()=> this.error = 'User name or Password is Incorrect');
   }
 
   detectFormChanges(): void {
@@ -47,6 +44,11 @@ export class LoginComponent implements OnInit {
       tap((formValue)=> this.storeService.dietician$.next(formValue))
     )
     .subscribe();
+  }
+
+  setAndRedirect(dietician: Dietician) {
+    this.storeService.dietician$.next(dietician);
+    this.router.navigateByUrl(`/dashboard`);
   }
 
 }

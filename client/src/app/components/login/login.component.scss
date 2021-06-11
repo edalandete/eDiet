@@ -5,12 +5,36 @@
   background-color: $background-color-login;
   min-height: 100vh;
   width: 100vw ;
+  @include flex-configuration(center, center, null);
 }
 
 .login-form {
   @include flex-configuration(center, center, null);
-  @include size-configuration(30rem, auto);
+  @include size-configuration(25rem, 20rem);
   padding: 2rem;
-  margin: 0 auto;
   background-color: white;
+  border-radius: 15px;
+}
+
+.list__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  .iconify {
+    margin-left: 3px;
+  }
+  input {
+    border: solid 1px $color-secondary-title;
+    border-radius: 5px;
+    padding: 1rem;
+    @include size-configuration(10rem, 2rem);
+  }
+  &--button {
+    button {
+      margin-top: 1rem;
+      padding: 10px;
+      width: 100%;
+    }
+  }
 }
