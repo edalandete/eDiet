@@ -1,15 +1,16 @@
 @import './../../../assets/styles/global/colors.scss';
 @import './../../../assets/styles/global/mixins.scss';
 
-.aa {
+.login {
   background-color: $background-color-login;
+  min-height: 100vh;
+  width: 100vw ;
 }
 
 .login-form {
-  @include flex-configuration(center, null, null);
+  @include flex-configuration(center, center, null);
   @include size-configuration(30rem, auto);
+  padding: 2rem;
   margin: 0 auto;
   background-color: white;
-
-
 }

@@ -1,7 +1,21 @@
-<main class="aa">
+<main class="login">
 
-  <form class="login-form">
-    klmsd
+  <form class="login-form" [formGroup]="loginForm" >
+    <ul class="patient-card__list">
+      <ng-container formGroupName="user">
+        <li class="list__item">
+          <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
+          <input type="text" class="editable-input" placeholder="email" formControlName="email">
+        </li>
+        <li class="list__item">
+          <span class="iconify" data-icon="ri:lock-password-line" data-inline="false"></span>
+          <input type="password" class="editable-input editable-input--email" placeholder="password" formControlName="password">
+        </li>
+        </ng-container>
+    </ul>
+
+    <button class="buttons forms__button" type="button" (click)="login()">save</button>
+
   </form>
 
 </main>

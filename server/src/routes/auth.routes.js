@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-debugger */
 /* eslint-disable no-underscore-dangle */
 const { Router } = require('express');
@@ -39,8 +40,8 @@ module.exports = () => {
 
                 const body = { _id: user._id, email: user.email };
                 const token = jwt.sign({ user: body }, process.env.SECRET_OR_KEY);
-
-                return res.json({ token });
+                console.log('entro');
+                return res.json({ user, token });
               },
             );
           } catch (error) {
