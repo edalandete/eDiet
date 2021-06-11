@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss', './../../../assets/styles/global/colors.scss']
 })
-export class NavBarComponent {}
+export class NavBarComponent {
+  logout() {
+    localStorage.removeItem('dieticianId');
+    location.reload()
+  }
+}
