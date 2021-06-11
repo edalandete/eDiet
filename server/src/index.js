@@ -27,9 +27,9 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(passport.initialize());
 
 app.use('/', authRoutes);
-app.use('/api/dieticians', dieticiansRouter);
-app.use('/api/diets', dietsRouter);
-app.use('/api/appointments', appointmentsRouter);
-app.use('/api/patients', patientsRouter);
+app.use('/api/dieticians', passport.authenticate('jwt', { session: false }), dieticiansRouter);
+app.use('/api/diets', passport.authenticate('jwt', { session: false }), dietsRouter);
+app.use('/api/appointments', passport.authenticate('jwt', { session: false }), appointmentsRouter);
+app.use('/api/patients', passport.authenticate('jwt', { session: false }), patientsRouter);
 
 app.listen(port, debug(`server is running on port ${port}`));

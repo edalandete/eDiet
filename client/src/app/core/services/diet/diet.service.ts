@@ -15,12 +15,13 @@ export class DietService {
 
   private dietsUrl = environment.dietsUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-  getDietsByType(type: string): Observable<Diet[]> {
-    return this.http.get<Diet[]>(`${this.dietsUrl}/type/${type}`).pipe(
+  getDietsByType(type: string, token: string): Observable<Diet[]> {
+    return this.http.get<Diet[]>(`${this.dietsUrl}/type/${type}`,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
       tap(patients => patients.length ?
          this.helperService.log(`found diets matching "${type}"`) :
          this.helperService.log(`no diets matching "${type}"`)),

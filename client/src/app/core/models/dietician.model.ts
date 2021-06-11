@@ -14,5 +14,5 @@ export interface Dietician {
       friday: [string];
     }
   },
-  token: string | null;
+  token: string;
 }

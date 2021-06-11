@@ -33,27 +33,27 @@ export class StoreService {
   ) { }
 
   getTodayAppointments(dieticianId: string, date: string):Observable<Appointment[]>{
-    return this.appointmentService.getAppointments(dieticianId, date);
+    return this.appointmentService.getAppointments(dieticianId, date, this.dietician$.value.token);
   }
 
   getPatientDetail(patientId: string):Observable<Patient>{
-    return this.patientService.getPatient(patientId);
+    return this.patientService.getPatient(patientId, this.dietician$.value.token);
   }
 
   searchPatients(term: string): Observable<Patient[]> {
-    return this.patientService.searchPatients(term);
+    return this.patientService.searchPatients(term, this.dietician$.value.token);
   }
 
   updatePatient(patient: Patient, patientId: string):Observable<Patient> {
-    return this.patientService.updatePatient(patient, patientId);
+    return this.patientService.updatePatient(patient, patientId, this.dietician$.value.token);
   }
 
   getDietsByType(type: string): Observable<Diet[]> {
-    return this.dietService.getDietsByType(type);
+    return this.dietService.getDietsByType(type, this.dietician$.value.token);
   }
 
   createPatient(newPatient: Patient): Observable<Patient> {
-    return this.patientService.createPatient(newPatient);
+    return this.patientService.createPatient(newPatient, this.dietician$.value.token);
   }
 
   login():Observable<Dietician>{

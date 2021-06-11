@@ -15,12 +15,13 @@ export class DashboardComponent implements OnInit {
 
   appointments: Appointment[] = [];
   // TODO Replace for loggedDietician
-  dieticianId: string = environment.dieticianId;
+  dieticianId: string = "";
   date: string = dayjs().format(DATE_FORMAT_YYYYMMDD);
 
   constructor(public storeService : StoreService) { }
 
   ngOnInit(): void {
+    this.dieticianId = this.storeService.dietician$.value.user._id;
     this.getAppointments();
   }
 
