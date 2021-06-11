@@ -16,11 +16,6 @@ export class AppointmentService {
 
   private appointmentsUrl = environment.appointmentsUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-
-  };
-
   getAppointments(dieticianId: string, date: string, token: string): Observable<Appointment[]> {
     return this.http.post<Appointment[]>(`${this.appointmentsUrl}/day`,
     { dieticianId: dieticianId, date: date },

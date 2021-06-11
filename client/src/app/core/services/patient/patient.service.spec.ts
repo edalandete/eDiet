@@ -78,7 +78,7 @@ describe('Given a PatientService', () => {
     it('Then should benn called once', () => {
       httpClientSpy.get.and.returnValue(of(patient));
       const patientId: string = "ssss";
-      service.getPatient(patientId).subscribe(()=>{
+      service.getPatient(patientId, "token").subscribe(()=>{
         expect(httpClientSpy.get.calls.count()).toBe(1);
       })
     })
@@ -89,7 +89,7 @@ describe('Given a PatientService', () => {
       const patients: Patient[] = [];
       httpClientSpy.get.and.returnValue(of(patients));
       const term: string = "ssss";
-      service.searchPatients(term).subscribe(()=>{
+      service.searchPatients(term, 'token').subscribe(()=>{
         expect(httpClientSpy.get.calls.count()).toBe(1);
       })
     })
@@ -99,7 +99,7 @@ describe('Given a PatientService', () => {
     it('Then should benn called once', () => {
       httpClientSpy.put.and.returnValue(of(patient));
       const term: string = "ssss";
-      service.updatePatient(patient, patient._id).subscribe(()=>{
+      service.updatePatient(patient, patient._id, 'token').subscribe(()=>{
         expect(httpClientSpy.put.calls.count()).toBe(1);
       })
     })
@@ -109,7 +109,7 @@ describe('Given a PatientService', () => {
     it('Then should benn called once', () => {
       httpClientSpy.post.and.returnValue(of(patient));
       const term: string = "ssss";
-      service.createPatient(patient).subscribe(()=>{
+      service.createPatient(patient, 'token').subscribe(()=>{
         expect(httpClientSpy.post.calls.count()).toBe(1);
       })
     })

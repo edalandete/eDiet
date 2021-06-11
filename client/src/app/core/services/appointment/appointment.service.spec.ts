@@ -34,7 +34,7 @@ describe('Given an AppointmentService', () => {
       httpClientSpy.post.and.returnValue(of(appointments));
       const dieticianId: string = "ssss";
       const date: string = "aaaa";
-      service.getAppointments(dieticianId, date).subscribe(()=>{
+      service.getAppointments(dieticianId, date, "token").subscribe(()=>{
         expect(httpClientSpy.post.calls.count()).toBe(1);
       })
     })

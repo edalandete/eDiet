@@ -15,10 +15,6 @@ export class PatientService {
 
   private patientsUrl = environment.patientsUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   getPatient(patientId: string, token: string): Observable<Patient> {
     return this.http.get<Patient>(`${this.patientsUrl}/${patientId}`,{
       headers: new HttpHeaders({
@@ -72,7 +68,5 @@ export class PatientService {
       catchError(this.helperService.handleError<Patient>('createPAtient'))
     );
   }
-
-
 
 }
