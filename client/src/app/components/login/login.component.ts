@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   setAndRedirect(dietician: Dietician) {
     this.storeService.dietician$.next(dietician);
+    localStorage.setItem('dieticianId', dietician.user._id);
     this.router.navigateByUrl(`/dashboard`);
   }
 

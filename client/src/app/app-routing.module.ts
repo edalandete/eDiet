@@ -7,18 +7,20 @@ import { NewPatientFormComponent } from './components/new-patient-form/new-patie
 import { PatientDetailComponent } from './components/patient-detail/patient-detail.component';
 import { PatientEditComponent } from './components/patient-edit/patient-edit.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { AuthService } from './core/services/auth/auth.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'search', component: SearchBarComponent },
-  { path: 'createAppointment', component: AppointmentFormComponent},
-  { path: 'createPatient', component: NewPatientFormComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthService] },
+  { path: 'search', component: SearchBarComponent, canActivate: [AuthService] },
+  { path: 'createAppointment', component: AppointmentFormComponent, canActivate: [AuthService]},
+  { path: 'createPatient', component: NewPatientFormComponent, canActivate: [AuthService]},
   { path: 'logout', redirectTo: '/login'},
-  { path: 'detail/:id', component: PatientDetailComponent },
-  { path: 'editPatient/:id', component: PatientEditComponent },
+  { path: 'detail/:id', component: PatientDetailComponent, canActivate: [AuthService] },
+  { path: 'editPatient/:id', component: PatientEditComponent, canActivate: [AuthService] },
+  { path: '**', component: LoginComponent },
 
 
 
@@ -29,7 +31,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthService]
 })
 
 export class AppRoutingModule { }
