@@ -8,9 +8,9 @@
   @include flex-configuration(center, center, null);
 }
 
-.login-form {
-  @include flex-configuration(center, center, null);
-  @include size-configuration(25rem, 20rem);
+.login__list {
+  @include flex-configuration(center, center, column);
+  @include size-configuration(25rem, 30rem);
   padding: 2rem;
   background-color: white;
   border-radius: 15px;
@@ -21,6 +21,9 @@
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+  .logo {
+    @include size-configuration(6rem, 6rem);
+  }
   .iconify {
     margin-left: 3px;
   }
@@ -28,13 +31,18 @@
     border: solid 1px $color-secondary-title;
     border-radius: 5px;
     padding: 1rem;
+    margin-left: 0.5rem;
     @include size-configuration(10rem, 2rem);
+    &:focus {
+      outline: none;
+      border: solid 1px gray
+    }
   }
   &--button {
     button {
       margin-top: 1rem;
       padding: 10px;
-      width: 100%;
+      width: 10rem;
     }
   }
 }

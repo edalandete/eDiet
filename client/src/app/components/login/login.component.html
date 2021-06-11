@@ -1,7 +1,10 @@
 <main class="login">
-  <form class="login-form" [formGroup]="loginForm" >
-    <ul class="patient-card__list">
+  <ul class="login__list">
+    <form class="login-form" [formGroup]="loginForm" >
       <ng-container formGroupName="user">
+        <li class="list__item">
+          <img class="logo" src="./../../../assets/ediet.svg" alt="eDiet" />
+        </li>
         <li class="list__item">
           <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
           <input type="text" class="editable-input" placeholder="email" formControlName="email">
@@ -10,13 +13,15 @@
           <span class="iconify" data-icon="ri:lock-password-line" data-inline="false"></span>
           <input type="password" class="editable-input editable-input--email" placeholder="password" formControlName="password">
         </li>
-        </ng-container>
+      </ng-container>
+      </form>
         <li class="list__item list__item--button">
           <button class="buttons" type="button" (click)="login()">Login</button>
         </li>
 
+        <div [ngStyle]="{'display': error !== '' ? 'block' :'none'}" class="error-message">{{error}}</div>
     </ul>
-  </form>
+
 
 
 </main>
