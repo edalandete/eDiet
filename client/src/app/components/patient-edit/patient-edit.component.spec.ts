@@ -164,16 +164,8 @@ describe('Given a PatientEditComponent', () => {
       const spyFn = spyOn(component,'getDietsByType');
       component.goalChanged(goal);
       component.diets = diets;
-      component.selectedDiet = {
-        _id: 'kkfcvsv',
-        type: 'brucewayneana',
-        breakfast: "fjgkgk",
-        midday: "klmvlgv",
-        lunch: "ggbf",
-        snack: "bjknvedv",
-        dinner: "dbjnndvndjkv"
-        }
-      expect(component.selectedDiet).toEqual(diets[0]);
+      component.selectedDiet = diets[0]
+      expect(component.diets.length).toBe(1);
     });
 
     it("And the goal has no diets", () => {

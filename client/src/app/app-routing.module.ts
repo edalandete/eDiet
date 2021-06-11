@@ -10,12 +10,13 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'search', component: SearchBarComponent },
   { path: 'createAppointment', component: AppointmentFormComponent},
   { path: 'createPatient', component: NewPatientFormComponent},
-  { path: 'logout', component: LoginComponent},
+  { path: 'logout', redirectTo: '/login'},
   { path: 'detail/:id', component: PatientDetailComponent },
   { path: 'editPatient/:id', component: PatientEditComponent },
 

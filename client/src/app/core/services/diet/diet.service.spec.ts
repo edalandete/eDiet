@@ -32,7 +32,7 @@ describe('DietService', () => {
       const diets: Diet[] = [];
       httpClientSpy.get.and.returnValue(of(diets));
       const dietType: string = "Hypertrophy";
-      service.getDietsByType(dietType).subscribe(()=>{
+      service.getDietsByType(dietType, "token").subscribe(()=>{
         expect(httpClientSpy.get.calls.count()).toBe(1);
       })
     })

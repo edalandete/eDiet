@@ -6,7 +6,6 @@ const { calculateAvailableHours } = require('../helpers/datesHelper');
 function dieticiansController() {
   async function getAll(req, res) {
     try {
-      debug('dentro de la function getAll');
       const dieticians = await Dietician.find();
       res.json(dieticians);
     } catch (error) {

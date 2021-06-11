@@ -15,21 +15,27 @@ export class PatientService {
 
   private patientsUrl = environment.patientsUrl;
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-  getPatient(patientId: string): Observable<Patient> {
-    return this.http.get<Patient>(`${this.patientsUrl}/${patientId}`)
+  getPatient(patientId: string, token: string): Observable<Patient> {
+    return this.http.get<Patient>(`${this.patientsUrl}/${patientId}`,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    })
     .pipe(
       tap(_ => this.helperService.log('fetched patient')),
       catchError(this.helperService.handleError<Patient>(`error fetching patient with id ${patientId}`))
     );
   }
 
-  searchPatients(fullName: string): Observable<Patient[]> {
+  searchPatients(fullName: string, token: string): Observable<Patient[]> {
     if (!fullName.trim()) return of([]);
-    return this.http.get<Patient[]>(`${this.patientsUrl}/?fullName=${fullName}`).pipe(
+    return this.http.get<Patient[]>(`${this.patientsUrl}/?fullName=${fullName}`,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
       tap(patients => patients.length ?
          this.helperService.log(`found patients matching "${fullName}"`) :
          this.helperService.log(`no patients matching "${fullName}"`)),
@@ -38,21 +44,29 @@ export class PatientService {
 
   }
 
-  updatePatient(patient:Patient, patientId:string):Observable<Patient>{
-    return this.http.put<Patient>(`${environment.patientsUrl}/${patientId}`, patient).pipe(
+  updatePatient(patient:Patient, patientId:string, token: string):Observable<Patient>{
+    return this.http.put<Patient>(`${environment.patientsUrl}/${patientId}`, patient,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
       tap(_ => this.helperService.log('updated patient')),
       catchError(this.helperService.handleError<Patient>(`error updating patient with id ${patientId}`))
     );
 
   }
 
-  createPatient(patient: Patient): Observable<Patient> {
-    return this.http.post<Patient>(this.patientsUrl, patient, this.httpOptions).pipe(
+  createPatient(patient: Patient, token: string): Observable<Patient> {
+    return this.http.post<Patient>(this.patientsUrl, patient, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
       tap((newPatient: Patient) => this.helperService.log(`added Patient w/ id=${newPatient._id}`)),
       catchError(this.helperService.handleError<Patient>('createPAtient'))
     );
   }
-
-
 
 }

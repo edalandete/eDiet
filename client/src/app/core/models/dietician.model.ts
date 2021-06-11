@@ -1,15 +1,18 @@
 export interface Dietician {
-    _id: string; 
+  user: {
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
     idCard: string;
     password: string;
     schedule: {
-        monday: [string];
-        tuesday: [string];
-        wednesday: [string];
-        thursday: [string];
-        friday: [string];
+      monday: [string];
+      tuesday: [string];
+      wednesday: [string];
+      thursday: [string];
+      friday: [string];
     }
+  },
+  token: string;
 }

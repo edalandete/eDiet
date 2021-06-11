@@ -1,55 +1,18 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-underscore-dangle */
 const { Router } = require('express');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const authController = require('../controllers/authController')();
 
-module.exports = () => {
-  const authRoutes = Router();
+function authRouter() {
+  const routes = Router();
 
-  authRoutes.post(
-    '/signup',
-    passport.authenticate('signup', { session: false }),
-    async (req, res) => {
-      res.json({
-        message: 'Signup successful',
-        user: req.user,
-      });
-    },
-  );
+  routes.route('/signup')
+    .post(passport.authenticate('signup', { session: false }),
+      authController.signup);
 
-  authRoutes.post(
-    '/login',
-    async (req, res, next) => {
-      passport.authenticate(
-        'login',
-        async (err, user) => {
-          try {
-            if (err || !user) {
-              const error = new Error('An error occurred.');
+  routes.route('/login')
+    .post(authController.login);
 
-              return next(error);
-            }
+  return routes;
+}
 
-            req.login(
-              user,
-              { session: false },
-              async (error) => {
-                if (error) return next(error);
-
-                const body = { _id: user._id, email: user.email };
-                const token = jwt.sign({ user: body }, process.env.SECRET_OR_KEY);
-
-                return res.json({ token });
-              },
-            );
-          } catch (error) {
-            return next(error);
-          }
-        },
-      )(req, res, next);
-    },
-  );
-
-  return authRoutes;
-};
+module.exports = authRouter();

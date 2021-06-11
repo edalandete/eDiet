@@ -13,18 +13,21 @@ import { HelperService } from 'src/app/helper/services.helper';
 })
 export class AppointmentService {
   constructor(private http: HttpClient, private helperService: HelperService) { }
-  
-  private appointmentsUrl = environment.appointmentsUrl;
-  
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
-  getAppointments(dieticianId: string, date: string): Observable<Appointment[]> {
-    return this.http.post<Appointment[]>(`${this.appointmentsUrl}/day`, { dieticianId: dieticianId, date: date }, this.httpOptions)
+  private appointmentsUrl = environment.appointmentsUrl;
+
+  getAppointments(dieticianId: string, date: string, token: string): Observable<Appointment[]> {
+    return this.http.post<Appointment[]>(`${this.appointmentsUrl}/day`,
+    { dieticianId: dieticianId, date: date },
+    {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    })
       .pipe(
         tap(_ => this.helperService.log('fetched appointments')),
         catchError(this.helperService.handleError<Appointment[]>('getAppointments', []))
       );
-  } 
+  }
 }
