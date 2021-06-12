@@ -4,11 +4,13 @@
   <form [formGroup]="newAppointmentForm" class="new-appointment">
     <label class="new-appointment__label">
       <p>Date:</p>
-      <input type="date" placeholder="Date" formControlName="date" (change) = "onDateChange()">
+      <input type="date" placeholder="Date" formControlName="date" (change)="onDateChange()">
     </label>
     <label class="new-appointment__label">
       <p>Time:</p>
-      <input type="text" placeholder="time" formControlName="time">
+      <select class="main-select" formControlName="time">
+        <option *ngFor="let time of availableHours" [value]="time" (change)="changeTime($event)">{{time}}</option>
+      </select>
     </label>
   </form>
   <button class="buttons forms__button new-patient-button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>

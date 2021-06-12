@@ -16,6 +16,7 @@ export class AppointmentFormComponent implements OnInit {
 
   patient!: Patient
   availableHours: String[] = [];
+  selectedHour?: String = '';
 
   newAppointmentForm: FormGroup = this.formBuilder.group({
     dieticianId: [localStorage.getItem('dieticianId'), [Validators.required]],
@@ -39,6 +40,7 @@ export class AppointmentFormComponent implements OnInit {
     const day = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);
     const appointment: Appointment = this.storeService.appointment$.getValue();
     appointment.date = day;
+    
     this.storeService.createAppointment(appointment).subscribe();
 
   }
@@ -50,6 +52,10 @@ export class AppointmentFormComponent implements OnInit {
     .subscribe(availableHours => {
       this.availableHours = availableHours;
     });
+  }
+
+  changeTime(event: any) {
+    this.selectedHour = this.availableHours.find(hour => hour === event.target.value);
   }
 
   detectFormChanges(): void {
