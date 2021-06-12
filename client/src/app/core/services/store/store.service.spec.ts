@@ -9,7 +9,6 @@ describe('StoreService', () => {
   let appointmentServiceSpy: jasmine.SpyObj<AppointmentService>;
   let patientServiceSpy: jasmine.SpyObj<PatientService>;
 
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [

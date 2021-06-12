@@ -10,7 +10,6 @@ describe('Given an AppointmentService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let helperServiceSpy: jasmine.SpyObj<HelperService>;
 
-
   beforeEach(() => {
     const postSpy = jasmine.createSpyObj('HttpClient', ['post']);
     const helperSpy = jasmine.createSpyObj('HelperService', ['log', 'handleError']);

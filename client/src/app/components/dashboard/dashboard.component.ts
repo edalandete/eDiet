@@ -14,7 +14,6 @@ import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
 export class DashboardComponent implements OnInit {
 
   appointments: Appointment[] = [];
-  // TODO Replace for loggedDietician
   dieticianId: string = "";
   date: string = dayjs().format(DATE_FORMAT_YYYYMMDD);
 
@@ -29,5 +28,4 @@ export class DashboardComponent implements OnInit {
     this.storeService.getTodayAppointments(this.dieticianId, this.date)
       .subscribe(appointments => this.appointments = appointments);
   }
-
 }

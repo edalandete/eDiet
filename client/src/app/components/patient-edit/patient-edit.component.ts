@@ -119,5 +119,4 @@ export class PatientEditComponent implements OnInit {
     )
     .subscribe();
   }
-
 }
