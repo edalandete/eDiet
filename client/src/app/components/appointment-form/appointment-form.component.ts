@@ -4,6 +4,8 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { Appointment } from 'src/app/core/models/appointment.model';
 import { Patient } from 'src/app/core/models/patient.model';
+import * as dayjs from 'dayjs';
+import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
 
 @Component({
   selector: 'app-appointment-form',
@@ -15,7 +17,10 @@ export class AppointmentFormComponent implements OnInit {
   patient!: Patient
 
   newAppointmentForm: FormGroup = this.formBuilder.group({
-
+    dieticianId: [localStorage.getItem('dieticianId'), [Validators.required]],
+    patient: ['', [Validators.required]],
+    date: ['', [Validators.required]],
+    time: ['', [Validators.required]],
   })
 
   constructor(
@@ -25,12 +30,14 @@ export class AppointmentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.patient = this.storeService.selectedPatient$.value;
-    console.log(this.patient);
+    this.newAppointmentForm.controls['patient'].setValue(this.patient._id)
     this.detectFormChanges();
   }
 
   createAppointment() {
+    const day = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);
     const appointment: Appointment = this.storeService.appointment$.getValue();
+    appointment.date = day;
     this.storeService.createAppointment(appointment).subscribe();
 
   }

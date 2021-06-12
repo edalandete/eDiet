@@ -2,7 +2,14 @@
 <main class="main">
   <h2 class="main__title">new appointment</h2>
   <form [formGroup]="newAppointmentForm" class="new-appointment">
-
+    <label class="new-appointment__label">
+      <p>Date:</p>
+      <input type="date" placeholder="Date" formControlName="date">
+    </label>
+    <label class="new-appointment__label">
+      <p>Time:</p>
+      <input type="text" placeholder="time" formControlName="time">
+    </label>
   </form>
   <button class="buttons forms__button new-patient-button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>
 </main>
