@@ -21,6 +21,7 @@ describe('Given a ComponentsHelper', () => {
             expect(sanitizedValue).toEqual('data:image/png;base64,'+environment.defaultProfileImage);
         })
     });
+
     describe('When transform function is called with filled base', () => {
         it('Then the default image should appear', () => {
             const base: string = '123';
@@ -29,5 +30,4 @@ describe('Given a ComponentsHelper', () => {
             expect(sanitizedValue).toEqual('123');
         })
     });
-
 });

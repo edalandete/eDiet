@@ -9,7 +9,6 @@ import { PatientEditComponent } from './components/patient-edit/patient-edit.com
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { AuthService } from './core/services/auth/auth.service';
 
-
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -21,13 +20,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: PatientDetailComponent, canActivate: [AuthService] },
   { path: 'editPatient/:id', component: PatientEditComponent, canActivate: [AuthService] },
   { path: '**', component: LoginComponent },
-
-
-
 ];
-
-
-
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],

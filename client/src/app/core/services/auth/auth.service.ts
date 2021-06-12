@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HelperService } from 'src/app/helper/services.helper';
 import { environment } from 'src/environments/environment';
 import { Dietician } from '../../models/dietician.model';
 

@@ -68,5 +68,4 @@ export class PatientService {
       catchError(this.helperService.handleError<Patient>('createPAtient'))
     );
   }
-
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable} from 'rxjs';
 import { Appointment } from './../../models/appointment.model';
 import { Dietician } from '../../models/dietician.model';
-import { DieticianService } from './../../services/dietician/dietician.service';
 import { AppointmentService } from './../../services/appointment/appointment.service';
 import { Patient } from '../../models/patient.model';
 import { PatientService } from '../patient/patient.service';
@@ -15,15 +14,12 @@ import { AuthService } from '../auth/auth.service';
 })
 export class StoreService {
 
-
   appointments$ = new BehaviorSubject<Appointment[]>([]);
   patient$ = new BehaviorSubject<Patient>(<Patient>{});
   patients$ = new BehaviorSubject<Patient[]>([]);
   updatedPatient$ = new BehaviorSubject<Patient>(<Patient>{});
   dietsType$ = new BehaviorSubject<Diet[]>([]);
   dietician$ = new BehaviorSubject<Dietician>(<Dietician>{});
-
-
 
   constructor(
       private appointmentService: AppointmentService,
@@ -59,8 +55,4 @@ export class StoreService {
   login():Observable<Dietician>{
     return this.authService.login(this.dietician$.getValue())
    }
-
-
-
-
 }
