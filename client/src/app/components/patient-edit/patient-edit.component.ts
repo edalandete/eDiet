@@ -73,6 +73,7 @@ export class PatientEditComponent implements OnInit {
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
     patient.weight = [...this.currentPatient.weight, patient.weight.toString()];
     patient.diet = this.selectedDiet ? this.selectedDiet : patient.diet;
+    patient.lastVisit = new Date();
     this.storeService.updatePatient(patient, this.id)?.subscribe();
   }
 

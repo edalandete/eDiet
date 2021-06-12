@@ -40,7 +40,7 @@ export class AppointmentFormComponent implements OnInit {
     const day = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);
     const appointment: Appointment = this.storeService.appointment$.getValue();
     appointment.date = day;
-    
+
     this.storeService.createAppointment(appointment).subscribe();
 
   }
