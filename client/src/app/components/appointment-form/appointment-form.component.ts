@@ -6,6 +6,7 @@ import { Appointment } from 'src/app/core/models/appointment.model';
 import { Patient } from 'src/app/core/models/patient.model';
 import * as dayjs from 'dayjs';
 import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
+import { ComponentsHelper } from 'src/app/helper/components.helper';
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
@@ -27,6 +28,7 @@ export class AppointmentFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public storeService: StoreService,
+    public componentsHelper: ComponentsHelper
     ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class AppointmentFormComponent implements OnInit {
     const appointment: Appointment = this.storeService.appointment$.getValue();
     appointment.date = day;
 
-    this.storeService.createAppointment(appointment).subscribe();
+    this.storeService.createAppointment(appointment).subscribe(() => this.componentsHelper.goToDetail(this.patient._id));
 
   }
 

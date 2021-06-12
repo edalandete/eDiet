@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import * as dayjs from 'dayjs';
 import { Patient } from 'src/app/core/models/patient.model';
@@ -47,7 +47,6 @@ export class PatientEditComponent implements OnInit {
   })
   constructor(
     private route: ActivatedRoute,
-    public router: Router,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
     private componentsHelper: ComponentsHelper,
@@ -75,10 +74,11 @@ export class PatientEditComponent implements OnInit {
     patient.diet = this.selectedDiet ? this.selectedDiet : patient.diet;
     patient.lastVisit = new Date();
     this.storeService.updatePatient(patient, this.id)?.subscribe();
+    this.goBack();
   }
 
-  cancel() {
-    this.router.navigateByUrl(`/detail/${this.id}`);
+  goBack() {
+    this.componentsHelper.goToDetail(this.id)
   }
 
   formatDate(date: Date): string {
