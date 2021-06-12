@@ -6,7 +6,6 @@ import { Appointment } from 'src/app/core/models/appointment.model';
 import { Patient } from 'src/app/core/models/patient.model';
 import * as dayjs from 'dayjs';
 import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
-
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
@@ -44,6 +43,8 @@ export class AppointmentFormComponent implements OnInit {
     this.storeService.createAppointment(appointment).subscribe();
 
   }
+
+  get today() { return dayjs().format('YYYY-MM-DD'); }
 
   onDateChange() {
     const selectedDate = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);

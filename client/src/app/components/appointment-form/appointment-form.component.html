@@ -4,7 +4,7 @@
   <form [formGroup]="newAppointmentForm" class="new-appointment">
     <label class="new-appointment__label">
       <p>Date:</p>
-      <input type="date" placeholder="Date" formControlName="date" (change)="onDateChange()">
+      <input type="date" placeholder="Date" formControlName="date" (change)="onDateChange()" [min]="today">
     </label>
     <label class="new-appointment__label">
       <p>Time:</p>
