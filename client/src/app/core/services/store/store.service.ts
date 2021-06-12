@@ -8,6 +8,7 @@ import { PatientService } from '../patient/patient.service';
 import { Diet } from '../../models/diet.model';
 import { DietService } from '../diet/diet.service';
 import { AuthService } from '../auth/auth.service';
+import { DieticianService } from '../dietician/dietician.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,8 @@ export class StoreService {
       private appointmentService: AppointmentService,
       private patientService: PatientService,
       private dietService: DietService,
-      private authService: AuthService
+      private authService: AuthService,
+      private dieticianService: DieticianService
   ) { }
 
   getTodayAppointments(dieticianId: string, date: string): Observable<Appointment[]> {
@@ -60,5 +62,9 @@ export class StoreService {
 
   createAppointment(newAppointment: Appointment): Observable<Appointment> {
     return this.appointmentService.createAppointment(newAppointment, this.dietician$.value.token);
+  }
+
+  getAvailableHours(dieticianId: string, date: string): Observable<String[]> {
+    return this.dieticianService.getAvailableHours(dieticianId, date, this.dietician$.value.token);
   }
 }

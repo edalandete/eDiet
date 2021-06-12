@@ -11,8 +11,8 @@ function dieticiansRouter() {
     .get(dieticiansController.getById)
     .delete(dieticiansController.deleteById)
     .put(dieticiansController.updateById);
-  routes.route('/day/:date')
-    .get(dieticiansController.getAvailableHours);
+  routes.route('/day')
+    .post(dieticiansController.getAvailableHours);
   return routes;
 }
 

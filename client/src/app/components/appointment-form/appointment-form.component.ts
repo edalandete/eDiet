@@ -15,6 +15,7 @@ import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
 export class AppointmentFormComponent implements OnInit {
 
   patient!: Patient
+  availableHours: String[] = [];
 
   newAppointmentForm: FormGroup = this.formBuilder.group({
     dieticianId: [localStorage.getItem('dieticianId'), [Validators.required]],
@@ -40,6 +41,15 @@ export class AppointmentFormComponent implements OnInit {
     appointment.date = day;
     this.storeService.createAppointment(appointment).subscribe();
 
+  }
+
+  onDateChange() {
+    const selectedDate = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);
+    const dieticianId = this.newAppointmentForm.controls['dieticianId'].value;
+    this.storeService.getAvailableHours(dieticianId, selectedDate)
+    .subscribe(availableHours => {
+      this.availableHours = availableHours;
+    });
   }
 
   detectFormChanges(): void {
