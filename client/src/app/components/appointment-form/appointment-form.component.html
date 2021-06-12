@@ -1,1 +1,8 @@
-<p>appointment-form works!</p>
+<app-nav-bar></app-nav-bar>
+<main class="main">
+  <h2 class="main__title">new appointment</h2>
+  <form [formGroup]="newAppointmentForm" class="new-appointment">
+
+  </form>
+  <button class="buttons forms__button new-patient-button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>
+</main>
