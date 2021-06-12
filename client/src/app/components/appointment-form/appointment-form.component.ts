@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { StoreService } from 'src/app/core/services/store/store.service';
 import { Appointment } from 'src/app/core/models/appointment.model';
+import { Patient } from 'src/app/core/models/patient.model';
 
 @Component({
   selector: 'app-appointment-form',
@@ -10,6 +11,8 @@ import { Appointment } from 'src/app/core/models/appointment.model';
   styleUrls: ['./appointment-form.component.scss', './../../app.component.scss']
 })
 export class AppointmentFormComponent implements OnInit {
+
+  patient!: Patient
 
   newAppointmentForm: FormGroup = this.formBuilder.group({
 
@@ -21,10 +24,14 @@ export class AppointmentFormComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.patient = this.storeService.selectedPatient$.value;
+    console.log(this.patient);
     this.detectFormChanges();
   }
 
   createAppointment() {
+    const appointment: Appointment = this.storeService.appointment$.getValue();
+    this.storeService.createAppointment(appointment).subscribe();
 
   }
 
@@ -33,7 +40,7 @@ export class AppointmentFormComponent implements OnInit {
     .pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      tap((formValue)=> this.storeService.patient$.next(formValue))
+      tap((formValue)=> this.storeService.appointment$.next(formValue))
     )
     .subscribe();
   }

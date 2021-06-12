@@ -30,4 +30,16 @@ export class AppointmentService {
         catchError(this.helperService.handleError<Appointment[]>('getAppointments', []))
       );
   }
+
+  createAppointment(appointment: Appointment, token: string): Observable<Appointment> {
+    return this.http.post<Appointment>(this.appointmentsUrl, appointment, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    }).pipe(
+      tap((newAppointment: Appointment) => this.helperService.log(`added Appointment w/ id=${newAppointment._id}`)),
+      catchError(this.helperService.handleError<Appointment>('createAppointment'))
+    );
+  }
 }
