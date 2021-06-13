@@ -1,5 +1,6 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import {Injectable} from "@angular/core";
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import * as dayjs from 'dayjs';
 import { FormControl } from '@angular/forms';
@@ -10,7 +11,8 @@ import { DATE_FORMAT_DDMMYYYY_SLASH } from 'src/assets/constants';
 })
 
 export class ComponentsHelper {
-   constructor(private domSanitizer: DomSanitizer) { }
+   constructor(private domSanitizer: DomSanitizer, public router: Router,
+    ) { }
 
    public transform(base : string){
     if(base) return this.domSanitizer.bypassSecurityTrustResourceUrl(base);
@@ -24,5 +26,10 @@ export class ComponentsHelper {
       return val.isValid() ? { invalidDate: false } : { invalidDate: true };
 
     };
+  }
+
+  public goToDetail(id: string) {
+    this.router.navigateByUrl(`/detail/${id}`);
+
   }
 }

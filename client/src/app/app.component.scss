@@ -37,6 +37,7 @@
   background-color: $button-color;
   color: $color-secondary-important;
   border-radius: 2rem;
+  text-transform: uppercase;
   &:hover {
     background-color: rgba(167, 107, 174,0.7);
   }

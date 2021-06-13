@@ -1,8 +1,9 @@
 <app-nav-bar></app-nav-bar>
 <main class="main">
-    <h2 class="main__title">patient details</h2>
-    <section *ngIf="patient else noPatientSelected">
-       <section class="patient-card">
+  <h2 class="main__title">patient details</h2>
+  <section *ngIf="patient else noPatientSelected">
+    <section class="patient-card">
+         <img alt=patient.name [src]="picture" class="profile-picture" />
            <ul class="patient-card__list list">
                 <li class="list__item">
                     <span class="iconify" data-icon="ant-design:user-outlined" data-inline="false"></span>
@@ -33,21 +34,20 @@
                     <span class="bolder">Last: </span> <span>{{lastVisit}}</span> <span class="bolder">Next: </span> <span>{{nextVisit}}</span>
                 </li>
            </ul>
-           <img alt=patient.name [src]="picture" class="profile-picture" />
-           <aside *ngIf="patient.isActive">
+           <aside *ngIf="patient.isActive" class="patient-buttons">
              <a routerLink="/editPatient/{{patient._id}}">
-              <p class="badge">Edit patient</p>
+              <button type="button" class="buttons forms__button"><span class="iconify" data-icon="clarity:note-edit-line" data-inline="false"></span>Edit</button>
              </a>
              <a (click) = "updateSubscription(patient.isActive)">
-               <p class="badge">Unsuscribe</p>
+               <button class="buttons forms__button" ><span class="iconify" data-icon="akar-icons:circle-minus" data-inline="false"></span>Unsuscribe</button>
              </a>
-             <a>
-               <p class="badge">Add Appointment</p>
+             <a (click) = "goToCreateAppointment()">
+               <button class="buttons forms__button" ><span class="iconify" data-icon="bi:plus" data-inline="false"></span>Appt.</button>
              </a>
            </aside>
-           <aside *ngIf="!patient.isActive">
+           <aside *ngIf="!patient.isActive" class="patient-buttons">
             <a (click) = "updateSubscription(patient.isActive)">
-              <p class="badge">Suscribe</p>
+              <button class="buttons forms__button" ><span class="iconify" data-icon="akar-icons:circle-check" data-inline="false"></span>Suscribe</button>
             </a>
           </aside>
        </section>

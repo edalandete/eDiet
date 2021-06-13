@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 const debug = require('debug')('app:appointmentsController');
 const Appointment = require('../models/appointment.model');
+const Patient = require('../models/patient.model');
 
 function appointmentsController() {
   async function getDayAppointments(req, res) {
@@ -18,7 +20,13 @@ function appointmentsController() {
 
     try {
       await newAppointment.save();
-      res.json(newAppointment);
+      const updatedPatient = await Patient.findByIdAndUpdate(
+        newAppointment.patient,
+        { appointment: newAppointment._id },
+        { new: true },
+      );
+
+      res.json({ newAppointment, updatedPatient });
     } catch (error) {
       res.send(error);
       debug(error);

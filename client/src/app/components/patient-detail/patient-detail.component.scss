@@ -3,7 +3,7 @@
 
 .patient-card {
   @include flex-configuration(space-around, center);
-  @include size-configuration(32rem, null);
+  @include size-configuration(60%, null);
     margin: 1rem auto;
     &__list {
       @include flex-configuration(unset, baseline, column);
@@ -43,6 +43,17 @@
             color: $color-secondary-important;
         }
     }
+}
+
+.patient-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  button {
+    margin: 0.5em 0;
+    padding: 0.2rem 1rem;
+    width: 100%;
+  }
 }
 
 .Rtable {

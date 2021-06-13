@@ -67,8 +67,7 @@ function dieticiansController() {
   }
 
   async function getAvailableHours(req, res) {
-    const { date } = req.params;
-    const { dieticianId } = req.body;
+    const { dieticianId, date } = req.body;
 
     try {
       debug('dentro de la function getAvailableHours');

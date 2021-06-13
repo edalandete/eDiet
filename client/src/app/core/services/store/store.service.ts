@@ -8,6 +8,7 @@ import { PatientService } from '../patient/patient.service';
 import { Diet } from '../../models/diet.model';
 import { DietService } from '../diet/diet.service';
 import { AuthService } from '../auth/auth.service';
+import { DieticianService } from '../dietician/dietician.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +17,26 @@ export class StoreService {
 
   appointments$ = new BehaviorSubject<Appointment[]>([]);
   patient$ = new BehaviorSubject<Patient>(<Patient>{});
+  selectedPatient$ = new BehaviorSubject<Patient>(<Patient>{});
   patients$ = new BehaviorSubject<Patient[]>([]);
   updatedPatient$ = new BehaviorSubject<Patient>(<Patient>{});
   dietsType$ = new BehaviorSubject<Diet[]>([]);
   dietician$ = new BehaviorSubject<Dietician>(<Dietician>{});
+  appointment$ = new BehaviorSubject<Appointment>(<Appointment>{});
 
   constructor(
       private appointmentService: AppointmentService,
       private patientService: PatientService,
       private dietService: DietService,
-      private authService: AuthService
+      private authService: AuthService,
+      private dieticianService: DieticianService
   ) { }
 
-  getTodayAppointments(dieticianId: string, date: string):Observable<Appointment[]>{
+  getTodayAppointments(dieticianId: string, date: string): Observable<Appointment[]> {
     return this.appointmentService.getAppointments(dieticianId, date, this.dietician$.value.token);
   }
 
-  getPatientDetail(patientId: string):Observable<Patient>{
+  getPatientDetail(patientId: string): Observable<Patient> {
     return this.patientService.getPatient(patientId, this.dietician$.value.token);
   }
 
@@ -40,7 +44,7 @@ export class StoreService {
     return this.patientService.searchPatients(term, this.dietician$.value.token);
   }
 
-  updatePatient(patient: Patient, patientId: string):Observable<Patient> {
+  updatePatient(patient: Patient, patientId: string): Observable<Patient> {
     return this.patientService.updatePatient(patient, patientId, this.dietician$.value.token);
   }
 
@@ -52,7 +56,15 @@ export class StoreService {
     return this.patientService.createPatient(newPatient, this.dietician$.value.token);
   }
 
-  login():Observable<Dietician>{
+  login(): Observable<Dietician> {
     return this.authService.login(this.dietician$.getValue())
-   }
+  }
+
+  createAppointment(newAppointment: Appointment): Observable<Appointment> {
+    return this.appointmentService.createAppointment(newAppointment, this.dietician$.value.token);
+  }
+
+  getAvailableHours(dieticianId: string, date: string): Observable<String[]> {
+    return this.dieticianService.getAvailableHours(dieticianId, date, this.dietician$.value.token);
+  }
 }

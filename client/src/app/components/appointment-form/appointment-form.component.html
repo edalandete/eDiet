@@ -1,1 +1,21 @@
-<p>appointment-form works!</p>
+<app-nav-bar></app-nav-bar>
+<main class="main">
+  <h2 class="main__title">new appointment</h2>
+  <form [formGroup]="newAppointmentForm" class="new-appointment">
+    <label class="new-appointment__label">
+      <p>Date:</p>
+      <input type="date" placeholder="Date" formControlName="date" (change)="onDateChange()" [min]="today">
+    </label>
+    <label class="new-appointment__label">
+      <p>Time:</p>
+      <select class="main-select" formControlName="time">
+        <option *ngFor="let time of availableHours" [value]="time" (change)="changeTime($event)">{{time}}</option>
+      </select>
+    </label>
+    <div class="appointment-buttons">
+      <button class="buttons appointment-buttons__button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>
+      <button class="buttons appointment-buttons__button" type="button" (click)="cancel()">cancel</button>
+
+    </div>
+  </form>
+</main>

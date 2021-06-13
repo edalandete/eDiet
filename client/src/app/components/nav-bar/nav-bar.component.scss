@@ -12,7 +12,7 @@
         list-style: none;
         &__item {
           @include flex-configuration(center, center);
-          @include size-configuration(100%, 6.25rem);
+          @include size-configuration(100%, 10rem);
             border-bottom: solid 2px $color-secondary;
             &--logo {
                 background-color: $background-color-main;
