@@ -23,6 +23,10 @@ describe('Given a PatientDetailComponent', () => {
     }
   };
 
+  const fakeDomSanitizier = {
+    bypassSecurityTrustResourceUrl: () => '',
+  }
+
   const patient : Patient = {
     _id: "sss",
     firstName: "aaaa",
@@ -72,7 +76,10 @@ describe('Given a PatientDetailComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ PatientDetailComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [StoreService, {provide: ActivatedRoute, useValue: fakeActivatedRoute}, DomSanitizer]
+      providers: [StoreService,
+        {provide: ActivatedRoute, useValue: fakeActivatedRoute},
+        {provide: DomSanitizer, useValue: fakeDomSanitizier}
+      ]
     })
     .compileComponents();
   });

@@ -10,22 +10,22 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
-  let routerDeclarationSpy: jasmine.SpyObj<Router>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     const postSpy = jasmine.createSpyObj('HttpClient', ['post']);
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const test = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
       providers : [
         AuthService,
-        RouterTestingModule,
+        { provide: Router, useValue: test },
         { provide: HttpClient, useValue: postSpy },
       ]
     });
     service = TestBed.inject(AuthService);
     httpClientSpy = TestBed.inject(HttpClient) as jasmine.SpyObj<HttpClient>;
-    routerDeclarationSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
   });
 
   describe('When it is called with login function', ()=> {
