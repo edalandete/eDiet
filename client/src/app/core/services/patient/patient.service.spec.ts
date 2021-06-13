@@ -85,12 +85,30 @@ describe('Given a PatientService', () => {
   });
 
   describe('When it is called with searchPatients function', ()=> {
-    it('Then should benn called once', () => {
+    it('And there are patients that match the term', () => {
+      const patients: Patient[] = [patient];
+      httpClientSpy.get.and.returnValue(of(patients));
+      const term: string = "ssss";
+      service.searchPatients(term, 'token').subscribe(()=>{
+        expect(httpClientSpy.get.calls.count()).toBe(1);
+      })
+    });
+
+    it('And there are no patients that match the term', () => {
       const patients: Patient[] = [];
       httpClientSpy.get.and.returnValue(of(patients));
       const term: string = "ssss";
       service.searchPatients(term, 'token').subscribe(()=>{
         expect(httpClientSpy.get.calls.count()).toBe(1);
+      })
+    })
+
+    it('And term is empty', () => {
+      const patients: Patient[] = [];
+      httpClientSpy.get.and.returnValue(of(patients));
+      const term: string = "";
+      service.searchPatients(term, 'token').subscribe(()=>{
+        expect(httpClientSpy.get.calls.count()).toBe(0);
       })
     })
   });

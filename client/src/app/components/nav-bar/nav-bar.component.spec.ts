@@ -27,12 +27,14 @@ describe('NavBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('When its called a logout function', () => {
-  //   const spyFn = spyOn(localStorage,'removeItem').and.callFake(mockLocalStorage.removeItem);
-  //   component.logout = function() {
-  //     mockLocalStorage.removeItem();
+  it('When its called a logout function', () => {
+    const spyFn = spyOn(component,'logout');
+    component.logout = function() {
+      spyFn();
+    }
 
-  //   };
-  //   expect(spyFn).toHaveBeenCalled();
-  // })
+    component.logout();
+    const spyFn2 = spyOn(localStorage, 'removeItem').and.callFake(mockLocalStorage.removeItem)
+    expect(spyFn2).toHaveBeenCalled();
+  })
 });
