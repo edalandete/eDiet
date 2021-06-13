@@ -1,0 +1,25 @@
+@import './../../../assets/styles/global/colors.scss';
+@import './../../../assets/styles/global/mixins.scss';
+
+.new-appointment {
+  @include flex-configuration(center,center,column);
+
+  &__label {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 2rem;
+
+    p {
+      margin-right: 1rem;
+      font-weight: bold;
+    }
+  }
+}
+
+.appointment-buttons {
+  &__button {
+    margin: 0.5em 0;
+    padding: 0.2rem 1rem;
+    width: 100%;
+  }
+}

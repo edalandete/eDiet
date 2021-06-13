@@ -48,6 +48,10 @@ export class AppointmentFormComponent implements OnInit {
 
   get today() { return dayjs().format('YYYY-MM-DD'); }
 
+  cancel() {
+    this.componentsHelper.goToDetail(this.patient._id);
+  }
+
   onDateChange() {
     const selectedDate = dayjs(this.newAppointmentForm.controls['date'].value).format(DATE_FORMAT_YYYYMMDD);
     const dieticianId = this.newAppointmentForm.controls['dieticianId'].value;

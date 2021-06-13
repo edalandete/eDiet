@@ -12,6 +12,10 @@
         <option *ngFor="let time of availableHours" [value]="time" (change)="changeTime($event)">{{time}}</option>
       </select>
     </label>
+    <div class="appointment-buttons">
+      <button class="buttons appointment-buttons__button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>
+      <button class="buttons appointment-buttons__button" type="button" (click)="cancel()">cancel</button>
+
+    </div>
   </form>
-  <button class="buttons forms__button new-patient-button" type="button" (click)="createAppointment()" [disabled]="newAppointmentForm.invalid">new appointment</button>
 </main>
