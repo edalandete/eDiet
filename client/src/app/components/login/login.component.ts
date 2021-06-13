@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   error: string = '';
 
   constructor(
-    private formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
     public storeService: StoreService,
     public router: Router,
   ) { }

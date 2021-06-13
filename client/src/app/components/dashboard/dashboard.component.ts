@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from 'src/app/core/models/appointment.model';
-import {   StoreService } from 'src/app/core/services/store/store.service';
+import { StoreService } from 'src/app/core/services/store/store.service';
 import * as dayjs from 'dayjs';
-import { environment } from 'src/environments/environment';
 import { DATE_FORMAT_YYYYMMDD } from 'src/assets/constants';
 
 
@@ -20,7 +19,7 @@ export class DashboardComponent implements OnInit {
   constructor(public storeService : StoreService) { }
 
   ngOnInit(): void {
-    this.dieticianId = this.storeService.dietician$.value.user._id;
+    this.dieticianId = this.storeService.dietician$.value.user?._id;
     this.getAppointments();
   }
 
