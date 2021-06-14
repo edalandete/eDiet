@@ -56,17 +56,36 @@ describe('AuthService', () => {
     })
   })
   describe('When it is called with canActivate function', ()=> {
-    it('And the user is logged', () => {
-      spyOn(service, 'canActivate').and.returnValue(true)
 
-      const result = service.canActivate()
+    it('The user is logged shoud return true ', () => {
+      let store: any = {
+        'dieticianId': 'gol'
+      };
+      const mockLocalStorage = {
+        getItem: (key: string): string => {
+          return key in store ? store[key] : null;
+        }
+      }
+
+      spyOn(localStorage, 'getItem')
+      .and.callFake(mockLocalStorage.getItem);
+      let result = service.canActivate()
       expect(result).toBe(true);
     });
 
-    it('And the user is not logged', () => {
-      spyOn(service, 'canActivate').and.returnValue(false)
+    it('The user is not logged shoud return false ', () => {
+      let store: any = {
 
-      const result = service.canActivate()
+      };
+      const mockLocalStorage = {
+        getItem: (key: string): string => {
+          return key in store ? store[key] : null;
+        }
+      }
+
+      spyOn(localStorage, 'getItem')
+      .and.callFake(mockLocalStorage.getItem);
+      let result = service.canActivate()
       expect(result).toBe(false);
     });
   })

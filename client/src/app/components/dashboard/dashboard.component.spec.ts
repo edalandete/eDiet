@@ -34,7 +34,7 @@ describe('Given a DashboardComponent', () => {
 
   const storeServiceMock = {
 
-    getTodaysAppointmentw: () => of([]),
+    getTodaysAppointments: () => of([]),
     dietician$: new BehaviorSubject<Dietician>(dietician)
   };
 
