@@ -21,9 +21,9 @@ export class PatientDetailComponent implements OnInit {
   ) { }
 
   patient! : Patient
-  lastVisit : String = '';
-  nextVisit: String = '';
-  birthDate : String = '';
+  lastVisit : string = '';
+  nextVisit: string = '';
+  birthDate : string = '';
   picture : any = '';
 
 

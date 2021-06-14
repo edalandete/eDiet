@@ -12,8 +12,8 @@ export class DieticianService {
 
   private dieticiansUrl = environment.dieticiansUrl;
 
-  getAvailableHours(dieticianId: string, date: string, token: string): Observable<String[]> {
-    return this.http.post<String[]>(`${this.dieticiansUrl}/day`,
+  getAvailableHours(dieticianId: string, date: string, token: string): Observable<string[]> {
+    return this.http.post<string[]>(`${this.dieticiansUrl}/day`,
     { dieticianId: dieticianId, date: date },
     {
       headers: new HttpHeaders({
@@ -23,7 +23,7 @@ export class DieticianService {
     })
       .pipe(
         tap(_ => this.helperService.log('fetched available hours')),
-        catchError(this.helperService.handleError<String[]>('getAvailableHours', []))
+        catchError(this.helperService.handleError<string[]>('getAvailableHours', []))
       );
   }
 

@@ -33,7 +33,7 @@ describe('DieticianService', () => {
 
   describe('When it is called with getAvailableHours function', ()=> {
     it('Then should been called once', () => {
-      const availableHours: String[] = [];
+      const availableHours: string[] = [];
       httpClientSpy.post.and.returnValue(of(availableHours));
       const dieticianId: string = "ssss";
       const date: string = "aaaa";

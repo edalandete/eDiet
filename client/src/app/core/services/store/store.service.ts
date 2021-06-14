@@ -64,7 +64,7 @@ export class StoreService {
     return this.appointmentService.createAppointment(newAppointment, this.dietician$.value.token);
   }
 
-  getAvailableHours(dieticianId: string, date: string): Observable<String[]> {
+  getAvailableHours(dieticianId: string, date: string): Observable<string[]> {
     return this.dieticianService.getAvailableHours(dieticianId, date, this.dietician$.value.token);
   }
 }
