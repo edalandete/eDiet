@@ -8,6 +8,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { DieticianService } from '../dietician/dietician.service';
 import { DietService } from '../diet/diet.service';
 import { Patient } from '../../models/patient.model';
+import { Appointment } from '../../models/appointment.model';
 
 describe('StoreService', () => {
   let service: StoreService;
@@ -56,6 +57,20 @@ describe('StoreService', () => {
     },
     isActive: true,
   };
+
+  const appointment : Appointment = {
+    _id: "string",
+    dieticianId: "string",
+    patient: {
+        _id: "string",
+        firstName: "string",
+        lastName: "string",
+    },
+
+    date: "string",
+    time: "string",
+  }
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -114,6 +129,18 @@ describe('StoreService', () => {
   it('should call login', () => {
     const spyFn = spyOn(service, 'login').and.callThrough()
     service.login();
+    expect(spyFn).toHaveBeenCalled()
+  });
+
+  it('should call createAppointment', () => {
+    const spyFn = spyOn(service, 'createAppointment').and.callThrough()
+    service.createAppointment(appointment);
+    expect(spyFn).toHaveBeenCalled()
+  });
+
+  it('should call getAvailableHours', () => {
+    const spyFn = spyOn(service, 'getAvailableHours').and.callThrough()
+    service.getAvailableHours("dieticianId", "date");
     expect(spyFn).toHaveBeenCalled()
   });
 

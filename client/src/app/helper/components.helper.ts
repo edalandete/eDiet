@@ -19,14 +19,16 @@ export class ComponentsHelper {
     else return this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,'+environment.defaultProfileImage)
   }
 
-  public DateValidator(format = DATE_FORMAT_DDMMYYYY_SLASH): any {
-    return (control: FormControl): { [key: string]: any } => {
-      const val = dayjs(control.value, format, true);
+  // TODO: Activate when validate date in forms
 
-      return val.isValid() ? { invalidDate: false } : { invalidDate: true };
+  // public DateValidator(format = DATE_FORMAT_DDMMYYYY_SLASH): any {
+  //   return (control: FormControl): { [key: string]: any } => {
+  //     const val = dayjs(control.value, format, true);
 
-    };
-  }
+  //     return val.isValid() ? { invalidDate: false } : { invalidDate: true };
+
+  //   };
+  // }
 
   public goToDetail(id: string) {
     this.router.navigateByUrl(`/detail/${id}`);
