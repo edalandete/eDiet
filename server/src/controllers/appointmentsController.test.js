@@ -3,8 +3,10 @@ const {
 } = require('./appointmentsController')();
 
 const Appointment = require('../models/appointment.model');
+const Patient = require('../models/patient.model');
 
 jest.mock('../models/appointment.model');
+jest.mock('../models/patient.model');
 
 describe('Given appointmentsController', () => {
   describe('When it is called with getDayAppointments function', () => {
@@ -59,8 +61,9 @@ describe('Given appointmentsController', () => {
         const newAppointment = new AppointmentMock('New Appointment');
 
         Appointment.mockReturnValueOnce(newAppointment);
+        Patient.findByIdAndUpdate.mockResolvedValueOnce({});
         await createOne(req, res);
-        expect(res.json).toHaveBeenCalledWith(newAppointment);
+        expect(res.json).toHaveBeenCalledWith({ newAppointment, updatedPatient: {} });
       });
     });
 
