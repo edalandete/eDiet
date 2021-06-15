@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { Dietician } from 'src/app/core/models/dietician.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
 
@@ -72,9 +72,12 @@ describe('LoginComponent', () => {
   });
 
   it(`Then the function login to have been called` , () => {
-    const spyFn = spyOn(storeService,'login').and.returnValue(of());
+    const spyFn = spyOn(storeService,'login').and.returnValue(throwError('User name or Password is Incorrect'));
+
+    storeService.login().subscribe(()=>{
+      expect(spyFn).toBe('User name or Password is Incorrect');
+    })
     component.ngOnInit();
     component.login();
-    expect(spyFn).toHaveBeenCalled();
   });
 });

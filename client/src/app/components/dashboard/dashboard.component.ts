@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   constructor(public storeService : StoreService) { }
 
   ngOnInit(): void {
-    this.dieticianId = this.storeService.dietician$.value.user?._id;
+    this.dieticianId = this.storeService.dietician$.value.user._id;
     this.getAppointments();
   }
 
