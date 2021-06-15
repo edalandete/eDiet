@@ -49,7 +49,7 @@ export class PatientEditComponent implements OnInit {
     private route: ActivatedRoute,
     public storeService: StoreService,
     private formBuilder: FormBuilder,
-    private componentsHelper: ComponentsHelper,
+    public componentsHelper: ComponentsHelper,
   ) { }
 
   ngOnInit(): void {

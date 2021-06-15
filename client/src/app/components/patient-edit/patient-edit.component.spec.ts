@@ -9,11 +9,13 @@ import { Patient } from 'src/app/core/models/patient.model';
 import { PatientEditComponent } from './patient-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Diet } from 'src/app/core/models/diet.model';
+import { ComponentsHelper } from 'src/app/helper/components.helper';
 
 describe('Given a PatientEditComponent', () => {
   let component: PatientEditComponent;
   let fixture: ComponentFixture<PatientEditComponent>;
   let storeService: StoreService;
+  let componentsHelper: ComponentsHelper;
 
   const fakeActivatedRoute = {
     snapshot: {
@@ -89,6 +91,11 @@ describe('Given a PatientEditComponent', () => {
     updatedPatient$: new BehaviorSubject<Patient>(patient)
   };
 
+  const componentsHelperMock = {
+    goToDetail: () => {},
+    transform: () => ''
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PatientEditComponent ],
@@ -96,6 +103,7 @@ describe('Given a PatientEditComponent', () => {
       providers: [
         {provide: StoreService, useValue: storeServiceMock},
         {provide: ActivatedRoute, useValue: fakeActivatedRoute},
+        {provide: ComponentsHelper, useValue: componentsHelperMock},
       ]
     })
     .compileComponents();
@@ -105,6 +113,7 @@ describe('Given a PatientEditComponent', () => {
     fixture = TestBed.createComponent(PatientEditComponent);
     component = fixture.componentInstance;
     storeService = TestBed.inject(StoreService);
+    componentsHelper = TestBed.inject(ComponentsHelper);
     fixture.detectChanges();
   });
 
@@ -141,8 +150,8 @@ describe('Given a PatientEditComponent', () => {
 
   describe("When cancel button is clicked", () => {
     it("Then the detail page is shown", () => {
-      const spyFn = spyOn(component.router,'navigateByUrl');
-      component.cancel();
+      const spyFn = spyOn(component.componentsHelper,'goToDetail');
+      component.goBack();
       expect(spyFn).toHaveBeenCalled();
     });
   });

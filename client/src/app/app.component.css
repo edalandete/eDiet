@@ -3,7 +3,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: calc(100vw - 9.70rem);
+  width: calc(100% - 9.70rem);
 }
 
 .main__title {
@@ -27,6 +27,7 @@
   border-radius: 1.25rem;
   color: #E2E5EF;
   margin: 2rem auto;
+  text-transform: uppercase;
 }
 
 .secondary-title {
@@ -50,6 +51,7 @@
   border: solid 1px #E2E5EF;
   color: #5E5E5E;
   background-color: #FCFBFE;
+  text-transform: uppercase;
 }
 
 .bolder {
@@ -60,6 +62,7 @@
   background-color: #A76BAE;
   color: #FFFFFF;
   border-radius: 2rem;
+  text-transform: uppercase;
 }
 
 .buttons:hover {
@@ -110,5 +113,9 @@
 
 .main-select option {
   font-weight: normal;
+}
+
+.error-message {
+  margin-top: 1rem;
 }
 /*# sourceMappingURL=app.component.css.map */

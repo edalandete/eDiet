@@ -15,8 +15,8 @@ import { ComponentsHelper } from 'src/app/helper/components.helper';
 export class AppointmentFormComponent implements OnInit {
 
   patient!: Patient
-  availableHours: String[] = [];
-  selectedHour?: String = '';
+  availableHours: string[] = [];
+  selectedHour?: string = '';
 
   newAppointmentForm: FormGroup = this.formBuilder.group({
     dieticianId: [localStorage.getItem('dieticianId'), [Validators.required]],

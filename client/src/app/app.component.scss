@@ -5,7 +5,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: calc(100vw - 9.70rem);
+    width: calc(100% - 9.70rem);
     &__title {
       @include flex-configuration(center, center);
       @include size-configuration(55rem, 3.43rem);

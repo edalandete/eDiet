@@ -10,6 +10,19 @@ describe('Given an AppointmentService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let helperServiceSpy: jasmine.SpyObj<HelperService>;
 
+  const appointment : Appointment = {
+    _id: "string",
+    dieticianId: "string",
+    patient: {
+        _id: "string",
+        firstName: "string",
+        lastName: "string",
+    },
+
+    date: "string",
+    time: "string",
+  }
+
   beforeEach(() => {
     const postSpy = jasmine.createSpyObj('HttpClient', ['post']);
     const helperSpy = jasmine.createSpyObj('HelperService', ['log', 'handleError']);
@@ -34,6 +47,14 @@ describe('Given an AppointmentService', () => {
       const dieticianId: string = "ssss";
       const date: string = "aaaa";
       service.getAppointments(dieticianId, date, "token").subscribe(()=>{
+        expect(httpClientSpy.post.calls.count()).toBe(1);
+      })
+    })
+  })
+  describe('When it is called with createAppointment function', ()=> {
+    it('Then should been called once', () => {
+      httpClientSpy.post.and.returnValue(of(appointment));
+      service.createAppointment(appointment, "token").subscribe(()=>{
         expect(httpClientSpy.post.calls.count()).toBe(1);
       })
     })

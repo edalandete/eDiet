@@ -1,1 +1,37 @@
-/* No CSS *//*# sourceMappingURL=appointment-form.component.css.map */
+.new-appointment {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.new-appointment__label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.new-appointment__label p {
+  margin-right: 1rem;
+  font-weight: bold;
+}
+
+.appointment-buttons__button {
+  margin: 0.5em 0;
+  padding: 0.2rem 1rem;
+  width: 100%;
+}
+/*# sourceMappingURL=appointment-form.component.css.map */
