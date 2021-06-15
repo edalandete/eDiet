@@ -7,8 +7,8 @@ passport.use(
   'signup',
   new LocalStrategy.Strategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: process.env.USERNAME_FIELD,
+      passwordField: process.env.PASSWORD_FIELD,
       passReqToCallback: true,
     },
 
@@ -41,8 +41,8 @@ passport.use(
   'login',
   new LocalStrategy.Strategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      usernameField: process.env.USERNAME_FIELD,
+      passwordField: process.env.PASSWORD_FIELD,
     },
     async (email, password, done) => {
       try {

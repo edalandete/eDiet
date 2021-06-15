@@ -34,7 +34,7 @@
                     <span class="bolder">Last: </span> <span>{{lastVisit}}</span> <span class="bolder">Next: </span> <span>{{nextVisit}}</span>
                 </li>
            </ul>
-           <aside *ngIf="patient.isActive" class="patient-buttons">
+           <aside *ngIf="patient.isActive" class="patient-buttons" aria-label="suscribed-patient-actions">
              <a routerLink="/editPatient/{{patient._id}}">
               <button type="button" class="buttons forms__button"><span class="iconify" data-icon="clarity:note-edit-line" data-inline="false"></span>Edit</button>
              </a>
@@ -45,7 +45,7 @@
                <button class="buttons forms__button" ><span class="iconify" data-icon="bi:plus" data-inline="false"></span>Appt.</button>
              </a>
            </aside>
-           <aside *ngIf="!patient.isActive" class="patient-buttons">
+           <aside *ngIf="!patient.isActive" class="patient-buttons" aria-label="unsuscribed-patient-actions">
             <a (click) = "updateSubscription(patient.isActive)">
               <button class="buttons forms__button" ><span class="iconify" data-icon="akar-icons:circle-check" data-inline="false"></span>Suscribe</button>
             </a>

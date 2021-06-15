@@ -17,9 +17,15 @@ require('./passport/strategies/local.strategy');
 require('./passport/strategies/jwt.strategy');
 
 const port = process.env.PORT || 4000;
+const originHost = process.env.ORIGIN_HOST || 'http://localhost:4200';
 
 const app = express();
-app.use(cors());
+app.disable('x-powered-by');
+const corsOptions = {
+  origin: originHost,
+};
+
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
