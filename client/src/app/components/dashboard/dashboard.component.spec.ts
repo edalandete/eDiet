@@ -32,9 +32,11 @@ describe('Given a DashboardComponent', () => {
     token: "string"
   };
 
-  const storeServiceMock = {
+  const appointments : Appointment[] = [];
 
-    getTodaysAppointments: () => of([]),
+
+  const storeServiceMock = {
+    getTodayAppointments: () => of(appointments),
     dietician$: new BehaviorSubject<Dietician>(dietician)
   };
 
@@ -42,7 +44,7 @@ describe('Given a DashboardComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardComponent ],
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [StoreService]
+      providers: [{provide: StoreService, useValue: storeServiceMock},]
     })
     .compileComponents();
   });
@@ -60,8 +62,7 @@ describe('Given a DashboardComponent', () => {
       expect(compiled.querySelector('h2').textContent).toContain('Today');
     });
     it(`Then the text today should appear in the screen` , () => {
-      const appointments : Appointment[] = [];
-      const spyFn = spyOn(component.storeService,'getTodayAppointments').and.returnValue(of(appointments))
+      const spyFn = spyOn(storeService,'getTodayAppointments').and.returnValue(of(appointments))
       component.ngOnInit();
       expect(spyFn).toHaveBeenCalled();
     });

@@ -29,12 +29,30 @@ describe('DietService', () => {
 
   describe('When it is called with getAppointments function', ()=> {
     it('Then should been called once', () => {
-      const diets: Diet[] = [];
+      const diets: Diet[] = [{
+        _id: "dietid",
+        type: "Hypertrophy",
+        breakfast: "breakfast",
+        midday:"sandwitch",
+        lunch:"salad",
+        snack: "penauts",
+        dinner: "meat"
+
+      }];
       httpClientSpy.get.and.returnValue(of(diets));
       const dietType: string = "Hypertrophy";
       service.getDietsByType(dietType, "token").subscribe(()=>{
         expect(httpClientSpy.get.calls.count()).toBe(1);
       })
     })
-  })
+  });
+
+  it('Then should been called once', () => {
+    const diets: Diet[] = [];
+    httpClientSpy.get.and.returnValue(of(diets));
+    const dietType: string = "Hypertrophy";
+    service.getDietsByType(dietType, "token").subscribe(()=>{
+      expect(httpClientSpy.get.calls.count()).toBe(1);
+    })
+  });
 });

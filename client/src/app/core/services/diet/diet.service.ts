@@ -21,7 +21,7 @@ export class DietService {
         'Authorization': `Bearer ${token}`
       })
     }).pipe(
-      tap(patients => patients.length ?
+      tap(diets => diets.length ?
          this.helperService.log(`found diets matching "${type}"`) :
          this.helperService.log(`no diets matching "${type}"`)),
       catchError(this.helperService.handleError<Diet[]>('diets', []))
