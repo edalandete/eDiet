@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { Patient } from 'src/app/core/models/patient.model';
 import { StoreService } from 'src/app/core/services/store/store.service';
+import { ComponentsHelper } from 'src/app/helper/components.helper';
 import { patientGoals } from 'src/assets/constants';
 @Component({
   selector: 'app-new-patient-form',
@@ -38,6 +39,7 @@ export class NewPatientFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public storeService: StoreService,
+    public componentsHelper: ComponentsHelper
     ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class NewPatientFormComponent implements OnInit {
     patient.fullName = `${patient.firstName} ${patient.lastName}`;
     patient.picture = typeof(this.image) === 'string' ? this.image : "";
     patient.isActive = true;
-    this.storeService.createPatient(patient).subscribe();
+    this.storeService.createPatient(patient).subscribe(newPatient => this.componentsHelper.goToDetail(newPatient._id));
   }
 
   detectFormChanges(): void {
